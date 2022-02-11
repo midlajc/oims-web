@@ -22,21 +22,36 @@ const login = (username, password) => {
         axios.post(API_URL + "/auth/login", {
             username,
             password,
+        }, {
+            headers: {
+                username: username
+            }
         }).then((response) => {
-            console.log(response);
             if (response.data.accessToken) {
                 localStorage.setItem("user", JSON.stringify(response.data));
             }
             resolve(response.data);
         }).catch(err => {
-            console.log(err);
-            reject(err)
+            reject(err.response)
         });
     })
 };
 
 const logout = () => {
-    localStorage.removeItem("user");
+    let user = JSON.parse(localStorage.getItem('user'))
+    axios.post(API_URL + "/auth/logout", {
+        username: user.username,
+        refreshToken: user.refreshToken
+    }, {
+        headers: {
+            username: user.username
+        }
+    }).then(() => {
+        localStorage.removeItem("user");
+        window.location.reload()
+    }).catch(err => {
+        console.log(err)
+    });
 };
 
 const getCurrentUser = () => {
