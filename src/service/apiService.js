@@ -1,21 +1,19 @@
-import axios from "axios";
-import authHeader from "./authHeader";
-
-const { API_URL } = require('./api');
-
-const getAllPublicPosts = () => {
-    return axios.get(API_URL + "/public");
-};
-
-const test = () => {
-    return axios.get(API_URL + "/", {
-        headers: authHeader()
-    });
-};
-
-const postService = {
-    getAllPublicPosts,
-    test,
-};
-
-export default postService;
+import api from './api';
+class UserService {
+    getPublicContent() {
+        return api.get('/test/all');
+    }
+    getUserBoard() {
+        return api.get('/test/user');
+    }
+    getModeratorBoard() {
+        return api.get('/test/mod');
+    }
+    getAdminBoard() {
+        return api.get('/test/admin');
+    }
+    test(){
+        return api.get('/')
+    }
+}
+export default new UserService();

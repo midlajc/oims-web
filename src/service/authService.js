@@ -1,25 +1,21 @@
-import axios from "axios";
-
-import { API_URL } from './api'
+import api from './api'
+import tokenService from './tokenService';
 
 const signup = (email, password) => {
-    return axios
-        .post(API_URL + "/signup", {
-            email,
-            password,
-        })
-        .then((response) => {
-            if (response.data.accessToken) {
-                localStorage.setItem("user", JSON.stringify(response.data));
-            }
-
-            return response.data;
-        });
+    return api.post("/signup", {
+        email,
+        password,
+    }).then((response) => {
+        if (response.data.accessToken) {
+            tokenService.setUser(response.data)
+        }
+        return response.data;
+    });
 };
 
 const login = (username, password) => {
     return new Promise((resolve, reject) => {
-        axios.post(API_URL + "/auth/login", {
+        api.post("/auth/login", {
             username,
             password,
         }, {
@@ -32,6 +28,7 @@ const login = (username, password) => {
             }
             resolve(response.data);
         }).catch(err => {
+            console.log(err);
             reject(err.response)
         });
     })
@@ -39,7 +36,7 @@ const login = (username, password) => {
 
 const logout = () => {
     let user = JSON.parse(localStorage.getItem('user'))
-    axios.post(API_URL + "/auth/logout", {
+    api.post("/auth/logout", {
         username: user.username,
         refreshToken: user.refreshToken
     }, {
@@ -47,7 +44,7 @@ const logout = () => {
             username: user.username
         }
     }).then(() => {
-        localStorage.removeItem("user");
+        tokenService.removeUser()
         window.location.reload()
     }).catch(err => {
         console.log(err)
@@ -55,7 +52,7 @@ const logout = () => {
 };
 
 const getCurrentUser = () => {
-    return JSON.parse(localStorage.getItem("user"));
+    return tokenService.getUser()
 };
 
 const authService = {

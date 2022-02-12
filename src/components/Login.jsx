@@ -17,11 +17,11 @@ function Login() {
 
   const doLogin = () => {
     authService.login(username, password).then(res => {
-      // navigate('/')
+      navigate('/')
       window.location.reload()
     }).catch(err => {
+      // console.log(err);
       setDAlert(err.data)
-      console.log(err.data);
     })
   }
 
