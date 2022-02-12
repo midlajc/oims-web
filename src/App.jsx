@@ -4,6 +4,7 @@ import Login from './components/Login'
 import authService from './service/authService';
 import { useNavigate } from 'react-router-dom'
 import Home from './components/Home'
+import AdminHeader from './components/Header/adminHeader'
 
 function App() {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -27,8 +28,9 @@ function App() {
       </Routes>
       {(currentUser) ?
         <div>
+          <AdminHeader />
           <Home />
-          <button onClick={authService.logout}>logout</button>
+          {/* <button onClick={authService.logout}>logout</button> */}
         </div> :
         null}
     </div>

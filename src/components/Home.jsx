@@ -10,7 +10,7 @@ function Home() {
   }, [])
   return (
     <div>
-      <div>{state}</div>
+      {/* <div>{state}</div> */}
     </div>
   )
 }
