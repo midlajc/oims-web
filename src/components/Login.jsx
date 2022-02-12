@@ -5,6 +5,7 @@ import { Grid, Paper, Avatar, TextField, Button, Alert } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import authService from '../service/authService';
 import { useNavigate } from "react-router-dom";
+import background from '../asset/images/login_bg.jpg'
 
 
 function Login() {
@@ -20,8 +21,7 @@ function Login() {
       navigate('/')
       window.location.reload()
     }).catch(err => {
-      // console.log(err);
-      setDAlert(err.data)
+      setDAlert(err.data.message)
     })
   }
 
@@ -29,7 +29,7 @@ function Login() {
   const avatarStyle = { backgroundColor: '#1bbd7e' }
   const btnStyle = { margin: '8px 0' }
   return (
-    <div className='loginGrid'>
+    <div className='loginGrid' style={{backgroundImage:`url('${background}')`}}>
       <Grid className=''>
         <Paper elevation={10} style={paperStyle}>
           <Grid align='center'>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import apiService from '../service/apiService'
+import apiService from '../../service/apiService';
 
 function Home() {
   const [state, setState] = useState(undefined);
@@ -10,7 +10,7 @@ function Home() {
   }, [])
   return (
     <div>
-      {/* <div>{state}</div> */}
+      <div>{state}</div>
     </div>
   )
 }

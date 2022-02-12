@@ -1,0 +1,9 @@
+.button:hover{
+    background-color: rgba(151, 151, 151, 0.37);
+    border-radius: .5rem; 
+}
+
+.link:link,.link:visited,.link:hover,.link:active{
+    text-decoration: none;
+    color: black;
+}

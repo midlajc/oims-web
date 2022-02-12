@@ -12,14 +12,27 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import authService from '../../service/authService';
+import tokenService from '../../service/tokenService';
+import { Link } from 'react-router-dom';
+import './Header.css'
+import { height } from '@mui/system';
 
-const pages = ['Home', 'Settings'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const routes = [
+    {
+        name: 'Home',
+        route: '/'
+    },
+    {
+        name: 'Settings',
+        route: '/settings'
+    }
+];
+// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function AdminHeader() {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
-
+    const user = tokenService.getUser()
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
@@ -35,9 +48,9 @@ function AdminHeader() {
         setAnchorElUser(null);
     };
     return (
-        <AppBar position="static" color='primary'>
+        <AppBar position="static">
             <Container maxWidth="xl">
-                <Toolbar disableGutters>
+                <Toolbar disableGutters style={{ minHeight: '3rem' }}>
                     <Typography
                         variant="h6"
                         noWrap
@@ -49,7 +62,8 @@ function AdminHeader() {
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
-                            size="large"
+                            size="small"
+                            sx={{ ml: "-.5rem"}}
                             aria-label="account of current user"
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
@@ -74,11 +88,16 @@ function AdminHeader() {
                             onClose={handleCloseNavMenu}
                             sx={{
                                 display: { xs: 'block', md: 'none' },
+                                mt: '15px'
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
+                            {routes.map((page) => (
+                                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                                    <Link to={page.route} className='link'>
+                                        <Typography textAlign="center">
+                                            {page.name}
+                                        </Typography>
+                                    </Link>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -92,25 +111,28 @@ function AdminHeader() {
                         LOGO
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                {page}
-                            </Button>
+                        {routes.map((page, index) => (
+                            <Link key={index} className='link button' to={page.route}>
+                                <Button
+                                    onClick={handleCloseNavMenu}
+                                    sx={{ my: 0, color: 'white', display: 'block' }}
+                                >
+                                    {page.name}
+                                </Button>
+                            </Link>
                         ))}
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                            <IconButton onClick={handleOpenUserMenu}
+                                sx={{ p: 0, my: 1 }}>
+                                <Avatar sx={{ height: '2rem', width: '2rem' }}
+                                    alt={user.name} src="/static/images/avatar/1.jpg" />
                             </IconButton>
                         </Tooltip>
                         <Menu
-                            sx={{ mt: '45px' }}
+                            sx={{ mt: '40px' }}
                             id="menu-appbar"
                             anchorEl={anchorElUser}
                             anchorOrigin={{
@@ -125,11 +147,12 @@ function AdminHeader() {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center" onClick={authService.logout} id={setting}>{setting}</Typography>
-                                </MenuItem>
-                            ))}
+                            <MenuItem onClick={handleCloseUserMenu}>
+                                <Typography textAlign="center" id='name'>{user.name}</Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleCloseUserMenu}>
+                                <Typography textAlign="center" onClick={authService.logout} id='logout'>Log out</Typography>
+                            </MenuItem>
                         </Menu>
                     </Box>
                 </Toolbar>
