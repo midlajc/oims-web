@@ -5,12 +5,15 @@ function Clock() {
     const [dateState, setDateState] = useState();
 
     useEffect(() => {
-        setInterval(() => {
-            const date = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            setClockState(date.toLocaleTimeString());
-            setDateState(date.toLocaleDateString("en-US", options));
-        }, 1000);
+            let clockInterval=setInterval(() => {
+                const date = new Date();
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                setClockState(date.toLocaleTimeString());
+                setDateState(date.toLocaleDateString("en-US", options));
+            }, 1000);
+        return () => {
+            clearInterval(clockInterval)
+        }
     }, []);
 
     return (
