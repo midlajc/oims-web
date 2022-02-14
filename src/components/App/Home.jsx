@@ -1,5 +1,5 @@
-import React from 'react'
-// import apiService from '../../service/apiService';
+import React, { useEffect,useState } from 'react'
+import apiService from '../../service/apiService';
 // import * as React from 'react';
 
 import './Home.css'
@@ -8,10 +8,23 @@ import Calender from './Home/Calender'
 
 
 function Home() {
+  const [state, setstate] = useState('');
+
+  useEffect(() => {
+    apiService.test().then(res=>{
+      console.log(res);
+      setstate(res.data.message)
+    })
+    return () => {
+      
+    };
+  }, []);
+
   return (
     <div className='body'>
       <Clock />
       <Calender />
+      {state}
     </div>
   )
 }

@@ -4,6 +4,7 @@ import tokenService from '../service/tokenService';
 import { Routes, Route } from "react-router-dom";
 import Home from './App/Home';
 import Settings from './App/Settings';
+import ProgressBar from './Header/ProgressBar';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -17,6 +18,7 @@ function App() {
     <div>
       <div>
         <AdminHeader />
+        <ProgressBar/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/settings" element={<Settings />} />
