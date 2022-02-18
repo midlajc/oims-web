@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from './App/Home';
 import Settings from './App/Settings';
 import ProgressBar from './Header/ProgressBar';
+import userContext from '../Context/userContext';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -17,12 +18,14 @@ function App() {
   return (
     <div>
       <div>
-        <AdminHeader />
-        <ProgressBar/>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/settings" element={<Settings />} />
-        </Routes>
+        <userContext.Provider value={currentUser}>
+          <AdminHeader />
+          <ProgressBar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </userContext.Provider>
       </div>
     </div>
   )

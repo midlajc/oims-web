@@ -12,7 +12,6 @@ function Home() {
 
   useEffect(() => {
     apiService.test().then(res=>{
-      console.log(res);
       setstate(res.data.message)
     })
     return () => {
