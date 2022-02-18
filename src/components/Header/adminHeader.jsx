@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useContext } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,7 +15,12 @@ import authService from '../../service/authService';
 import tokenService from '../../service/tokenService';
 import { Link } from 'react-router-dom';
 import './Header.css'
+import themeContext from '../../Context/themeContext';
 // import { height } from '@mui/system';
+import Switch from '@mui/material/Switch';
+
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 
 const routes = [
@@ -31,6 +36,7 @@ const routes = [
 // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function AdminHeader() {
+    const theme = useContext(themeContext)
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
     const user = tokenService.getUser()
@@ -150,6 +156,12 @@ function AdminHeader() {
                         >
                             <MenuItem onClick={handleCloseUserMenu}>
                                 <Typography textAlign="center" id='name'>{user.name}</Typography>
+                            </MenuItem>
+                            <MenuItem >
+                                <Switch aria-label='' onClick={theme.setMode} size="small" />
+                                <IconButton sx={{ ml: 1 }} color="inherit">
+                                    {theme.mode === 'dark' ? <Brightness4Icon /> : <Brightness7Icon />}
+                                </IconButton>
                             </MenuItem>
                             <MenuItem onClick={handleCloseUserMenu}>
                                 <Typography textAlign="center" onClick={authService.logout} id='logout'>Log out</Typography>
