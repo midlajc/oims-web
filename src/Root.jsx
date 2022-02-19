@@ -5,21 +5,25 @@ import App from './components/App'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import themeContext from './Context/themeContext';
+import tokenService from './service/tokenService';
 
 
 function Root() {
 
   const user = authService.getCurrentUser();
-  const [mode, setMode] = useState('light');
+  const [mode, setMode] = useState(tokenService.getTheme() || 'light');
   const theme = createTheme({
     palette: {
       mode,
     },
   })
-  // });
 
   const changeTheme = () => {
-    setMode(prevVal => prevVal === 'light' ? 'dark' : 'light')
+    setMode(prevVal => {
+      let mode = prevVal === 'light' ? 'dark' : 'light'
+      tokenService.setTheme(mode)
+      return mode
+    })
   }
 
 

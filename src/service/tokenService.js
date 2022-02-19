@@ -11,6 +11,18 @@ const updateLocalAccessToken = (token) => {
     user.accessToken = token;
     localStorage.setItem("user", JSON.stringify(user));
 };
+
+const setTheme = (mode) => {
+    let user = JSON.parse(localStorage.getItem("user"));
+    user.theme = mode;
+    localStorage.setItem("user", JSON.stringify(user));
+}
+
+const getTheme = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    return user?.theme
+}
+
 const getUser = () => {
     return JSON.parse(localStorage.getItem("user"));
 };
@@ -32,5 +44,7 @@ const tokenService = {
     setUser,
     removeUser,
     getUserName,
+    getTheme,
+    setTheme,
 };
 export default tokenService;

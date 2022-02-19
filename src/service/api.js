@@ -1,7 +1,7 @@
 import axios from "axios";
 import tokenService from "./tokenService";
 const instance = axios.create({
-    baseURL: "http://18.223.21.102/",
+    baseURL: "https://tezla.tech/",
     headers: {
         "Content-Type": "application/json",
     },
