@@ -25,7 +25,7 @@ function Login() {
     })
   }
 
-  const paperStyle = { padding: 20, height: 'auto', width: 280, margin: "0px 0", paddingBottom: '2rem' }
+  const paperStyle = { padding: 20, height: 'auto', width: 310, margin: "0px 0", paddingBottom: '2rem' }
   const avatarStyle = { backgroundColor: '#1bbd7e' }
   const btnStyle = { margin: '8px 0' }
   return (
