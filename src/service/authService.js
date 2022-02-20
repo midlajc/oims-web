@@ -1,5 +1,5 @@
 import api from './api'
-import tokenService from './tokenService';
+import storageService from './storageService';
 
 const signup = (email, password) => {
     return api.post("/signup", {
@@ -7,7 +7,7 @@ const signup = (email, password) => {
         password,
     }).then((response) => {
         if (response.data.accessToken) {
-            tokenService.setUser(response.data)
+            storageService.setUser(response.data)
         }
         return response.data;
     });
@@ -44,7 +44,7 @@ const logout = () => {
             username: user.username
         }
     }).then(() => {
-        tokenService.removeUser()
+        storageService.removeUser()
         window.location.reload()
     }).catch(err => {
         console.log(err)
@@ -52,7 +52,7 @@ const logout = () => {
 };
 
 const getCurrentUser = () => {
-    return tokenService.getUser()
+    return storageService.getUser()
 };
 
 const authService = {

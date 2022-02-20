@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import AdminHeader from './Header/adminHeader';
-import tokenService from '../service/tokenService';
+import storageService from '../service/storageService';
 import { Routes, Route } from "react-router-dom";
 import Home from './App/Home';
 import Settings from './App/Settings';
@@ -10,7 +10,7 @@ import userContext from '../Context/userContext';
 function App() {
   const [currentUser, setCurrentUser] = useState(undefined);
   useEffect(() => {
-    const user = tokenService.getUser();
+    const user = storageService.getUser();
     if (user) {
       setCurrentUser(user);
     }

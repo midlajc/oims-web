@@ -1,5 +1,5 @@
 import axios from "axios";
-import tokenService from "./tokenService";
+import storageService from "./storageService";
 const instance = axios.create({
     baseURL: "https://tezla.tech/",
     headers: {
@@ -8,8 +8,8 @@ const instance = axios.create({
 });
 instance.interceptors.request.use(
     (config) => {
-        const token = tokenService.getLocalAccessToken();
-        const username = tokenService.getUserName();
+        const token = storageService.getLocalAccessToken();
+        const username = storageService.getUserName();
         if (token) {
             config.headers["Authorization"] = 'Bearer ' + token;  // for Spring Boot back-end
             config.headers["username"] = username;
@@ -35,12 +35,12 @@ instance.interceptors.response.use(
                 originalConfig._retry = true;
                 try {
                     const rs = await instance.post("/auth/token", {
-                        refreshToken: tokenService.getLocalRefreshToken(),
+                        refreshToken: storageService.getLocalRefreshToken(),
                     }, {
-                        username: tokenService.getUserName()
+                        username: storageService.getUserName()
                     });
                     const { accessToken } = rs.data;
-                    tokenService.updateLocalAccessToken(accessToken);
+                    storageService.updateLocalAccessToken(accessToken);
                     return instance(originalConfig);
                 } catch (_error) {
                     return Promise.reject(_error);

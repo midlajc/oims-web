@@ -13,14 +13,15 @@ const updateLocalAccessToken = (token) => {
 };
 
 const setTheme = (mode) => {
-    let user = JSON.parse(localStorage.getItem("user"));
-    user.theme = mode;
-    localStorage.setItem("user", JSON.stringify(user));
+    let theme = {
+        mode: mode
+    }
+    localStorage.setItem("theme", JSON.stringify(theme));
 }
 
 const getTheme = () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    return user?.theme
+    const theme = JSON.parse(localStorage.getItem("theme"));
+    return theme?.mode
 }
 
 const getUser = () => {
@@ -36,7 +37,7 @@ const getUserName = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     return user?.username
 }
-const tokenService = {
+const storageService = {
     getLocalRefreshToken,
     getLocalAccessToken,
     updateLocalAccessToken,
@@ -47,4 +48,4 @@ const tokenService = {
     getTheme,
     setTheme,
 };
-export default tokenService;
+export default storageService;

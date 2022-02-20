@@ -12,12 +12,12 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import authService from '../../service/authService';
-import tokenService from '../../service/tokenService';
+import storageService from '../../service/storageService';
 import { Link } from 'react-router-dom';
 import './Header.css'
 import themeContext from '../../Context/themeContext';
 // import { height } from '@mui/system';
-import Switch from '@mui/material/Switch';
+// import Switch from '@mui/material/Switch';
 
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
@@ -39,7 +39,7 @@ function AdminHeader() {
     const theme = useContext(themeContext)
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
-    const user = tokenService.getUser()
+    const user = storageService.getUser()
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
@@ -131,6 +131,9 @@ function AdminHeader() {
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
+                        <IconButton sx={{ mr: 1 }} onClick={theme.setMode} color="inherit">
+                            {theme.mode === 'dark' ? <Brightness4Icon /> : <Brightness7Icon />}
+                        </IconButton>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu}
                                 sx={{ p: 0, my: 1 }}>
@@ -157,12 +160,12 @@ function AdminHeader() {
                             <MenuItem onClick={handleCloseUserMenu}>
                                 <Typography textAlign="center" id='name'>{user.name}</Typography>
                             </MenuItem>
-                            <MenuItem >
+                            {/* <MenuItem >
                                 <Switch aria-label='' onClick={theme.setMode} size="small" />
-                                <IconButton sx={{ ml: 1 }} color="inherit">
+                                <IconButton sx={{ ml: 1 }} onClick={theme.setMode} color="inherit">
                                     {theme.mode === 'dark' ? <Brightness4Icon /> : <Brightness7Icon />}
                                 </IconButton>
-                            </MenuItem>
+                            </MenuItem> */}
                             <MenuItem onClick={handleCloseUserMenu}>
                                 <Typography textAlign="center" onClick={authService.logout} id='logout'>Log out</Typography>
                             </MenuItem>

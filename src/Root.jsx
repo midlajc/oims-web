@@ -5,13 +5,13 @@ import App from './components/App'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import themeContext from './Context/themeContext';
-import tokenService from './service/tokenService';
+import storageService from './service/storageService';
 
 
 function Root() {
 
   const user = authService.getCurrentUser();
-  const [mode, setMode] = useState(tokenService.getTheme() || 'light');
+  const [mode, setMode] = useState(storageService.getTheme() || 'light');
   const theme = createTheme({
     palette: {
       mode,
@@ -21,7 +21,7 @@ function Root() {
   const changeTheme = () => {
     setMode(prevVal => {
       let mode = prevVal === 'light' ? 'dark' : 'light'
-      tokenService.setTheme(mode)
+      storageService.setTheme(mode)
       return mode
     })
   }
@@ -29,22 +29,22 @@ function Root() {
 
   return (
     <div>
-      {
-        (user) ?
-          <div>
-            <themeContext.Provider value={{ mode: mode, setMode: changeTheme }}>
-              <ThemeProvider theme={theme}>
-                <CssBaseline />
+      <themeContext.Provider value={{ mode: mode, setMode: changeTheme }}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          {
+            (user) ?
+              <div>
                 <App />
-              </ThemeProvider>
-            </themeContext.Provider>
-          </div>
-          :
-          <div>
-            <Login />
-          </div>
-      }
-    </div>
+              </div>
+              :
+              <div>
+                <Login />
+              </div>
+          }
+        </ThemeProvider>
+      </themeContext.Provider>
+    </div >
   )
 }
 
