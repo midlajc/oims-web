@@ -7,9 +7,10 @@ function Clock() {
     useEffect(() => {
         let clockInterval = setInterval(() => {
             const date = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            setClockState(date.toLocaleTimeString());
-            setDateState(date.toLocaleDateString("en-US", options));
+            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const timeOption = { hour: 'numeric', minute: 'numeric', hour12: true }
+            setClockState(date.toLocaleString('en-US', timeOption));
+            setDateState(date.toLocaleDateString("en-US", dateOptions));
         }, 1000);
         return () => {
             clearInterval(clockInterval)
