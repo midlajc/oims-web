@@ -8,7 +8,7 @@ function Clock() {
         let clockInterval = setInterval(() => {
             const date = new Date();
             const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const timeOption = { hour: 'numeric', minute: 'numeric', hour12: true }
+            const timeOption = { hour: 'numeric', minute: 'numeric', hour12: true, second: 'numeric' }
             setClockState(date.toLocaleString('en-US', timeOption));
             setDateState(date.toLocaleDateString("en-US", dateOptions));
         }, 1000);
