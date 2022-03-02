@@ -18,9 +18,8 @@ import './Header.css'
 import themeContext from '../../Context/themeContext';
 // import { height } from '@mui/system';
 // import Switch from '@mui/material/Switch';
-
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 
 
 const routes = [
@@ -151,7 +150,7 @@ function AdminHeader() {
 
                     <Box sx={{ flexGrow: 0 }}>
                         <IconButton sx={{ mr: 1 }} onClick={theme.setMode} color="inherit">
-                            {theme.mode === 'dark' ? <Brightness4Icon /> : <Brightness7Icon />}
+                            {theme.mode === 'dark' ? <LightModeOutlinedIcon /> : <DarkModeOutlinedIcon />}
                         </IconButton>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu}
