@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -37,6 +37,25 @@ const routes = [
 
 function AdminHeader() {
     const theme = useContext(themeContext)
+
+    useEffect(() => {
+        if (theme.mode === 'light') {
+            setLinkStyle({
+                textDecoration: 'none',
+                color: 'black',
+            })
+        } else {
+            setLinkStyle({
+                textDecoration: 'none',
+                color: 'white',
+            })
+        }
+    }, [theme]);
+
+    const [linkStyle, setLinkStyle] = useState({
+        textDecoration: 'none',
+        color: 'white',
+    });
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
     const user = storageService.getUser()
@@ -100,7 +119,7 @@ function AdminHeader() {
                         >
                             {routes.map((page) => (
                                 <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                                    <Link to={page.route} className='link'>
+                                    <Link to={page.route} style={linkStyle}>
                                         <Typography textAlign="center">
                                             {page.name}
                                         </Typography>
