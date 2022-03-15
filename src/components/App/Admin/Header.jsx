@@ -11,11 +11,11 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import authService from '../../service/authService';
-import storageService from '../../service/storageService';
+import authService from '../../../service/authService';
+import storageService from '../../../service/storageService';
 import { Link } from 'react-router-dom';
 import './Header.css'
-import themeContext from '../../Context/themeContext';
+import themeContext from '../../../Context/themeContext';
 // import { height } from '@mui/system';
 // import Switch from '@mui/material/Switch';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
@@ -26,11 +26,22 @@ const routes = [
     {
         name: 'Home',
         route: '/'
-    },
-    {
+    },{
+        name: 'Students',
+        route: '/students'
+    },{
+        name: 'Sponsors',
+        route: '/sponsors'
+    }, {
+        name: 'Sponsorship',
+        route: '/sponsorship'
+    }, {
+        name: 'Accounts',
+        route: '/accounts'
+    },{
         name: 'Settings',
         route: '/settings'
-    }
+    },
 ];
 // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -137,7 +148,7 @@ function AdminHeader() {
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {routes.map((page, index) => (
-                            <Link key={index} className='link button' to={page.route}>
+                            <Link key={index} className='link' to={page.route}>
                                 <Button
                                     onClick={handleCloseNavMenu}
                                     sx={{ my: 0, color: 'white', display: 'block' }}
