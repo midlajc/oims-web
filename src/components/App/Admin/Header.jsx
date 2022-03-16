@@ -26,19 +26,23 @@ const routes = [
     {
         name: 'Home',
         route: '/'
-    },{
+    }, {
         name: 'Students',
         route: '/students'
-    },{
+    }, {
         name: 'Sponsors',
         route: '/sponsors'
     }, {
         name: 'Sponsorship',
         route: '/sponsorship'
+    },
+    {
+        name: 'Admission',
+        route: '/admission'
     }, {
         name: 'Accounts',
         route: '/accounts'
-    },{
+    }, {
         name: 'Settings',
         route: '/settings'
     },
