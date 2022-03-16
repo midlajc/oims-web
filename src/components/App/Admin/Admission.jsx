@@ -23,7 +23,7 @@ function Admission() {
                 }}>
                     <CardMedia
                         component="img"
-                        sx={{ width: 70, height: 70, }}
+                        sx={{ width: 55, height: 55, }}
                         image="https://img.icons8.com/ios-glyphs/344/list--v1.png"
                         alt="Live from space album cover"
                     />
