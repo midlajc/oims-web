@@ -22,34 +22,10 @@ import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 
 
-const routes = [
-    {
-        name: 'Home',
-        route: '/'
-    }, {
-        name: 'Students',
-        route: '/students'
-    }, {
-        name: 'Sponsors',
-        route: '/sponsors'
-    }, {
-        name: 'Sponsorship',
-        route: '/sponsorship'
-    },
-    {
-        name: 'Admission',
-        route: '/admission'
-    }, {
-        name: 'Accounts',
-        route: '/accounts'
-    }, {
-        name: 'Settings',
-        route: '/settings'
-    },
-];
+
 // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function AdminHeader() {
+function AdminHeader({routes}) {
     const theme = useContext(themeContext)
 
     useEffect(() => {
@@ -133,7 +109,7 @@ function AdminHeader() {
                         >
                             {routes.map((page) => (
                                 <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                                    <Link to={page.route} style={linkStyle}>
+                                    <Link to={page.path} style={linkStyle}>
                                         <Typography textAlign="center">
                                             {page.name}
                                         </Typography>
@@ -152,7 +128,7 @@ function AdminHeader() {
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {routes.map((page, index) => (
-                            <Link key={index} className='link' to={page.route}>
+                            <Link key={index} className='link' to={page.path}>
                                 <Button
                                     onClick={handleCloseNavMenu}
                                     sx={{ my: 0, color: 'white', display: 'block' }}

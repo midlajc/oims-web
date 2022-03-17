@@ -7,9 +7,8 @@ import Clock from './Home/Clock';
 import Calender from './Home/Calender'
 
 
-function Home() {
+function Home({routes}) {
   const [state, setState] = useState('');
-
   useEffect(() => {
     apiService.test().then(res=>{
       setState(res.data.message)

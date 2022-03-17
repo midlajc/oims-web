@@ -1,7 +1,8 @@
 import axios from "axios";
 import storageService from "./storageService";
 const instance = axios.create({
-    baseURL: "http://192.168.1.5:8000",
+    baseURL: "http://192.168.183.13:8000",
+    // baseURL: "http://localhost:8000",
     // baseURL: "https://pro-back-end.herokuapp.com/",
     // baseURL: "https://tezla.tech/",
     headers: {
@@ -13,9 +14,9 @@ instance.interceptors.request.use(
         const token = storageService.getLocalAccessToken();
         const username = storageService.getUserName();
         if (token) {
-            config.headers["Authorization"] = 'Bearer ' + token;  // for Spring Boot back-end
+            config.headers["Authorization"] = 'Bearer ' + token; 
             config.headers["username"] = username;
-            // config.headers["x-access-token"] = token; // for Node.js Express back-end
+            // config.headers["x-access-token"] = token; 
         }
         return config;
     },

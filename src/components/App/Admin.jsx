@@ -1,22 +1,37 @@
 import React from 'react'
 import Header from './Admin/Header';
-import Home from './Admin/Home';
-import Settings from './Admin/Settings';
-import Admission from './Admin/Admission';
+
 import { Routes, Route } from "react-router-dom";
+import routes from './Admin/Routes'
+import ApplicantList from './Admin/Admission/ApplicantList';
 
 
 function Admin() {
     return (
         <div>
-            <Header />
+            <Header routes={routes} />
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/settings" element={<Settings />} />
-                <Route path="/admission" element={<Admission />} />
-                <Route path="/settings" element={<Settings />} />
-                <Route path="/settings" element={<Settings />} />
-                <Route path="/settings" element={<Settings />} />
+                {routes.map((route, i) => {
+                    // route.routes.map((route, i) => {
+                    //     console.log(route);
+                    //     // route.routes.map()
+                    //     return (
+                    //         <Route
+                    //             key={i}
+                    //             path={route.path}
+                    //             element={<route.component routes={route.routes} />}
+                    //         />
+                    //     )
+                    // })
+                    return (
+                        <Route
+                            key={i}
+                            path={route.path}
+                            element={<route.component routes={route.routes} />}
+                        />
+                    )
+                })}
+                {/* <Route path='/admission/applicant-list' element={<ApplicantList />} /> */}
             </Routes>
         </div>
     )
