@@ -1,27 +1,14 @@
 import React from 'react'
 import Box from '@mui/material/Box';
-import { Routes, Route, Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import Widget from '../../Common/Widget';
-import ApplicantList from './Admission/ApplicantList';
+import routes from './Admission/routes'
 
-function Admission({ routes }) {
-    // console.log(routes);
+function Admission() {
     return (
         <>
-            <Routes>
-                <Route path='/admission/applicant-list' element={<ApplicantList />} />
-
-                {/* {routes.map((route, i) => {
-                    return (
-                        <Route
-                            key={i}
-                            path={route.path}
-                            element={<route.component routes={route.routes} />}
-                        />
-                    )
-                })} */}
-            </Routes>
             <div>
+                <Outlet />
                 <Box style={{
                     display: 'flex', width: '100%', padding: 25,
                     justifyContent: 'flex-start', alignItems: 'flex-start', flexWrap: 'wrap'
@@ -37,6 +24,7 @@ function Admission({ routes }) {
                             )
                         })
                     }
+
                 </Box>
             </div>
         </>

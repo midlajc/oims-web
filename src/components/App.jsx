@@ -15,7 +15,7 @@ function App() {
   }, [])
 
   let render = () => {
-    if (user.role==='admin') {
+    if (user.role === 'admin') {
       return (
         <Admin />
       )
