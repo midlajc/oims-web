@@ -6,11 +6,9 @@ import Modal from '@mui/material/Modal';
 const style = {
     position: 'absolute',
     top:'5%',
-    // marginBottom: 10,
-    width: '90%',
+    width: '80%',
     bgcolor: 'background.paper',
-    // border: '2px solid #000',
-    boxShadow: 24,
+    boxShadow: 10,
     p: 4,
 };
 

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Box, Button } from '@mui/material';
 
 import AddApplicant from './ApplicantList/AddApplicant'
-import { margin, width } from '@mui/system';
 import ApplicantTable from './ApplicantList/ApplicantTable';
 
 function ApplicantList() {
@@ -22,11 +21,10 @@ function ApplicantList() {
           width: '95%',
           // padding:5
         }}>
-        {/* <Button onClick={handleOpen}>Open modal</Button> */}
+        <AddApplicant open={addApplicant} close={handleClose} />
         <span style={{ float: 'left' }}>
-          {/* <AddApplicant open={addApplicant} close={handleClose} /> */}
         </span>
-        <ApplicantTable />
+        <ApplicantTable handleAddApplicant={handleOpen} />
       </div>
     </Box >
     // <>
