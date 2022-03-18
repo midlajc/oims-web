@@ -6,15 +6,15 @@
 .pnp.js
 
 #firebase
-.firebase
-firebase.json
-.firebaserc
+# .firebase
+# firebase.json
+# .firebaserc
 
 # testing
 /coverage
 
 # production
-# /build
+/build
 
 # misc
 .DS_Store
