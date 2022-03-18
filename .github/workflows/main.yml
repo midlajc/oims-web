@@ -13,7 +13,7 @@ jobs:
       - name: Install Dependencies
         run: npm install
       - name: Audit npm
-        run: npm audit fix
+        run: npm audit fix --force
       - name: Build
         run: npm run build
       - name: Archive Production Artifact
