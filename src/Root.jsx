@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import Login from './components/Login'
+import Login from './Components/Login'
 import authService from './service/authService';
-import App from './components/App'
+import App from './Components/App'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import themeContext from './Context/themeContext';
