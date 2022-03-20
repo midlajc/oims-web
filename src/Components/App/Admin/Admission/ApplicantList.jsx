@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
 
 import AddApplicant from './ApplicantList/AddApplicant'
 import ApplicantTable from './ApplicantList/ApplicantTable';

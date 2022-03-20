@@ -81,7 +81,7 @@ const SearchBar = React.forwardRef(
                     inputProps.onFocus(e);
                 }
             },
-            [inputProps.onFocus]
+            [inputProps]
         );
 
         const handleBlur = React.useCallback(
@@ -91,7 +91,7 @@ const SearchBar = React.forwardRef(
                     inputProps.onBlur(e);
                 }
             },
-            [inputProps.onBlur]
+            [inputProps]
         );
 
         const handleInput = React.useCallback(
@@ -101,7 +101,7 @@ const SearchBar = React.forwardRef(
                     inputProps.onChange(e.target.value);
                 }
             },
-            [inputProps.onChange]
+            [inputProps]
         );
 
         const handleCancel = React.useCallback(() => {
@@ -131,7 +131,7 @@ const SearchBar = React.forwardRef(
                     inputProps.onKeyUp(e);
                 }
             },
-            [handleRequestSearch, cancelOnEscape, handleCancel, inputProps.onKeyUp]
+            [handleRequestSearch, cancelOnEscape, handleCancel, inputProps]
         );
 
         React.useImperativeHandle(ref, () => ({

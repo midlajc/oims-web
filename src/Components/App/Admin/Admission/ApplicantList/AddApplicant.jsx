@@ -3,12 +3,21 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
-import { Button } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { LoadingButton } from '@mui/lab';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid'
+import InputLabel from '@mui/material/InputLabel';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DatePicker from '@mui/lab/DatePicker';
+
 
 const style = {
     position: 'absolute',
@@ -23,8 +32,25 @@ function AddApplicant({ open, close }) {
 
     const [loading, setLoading] = useState(false);
 
+    const [name, setName] = useState('');
+    const [dob, setDob] = useState(null);
+    const [gender, setGender] = useState('');
+    const [standard, setStandard] = useState('');
+    const [age, setAge] = useState('');
+    // let primary_details={
+    //     name
+    // }
+
     const handleClick = () => {
         setLoading(preVal => !preVal)
+    }
+
+    const clearFields = () => {
+        setDob(null)
+        setName('')
+        setGender('')
+        setStandard('')
+        setAge('')
     }
 
     return (
@@ -42,7 +68,7 @@ function AddApplicant({ open, close }) {
             >
                 <Box sx={style}>
                     <Button color='inherit' sx={{ float: 'right' }} onClick={close}>
-                        <CloseIcon sx={{ width: 15 }} />
+                        <CloseIcon sx={{ width: 1 }} />
                     </Button>
                     <Typography sx={{
                         marginBottom: 3
@@ -59,10 +85,80 @@ function AddApplicant({ open, close }) {
                                 <Typography>Primary Details</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                    malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                </Typography>
+                                <Container>
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={12} md={6}>
+                                            <InputLabel id="">Name *</InputLabel>
+                                            <TextField
+                                                fullWidth
+                                                value={name}
+                                                onChange={(newVal) => setName(newVal.target.value)}
+                                                size='small'
+                                                variant="outlined"
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} md={3}>
+                                            <InputLabel id="">Gender*</InputLabel>
+                                            <Select
+                                                value={gender}
+                                                fullWidth
+                                                size='small'
+                                                onChange={(newVal) => setGender(newVal.target.value)}
+                                                labelId=""
+                                                id=""
+                                            >
+                                                <MenuItem value={1}>Male</MenuItem>
+                                                <MenuItem value={2}>Female</MenuItem>
+                                                <MenuItem value={3}>Other</MenuItem>
+                                            </Select>
+                                        </Grid>
+                                        <Grid item xs={12} md={3}>
+                                            <InputLabel id="">Age *</InputLabel>
+                                            <TextField
+                                                fullWidth
+                                                size='small'
+                                                type={'number'}
+                                                value={age}
+                                                onChange={(newVal) => setAge(newVal.target.value)}
+                                                variant="outlined"
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} md={3}>
+                                            <InputLabel id="">Date of Birth *</InputLabel>
+                                            <LocalizationProvider
+                                                dateAdapter={AdapterDateFns}>
+                                                <DatePicker
+                                                    value={dob}
+                                                    onChange={(newValue) => {
+                                                        setDob(newValue);
+                                                    }}
+                                                    renderInput={(params) => <TextField
+                                                        style={{
+                                                            width: '100%'
+                                                        }}
+                                                        size='small'
+                                                        {...params}
+                                                    />}
+                                                />
+                                            </LocalizationProvider>
+                                        </Grid>
+                                        <Grid item xs={12} md={3}>
+                                            <InputLabel id="ageLabel">Class*</InputLabel>
+                                            <Select
+                                                value={standard}
+                                                fullWidth
+                                                size='small'
+                                                onChange={(newVal) => setStandard(newVal.target.value)}
+                                                labelId="ageLabel"
+                                                id=""
+                                            >
+                                                <MenuItem value={1}>Standard 1</MenuItem>
+                                                <MenuItem value={2}>Standard 2</MenuItem>
+                                                <MenuItem value={3}>Standard 3</MenuItem>
+                                            </Select>
+                                        </Grid>
+                                    </Grid>
+                                </Container>
                             </AccordionDetails>
                         </Accordion>
                         <Accordion>
@@ -97,6 +193,16 @@ function AddApplicant({ open, close }) {
                         </Accordion>
                     </div>
                     <div style={{ float: 'right' }}>
+                        <Button
+                            variant='contained'
+                            color='error'
+                            sx={{
+                                marginRight: 1
+                            }}
+                            onClick={clearFields}
+                        >
+                            Clear
+                        </Button>
                         <LoadingButton
                             onClick={handleClick}
                             loading={loading}
@@ -107,7 +213,7 @@ function AddApplicant({ open, close }) {
                     </div>
                 </Box>
             </Modal>
-        </div>
+        </div >
     )
 }
 

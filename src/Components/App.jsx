@@ -6,13 +6,13 @@ import Admin from './App/Admin';
 import userContext from '../Context/userContext';
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(undefined);
   const user = storageService.getUser();
-  useEffect(() => {
-    if (user) {
-      setCurrentUser(user);
-    }
-  }, [])
+  const [currentUser, setCurrentUser] = useState(user);
+  // useEffect(() => {
+  //   if (user) {
+  //     setCurrentUser(user);
+  //   }
+  // }, [])
 
   let render = () => {
     if (user.role === 'admin') {
