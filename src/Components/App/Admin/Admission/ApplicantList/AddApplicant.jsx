@@ -37,6 +37,8 @@ function AddApplicant({ open, close }) {
     const [gender, setGender] = useState('');
     const [standard, setStandard] = useState('');
     const [age, setAge] = useState('');
+    const [border, setBorder] = useState('');
+    const [studentType, setStudentType] = useState();
     // let primary_details={
     //     name
     // }
@@ -51,6 +53,8 @@ function AddApplicant({ open, close }) {
         setGender('')
         setStandard('')
         setAge('')
+        setBorder('')
+        setStudentType('')
     }
 
     return (
@@ -85,8 +89,10 @@ function AddApplicant({ open, close }) {
                                 <Typography>Primary Details</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <Container>
-                                    <Grid container spacing={2}>
+                                <Container sx={{
+                                    marginBottom:3
+                                }}>
+                                    <Grid container spacing={1}>
                                         <Grid item xs={12} md={6}>
                                             <InputLabel id="">Name *</InputLabel>
                                             <TextField
@@ -104,7 +110,6 @@ function AddApplicant({ open, close }) {
                                                 fullWidth
                                                 size='small'
                                                 onChange={(newVal) => setGender(newVal.target.value)}
-                                                labelId=""
                                                 id=""
                                             >
                                                 <MenuItem value={1}>Male</MenuItem>
@@ -149,12 +154,38 @@ function AddApplicant({ open, close }) {
                                                 fullWidth
                                                 size='small'
                                                 onChange={(newVal) => setStandard(newVal.target.value)}
-                                                labelId="ageLabel"
                                                 id=""
                                             >
                                                 <MenuItem value={1}>Standard 1</MenuItem>
                                                 <MenuItem value={2}>Standard 2</MenuItem>
                                                 <MenuItem value={3}>Standard 3</MenuItem>
+                                            </Select>
+                                        </Grid>
+                                        <Grid item xs={12} md={3}>
+                                            <InputLabel id="ageLabel">Student Type*</InputLabel>
+                                            <Select
+                                                value={studentType}
+                                                fullWidth
+                                                size='small'
+                                                onChange={(newVal) => setStudentType(newVal.target.value)}
+                                                id=""
+                                            >
+                                                <MenuItem value={1}>Orphan</MenuItem>
+                                                <MenuItem value={2}>Destitute</MenuItem>
+                                                <MenuItem value={3}>Higher Studies</MenuItem>
+                                            </Select>
+                                        </Grid>
+                                        <Grid item xs={12} md={3}>
+                                            <InputLabel id="ageLabel">Boarder Type*</InputLabel>
+                                            <Select
+                                                value={border}
+                                                fullWidth
+                                                size='small'
+                                                onChange={(newVal) => setBorder(newVal.target.value)}
+                                                id=""
+                                            >
+                                                <MenuItem value={'week'}>Week Day</MenuItem>
+                                                <MenuItem value={'full'}>Full Day</MenuItem>
                                             </Select>
                                         </Grid>
                                     </Grid>
