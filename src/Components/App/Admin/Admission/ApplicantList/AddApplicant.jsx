@@ -56,7 +56,7 @@ function AddApplicant({ open, close }) {
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
                             >
-                                <Typography>Accordion 1</Typography>
+                                <Typography>Primary Details</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
                                 <Typography>
@@ -71,7 +71,7 @@ function AddApplicant({ open, close }) {
                                 aria-controls="panel2a-content"
                                 id="panel2a-header"
                             >
-                                <Typography>Accordion 2</Typography>
+                                <Typography>Address Information</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
                                 <Typography>

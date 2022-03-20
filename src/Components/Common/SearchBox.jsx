@@ -17,6 +17,8 @@ const styles = (theme) => ({
     iconButton: {
         color: theme.palette.action.active,
         transform: "scale(1, 1)",
+        // width:10,
+        // margin:4,
         transition: theme.transitions.create(["transform", "color"], {
             duration: theme.transitions.duration.shorter,
             easing: theme.transitions.easing.easeInOut,

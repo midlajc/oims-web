@@ -21,7 +21,7 @@ import Paper from '@mui/material/Paper';
 // import DeleteIcon from '@mui/icons-material/Delete';
 // import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
-import { TextField, Button } from '@mui/material';
+import { Button } from '@mui/material';
 import SearchBar from '../../../../Common/SearchBox'
 
 
@@ -215,9 +215,9 @@ const EnhancedTableToolbar = (props) => {
             <Button sx={{ width: 199 }} onClick={handleAddApplicant} variant="contained" size="medium">Add Applicant</Button>
             <SearchBar
                 style={{
-                    width:"19rem",
-                    height:'2.3rem',
-                    marginLeft:10
+                    width: "19rem",
+                    height: '2.5rem',
+                    marginLeft: 10
                 }}
                 onChange={(searchVal) => requestSearch(searchVal)}
                 onCancelSearch={() => cancelSearch()}
