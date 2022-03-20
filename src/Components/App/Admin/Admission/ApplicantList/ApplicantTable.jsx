@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types';
-import { alpha } from '@mui/material/styles';
+// import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -22,7 +22,8 @@ import Paper from '@mui/material/Paper';
 // import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import { TextField, Button } from '@mui/material';
-// import { width } from '@mui/system';
+import SearchBar from '../../../../Common/SearchBox'
+
 
 
 
@@ -37,19 +38,19 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const originalRows = [
-    // createData('Donut', 452, 25.0, 51, 4.9),
-    // createData('Cupcake', 305, 3.7, 67, 4.3),
-    // createData('Eclair', 262, 16.0, 24, 6.0),
-    // createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    // createData('Gingerbread', 356, 16.0, 49, 3.9),
-    // createData('Honeycomb', 408, 3.2, 87, 6.5),
-    // createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    // createData('Jelly Bean', 375, 0.0, 94, 0.0),
-    // createData('KitKat', 518, 26.0, 65, 7.0),
-    // createData('Lollipop', 392, 0.2, 98, 0.0),
-    // createData('Marshmallow', 318, 0, 81, 2.0),
-    // createData('Nougat', 360, 19.0, 9, 37.0),
-    // createData('Oreo', 437, 18.0, 63, 4.0),
+    createData('Donut', 452, 25.0, 51, 4.9),
+    createData('Cupcake', 305, 3.7, 67, 4.3),
+    createData('Eclair', 262, 16.0, 24, 6.0),
+    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+    createData('Gingerbread', 356, 16.0, 49, 3.9),
+    createData('Honeycomb', 408, 3.2, 87, 6.5),
+    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+    createData('Jelly Bean', 375, 0.0, 94, 0.0),
+    createData('KitKat', 518, 26.0, 65, 7.0),
+    createData('Lollipop', 392, 0.2, 98, 0.0),
+    createData('Marshmallow', 318, 0, 81, 2.0),
+    createData('Nougat', 360, 19.0, 9, 37.0),
+    createData('Oreo', 437, 18.0, 63, 4.0),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -107,12 +108,12 @@ const headCells = [
         disablePadding: false,
         label: 'Carbs',
     },
-    {
-        id: 'protein',
-        numeric: true,
-        disablePadding: false,
-        label: 'Protein',
-    },
+    // {
+    //     id: 'protein',
+    //     numeric: true,
+    //     disablePadding: false,
+    //     label: 'Protein',
+    // },
     {
         id: 'action',
         numeric: true,
@@ -122,7 +123,7 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-    const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
+    const { order, orderBy, onRequestSort } =
         props;
     const createSortHandler = (property) => (event) => {
         onRequestSort(event, property);
@@ -169,12 +170,12 @@ function EnhancedTableHead(props) {
 }
 
 EnhancedTableHead.propTypes = {
-    numSelected: PropTypes.number.isRequired,
+    // numSelected: PropTypes.number.isRequired,
     onRequestSort: PropTypes.func.isRequired,
-    onSelectAllClick: PropTypes.func.isRequired,
+    // onSelectAllClick: PropTypes.func.isRequired,
     order: PropTypes.oneOf(['asc', 'desc']).isRequired,
     orderBy: PropTypes.string.isRequired,
-    rowCount: PropTypes.number.isRequired,
+    // rowCount: PropTypes.number.isRequired,
 };
 
 const EnhancedTableToolbar = (props) => {
@@ -211,26 +212,23 @@ const EnhancedTableToolbar = (props) => {
             >
                 Applicant List
             </Typography>
-
             <Button sx={{ width: 199 }} onClick={handleAddApplicant} variant="contained" size="medium">Add Applicant</Button>
-            <TextField
-                sx={{
-                    m: 1,
-                    float: 'right',
+            <SearchBar
+                style={{
+                    width:"19rem",
+                    height:'2.3rem',
+                    marginLeft:10
                 }}
-                size='small'
-                onChange={(searchVal) => requestSearch(searchVal.target.value)}
+                onChange={(searchVal) => requestSearch(searchVal)}
                 onCancelSearch={() => cancelSearch()}
-                id="outlined-basic" label="search"
-                variant="outlined"
             />
         </Toolbar>
     );
 };
 
-EnhancedTableToolbar.propTypes = {
-    numSelected: PropTypes.number.isRequired,
-};
+// EnhancedTableToolbar.propTypes = {
+//     numSelected: PropTypes.number.isRequired,
+// };
 
 function ApplicantTable({ handleAddApplicant }) {
 
@@ -238,7 +236,7 @@ function ApplicantTable({ handleAddApplicant }) {
     const [searched, setSearched] = useState("");
 
     const requestSearch = (searchedVal) => {
-        console.log(searchedVal);
+        // console.log(searchedVal);
         const filteredRows = originalRows.filter((row) => {
             return row.name.toLowerCase().includes(searchedVal.toLowerCase());
         });
@@ -252,7 +250,7 @@ function ApplicantTable({ handleAddApplicant }) {
 
     const [order, setOrder] = useState('asc');
     const [orderBy, setOrderBy] = useState('');
-    const [selected, setSelected] = useState([]);
+    // const [selected, setSelected] = useState([]);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -304,7 +302,7 @@ function ApplicantTable({ handleAddApplicant }) {
     //     setDense(event.target.checked);
     // };
 
-    const isSelected = (name) => selected.indexOf(name) !== -1;
+    // const isSelected = (name) => selected.indexOf(name) !== -1;
 
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
@@ -318,7 +316,7 @@ function ApplicantTable({ handleAddApplicant }) {
     return (
         <Box sx={{ width: '100%' }}>
             <Paper sx={{ width: '100%', mb: 2, padding: 3 }}>
-                <EnhancedTableToolbar {...prop}/>
+                <EnhancedTableToolbar {...prop} />
                 <TableContainer>
                     <Table
                         sx={{ minWidth: 750 }}
@@ -326,12 +324,12 @@ function ApplicantTable({ handleAddApplicant }) {
                         size={'medium'}
                     >
                         <EnhancedTableHead
-                            numSelected={selected.length}
+                            // numSelected={selected.length}
                             order={order}
                             orderBy={orderBy}
                             // onSelectAllClick={handleSelectAllClick}
                             onRequestSort={handleRequestSort}
-                            rowCount={rows.length}
+                        // rowCount={rows.length}
                         />
                         <TableBody>
                             {/* if you don't need to support IE11, you can replace the `stableSort` call with:
@@ -339,7 +337,7 @@ function ApplicantTable({ handleAddApplicant }) {
                             {stableSort(rows, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
-                                    const isItemSelected = isSelected(row.name);
+                                    // const isItemSelected = isSelected(row.name);
                                     const labelId = `enhanced-table-checkbox-${index}`;
 
                                     return (
@@ -347,10 +345,10 @@ function ApplicantTable({ handleAddApplicant }) {
                                             hover
                                             // onClick={(event) => handleClick(event, row.name)}
                                             role="checkbox"
-                                            aria-checked={isItemSelected}
+                                            // aria-checked={isItemSelected}
                                             tabIndex={-1}
                                             key={row.name}
-                                            selected={isItemSelected}
+                                        // selected={isItemSelected}
                                         >
                                             {/* <TableCell padding="checkbox">
                                                 <Checkbox
