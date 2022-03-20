@@ -38,7 +38,7 @@ function AddApplicant({ open, close }) {
     const [standard, setStandard] = useState('');
     const [age, setAge] = useState('');
     const [border, setBorder] = useState('');
-    const [studentType, setStudentType] = useState();
+    const [studentType, setStudentType] = useState('');
     // let primary_details={
     //     name
     // }
