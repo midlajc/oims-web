@@ -90,7 +90,7 @@ function AddApplicant({ open, close }) {
                             </AccordionSummary>
                             <AccordionDetails>
                                 <Container sx={{
-                                    marginBottom:3
+                                    marginBottom: 3
                                 }}>
                                     <Grid container spacing={1}>
                                         <Grid item xs={12} md={6}>
@@ -148,20 +148,6 @@ function AddApplicant({ open, close }) {
                                             </LocalizationProvider>
                                         </Grid>
                                         <Grid item xs={12} md={3}>
-                                            <InputLabel id="ageLabel">Class*</InputLabel>
-                                            <Select
-                                                value={standard}
-                                                fullWidth
-                                                size='small'
-                                                onChange={(newVal) => setStandard(newVal.target.value)}
-                                                id=""
-                                            >
-                                                <MenuItem value={1}>Standard 1</MenuItem>
-                                                <MenuItem value={2}>Standard 2</MenuItem>
-                                                <MenuItem value={3}>Standard 3</MenuItem>
-                                            </Select>
-                                        </Grid>
-                                        <Grid item xs={12} md={3}>
                                             <InputLabel id="ageLabel">Student Type*</InputLabel>
                                             <Select
                                                 value={studentType}
@@ -176,6 +162,33 @@ function AddApplicant({ open, close }) {
                                             </Select>
                                         </Grid>
                                         <Grid item xs={12} md={3}>
+                                            <InputLabel id="ageLabel">Board of Studies *</InputLabel>
+                                            <Select
+                                                value={border}
+                                                fullWidth
+                                                size='small'
+                                                onChange={(newVal) => setBorder(newVal.target.value)}
+                                                id=""
+                                            >
+                                                <MenuItem value={'week'}></MenuItem>
+                                                <MenuItem value={'full'}>Full Day</MenuItem>
+                                            </Select>
+                                        </Grid>
+                                        <Grid item xs={12} md={3}>
+                                            <InputLabel id="ageLabel">Class*</InputLabel>
+                                            <Select
+                                                value={standard}
+                                                fullWidth
+                                                size='small'
+                                                onChange={(newVal) => setStandard(newVal.target.value)}
+                                                id=""
+                                            >
+                                                <MenuItem value={1}>Standard 1</MenuItem>
+                                                <MenuItem value={2}>Standard 2</MenuItem>
+                                                <MenuItem value={3}>Standard 3</MenuItem>
+                                            </Select>
+                                        </Grid>
+                                        {/* <Grid item xs={12} md={3}>
                                             <InputLabel id="ageLabel">Boarder Type*</InputLabel>
                                             <Select
                                                 value={border}
@@ -187,7 +200,7 @@ function AddApplicant({ open, close }) {
                                                 <MenuItem value={'week'}>Week Day</MenuItem>
                                                 <MenuItem value={'full'}>Full Day</MenuItem>
                                             </Select>
-                                        </Grid>
+                                        </Grid> */}
                                     </Grid>
                                 </Container>
                             </AccordionDetails>
