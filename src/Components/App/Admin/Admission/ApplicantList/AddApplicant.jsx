@@ -37,7 +37,7 @@ function AddApplicant({ open, close }) {
     const [gender, setGender] = useState('');
     const [standard, setStandard] = useState('');
     const [age, setAge] = useState('');
-    const [border, setBorder] = useState('');
+    const [boardOfStudies, setBoardOfStudies] = useState('');
     const [studentType, setStudentType] = useState('');
     // let primary_details={
     //     name
@@ -53,7 +53,7 @@ function AddApplicant({ open, close }) {
         setGender('')
         setStandard('')
         setAge('')
-        setBorder('')
+        setBoardOfStudies('')
         setStudentType('')
     }
 
@@ -83,8 +83,6 @@ function AddApplicant({ open, close }) {
                         <Accordion>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
                             >
                                 <Typography>Primary Details</Typography>
                             </AccordionSummary>
@@ -164,14 +162,14 @@ function AddApplicant({ open, close }) {
                                         <Grid item xs={12} md={3}>
                                             <InputLabel id="ageLabel">Board of Studies *</InputLabel>
                                             <Select
-                                                value={border}
+                                                value={boardOfStudies}
                                                 fullWidth
                                                 size='small'
-                                                onChange={(newVal) => setBorder(newVal.target.value)}
+                                                onChange={(newVal) => setBoardOfStudies(newVal.target.value)}
                                                 id=""
                                             >
-                                                <MenuItem value={'week'}></MenuItem>
-                                                <MenuItem value={'full'}>Full Day</MenuItem>
+                                                <MenuItem value={'cbse'}>CBSE</MenuItem>
+                                                <MenuItem value={'hse'}>HSE</MenuItem>
                                             </Select>
                                         </Grid>
                                         <Grid item xs={12} md={3}>
@@ -208,16 +206,172 @@ function AddApplicant({ open, close }) {
                         <Accordion>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel2a-content"
-                                id="panel2a-header"
                             >
-                                <Typography>Address Information</Typography>
+                                <Typography>Parent Details</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                    malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                </Typography>
+                                <Grid container spacing={4}>
+                                    <Grid item xs={3} md={6}>
+                                        <Grid container spacing={1}>
+                                            <Typography sx={{ marginLeft: 1 }}>Father</Typography>
+                                            <Grid item xs={12}>
+                                                <InputLabel id="">Name *</InputLabel>
+                                                <TextField
+                                                    fullWidth
+                                                    // value={name}
+                                                    // onChange={(newVal) => setName(newVal.target.value)}
+                                                    size='small'
+                                                    variant="outlined"
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <InputLabel id="">Edn. Qualification *</InputLabel>
+                                                <TextField
+                                                    fullWidth
+                                                    // value={name}
+                                                    // onChange={(newVal) => setName(newVal.target.value)}
+                                                    size='small'
+                                                    variant="outlined"
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <InputLabel id="">Residence Address *</InputLabel>
+                                                <TextField
+                                                    fullWidth
+                                                    multiline
+                                                    rows={3}
+                                                    // value={name}
+                                                    // onChange={(newVal) => setName(newVal.target.value)}
+                                                    size='small'
+                                                    variant="outlined"
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <InputLabel id="">Pin *</InputLabel>
+                                                <TextField
+                                                    fullWidth
+                                                    // value={name}
+                                                    // onChange={(newVal) => setName(newVal.target.value)}
+                                                    size='small'
+                                                    variant="outlined"
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <InputLabel id="">Mobile No *</InputLabel>
+                                                <TextField
+                                                    fullWidth
+                                                    type={'number'}
+                                                    // value={name}
+                                                    // onChange={(newVal) => setName(newVal.target.value)}
+                                                    size='small'
+                                                    variant="outlined"
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <InputLabel id="">Office Address</InputLabel>
+                                                <TextField
+                                                    fullWidth
+                                                    multiline
+                                                    rows={3}
+                                                    // value={name}
+                                                    // onChange={(newVal) => setName(newVal.target.value)}
+                                                    size='small'
+                                                    variant="outlined"
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <InputLabel id="">Email</InputLabel>
+                                                <TextField
+                                                    fullWidth
+                                                    // value={name}
+                                                    // onChange={(newVal) => setName(newVal.target.value)}
+                                                    size='small'
+                                                    variant="outlined"
+                                                />
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid item xs={12} md={6}>
+                                        <Grid container spacing={1}>
+                                            <Typography sx={{ marginLeft: 1 }}>Mother</Typography>
+                                            <Grid item xs={12}>
+                                                <InputLabel id="">Name *</InputLabel>
+                                                <TextField
+                                                    fullWidth
+                                                    // value={name}
+                                                    // onChange={(newVal) => setName(newVal.target.value)}
+                                                    size='small'
+                                                    variant="outlined"
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <InputLabel id="">Edn. Qualification *</InputLabel>
+                                                <TextField
+                                                    fullWidth
+                                                    // value={name}
+                                                    // onChange={(newVal) => setName(newVal.target.value)}
+                                                    size='small'
+                                                    variant="outlined"
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <InputLabel id="">Residence Address *</InputLabel>
+                                                <TextField
+                                                    fullWidth
+                                                    multiline
+                                                    rows={3}
+                                                    // value={name}
+                                                    // onChange={(newVal) => setName(newVal.target.value)}
+                                                    size='small'
+                                                    variant="outlined"
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <InputLabel id="">Pin *</InputLabel>
+                                                <TextField
+                                                    fullWidth
+                                                    // value={name}
+                                                    // onChange={(newVal) => setName(newVal.target.value)}
+                                                    size='small'
+                                                    variant="outlined"
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <InputLabel id="">Mobile No *</InputLabel>
+                                                <TextField
+                                                    fullWidth
+                                                    type={'number'}
+                                                    // value={name}
+                                                    // onChange={(newVal) => setName(newVal.target.value)}
+                                                    size='small'
+                                                    variant="outlined"
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <InputLabel id="">Office Address</InputLabel>
+                                                <TextField
+                                                    fullWidth
+                                                    multiline
+                                                    rows={3}
+                                                    // value={name}
+                                                    // onChange={(newVal) => setName(newVal.target.value)}
+                                                    size='small'
+                                                    variant="outlined"
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <InputLabel id="">Email</InputLabel>
+                                                <TextField
+                                                    fullWidth
+                                                    // value={name}
+                                                    // onChange={(newVal) => setName(newVal.target.value)}
+                                                    size='small'
+                                                    variant="outlined"
+                                                />
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
                             </AccordionDetails>
                         </Accordion>
                         <Accordion>
