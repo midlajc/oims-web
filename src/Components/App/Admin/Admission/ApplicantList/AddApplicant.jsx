@@ -39,6 +39,14 @@ function AddApplicant({ open, close }) {
     const [age, setAge] = useState('');
     const [boardOfStudies, setBoardOfStudies] = useState('');
     const [studentType, setStudentType] = useState('');
+    const [fatherName, setFatherName] = useState('');
+    const [fatherEd, setFatherEd] = useState('');
+    const [fatherResiAddress, setFatherResiAddress] = useState('');
+    const [fatherPin, setFatherPin] = useState('');
+    const [fatherMobile, setFatherMobile] = useState('');
+    const [fatherOfficeAddress, setFatherOfficeAddress] = useState('');
+    const [fatherEmail, setFatherEmail] = useState('');
+
     // let primary_details={
     //     name
     // }
@@ -55,6 +63,13 @@ function AddApplicant({ open, close }) {
         setAge('')
         setBoardOfStudies('')
         setStudentType('')
+        setFatherEd('')
+        setFatherEmail('')
+        setFatherMobile('')
+        setFatherName('')
+        setFatherOfficeAddress('')
+        setFatherPin('')
+        setFatherResiAddress('')
     }
 
     return (
@@ -218,8 +233,8 @@ function AddApplicant({ open, close }) {
                                                 <InputLabel id="">Name *</InputLabel>
                                                 <TextField
                                                     fullWidth
-                                                    // value={name}
-                                                    // onChange={(newVal) => setName(newVal.target.value)}
+                                                    value={fatherName}
+                                                    onChange={(newVal) => setFatherName(newVal.target.value)}
                                                     size='small'
                                                     variant="outlined"
                                                 />
@@ -228,8 +243,8 @@ function AddApplicant({ open, close }) {
                                                 <InputLabel id="">Edn. Qualification *</InputLabel>
                                                 <TextField
                                                     fullWidth
-                                                    // value={name}
-                                                    // onChange={(newVal) => setName(newVal.target.value)}
+                                                    value={fatherEd}
+                                                    onChange={(newVal) => setFatherEd(newVal.target.value)}
                                                     size='small'
                                                     variant="outlined"
                                                 />
@@ -240,8 +255,8 @@ function AddApplicant({ open, close }) {
                                                     fullWidth
                                                     multiline
                                                     rows={3}
-                                                    // value={name}
-                                                    // onChange={(newVal) => setName(newVal.target.value)}
+                                                    value={fatherResiAddress}
+                                                    onChange={(newVal) => setFatherResiAddress(newVal.target.value)}
                                                     size='small'
                                                     variant="outlined"
                                                 />
@@ -250,8 +265,8 @@ function AddApplicant({ open, close }) {
                                                 <InputLabel id="">Pin *</InputLabel>
                                                 <TextField
                                                     fullWidth
-                                                    // value={name}
-                                                    // onChange={(newVal) => setName(newVal.target.value)}
+                                                    value={fatherPin}
+                                                    onChange={(newVal) => setFatherPin(newVal.target.value)}
                                                     size='small'
                                                     variant="outlined"
                                                 />
@@ -261,8 +276,8 @@ function AddApplicant({ open, close }) {
                                                 <TextField
                                                     fullWidth
                                                     type={'number'}
-                                                    // value={name}
-                                                    // onChange={(newVal) => setName(newVal.target.value)}
+                                                    value={fatherMobile}
+                                                    onChange={(newVal) => setFatherMobile(newVal.target.value)}
                                                     size='small'
                                                     variant="outlined"
                                                 />
@@ -273,8 +288,8 @@ function AddApplicant({ open, close }) {
                                                     fullWidth
                                                     multiline
                                                     rows={3}
-                                                    // value={name}
-                                                    // onChange={(newVal) => setName(newVal.target.value)}
+                                                    value={fatherOfficeAddress}
+                                                    onChange={(newVal) => setFatherOfficeAddress(newVal.target.value)}
                                                     size='small'
                                                     variant="outlined"
                                                 />
@@ -283,8 +298,8 @@ function AddApplicant({ open, close }) {
                                                 <InputLabel id="">Email</InputLabel>
                                                 <TextField
                                                     fullWidth
-                                                    // value={name}
-                                                    // onChange={(newVal) => setName(newVal.target.value)}
+                                                    value={fatherEmail}
+                                                    onChange={(newVal) => setFatherEmail(newVal.target.value)}
                                                     size='small'
                                                     variant="outlined"
                                                 />
