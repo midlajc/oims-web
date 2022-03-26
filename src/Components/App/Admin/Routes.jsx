@@ -4,6 +4,9 @@ import { useRoutes} from "react-router-dom";
 import Home from './Home';
 import Admission from './Admission';
 import Settings from './Settings';
+import Sponsors from './Sponsors';
+import Sponsorship from './Sponsorship';
+import Accounts from './Accounts';
 
 //Admission
 import ApplicantList from './Admission/ApplicantList';
@@ -31,6 +34,18 @@ function Routing() {
         {
             path: "settings",
             element: <Settings />
+        },
+        {
+            path: "sponsors",
+            element: <Sponsors />
+        },
+        {
+            path: "sponsorship",
+            element: <Sponsorship />
+        },
+        {
+            path: "accounts",
+            element: <Accounts />
         },
     ]);
 
