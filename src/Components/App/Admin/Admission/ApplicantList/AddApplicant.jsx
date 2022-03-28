@@ -411,13 +411,89 @@ function AddApplicant({ open, close }) {
                                 aria-controls="panel3a-content"
                                 id="panel3a-header"
                             >
-                                <Typography>Disabled Accordion</Typography>
+                                <Typography>Guardian Detailes</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                    malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                </Typography>
+                                    <Grid container spacing={1}>
+                                        {/* <Typography sx={{ marginLeft: 1 }}>Mother</Typography> */}
+                                        <Grid item xs={12} md={6}>
+                                            <InputLabel id="">Name *</InputLabel>
+                                            <TextField
+                                                fullWidth
+                                                // value={guardianName}
+                                                // onChange={(newVal) => setMotherName(newVal.target.value)}
+                                                size='small'
+                                                variant="outlined"
+                                            />
+                                        </Grid>
+                                        <Grid item xxs={12} md={6}>
+                                            <InputLabel id="">Edn. Qualification *</InputLabel>
+                                            <TextField
+                                                fullWidth
+                                                // value={guardianEd}
+                                                // onChange={(newVal) => setMotherEd(newVal.target.value)}
+                                                size='small'
+                                                variant="outlined"
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} md={6}>
+                                            <InputLabel id="">Residence Address *</InputLabel>
+                                            <TextField
+                                                fullWidth
+                                                multiline
+                                                rows={3}
+                                                // value={guardianResiAddress}
+                                                // onChange={(newVal) => setMotherResiAddress(newVal.target.value)}
+                                                size='small'
+                                                variant="outlined"
+                                            />
+                                        </Grid>
+
+                                        <Grid item xs={12} md={6}>
+                                            <InputLabel id="">Office Address</InputLabel>
+                                            <TextField
+                                                fullWidth
+                                                multiline
+                                                rows={3}
+                                                // value={guardianOfficeAddress}
+                                                // onChange={(newVal) => setMotherOfficeAddress(newVal.target.value)}
+                                                size='small'
+                                                variant="outlined"
+                                            />
+                                        </Grid>
+
+                                        <Grid item xs={12} md={6}>
+                                            <InputLabel id="">Pin *</InputLabel>
+                                            <TextField
+                                                fullWidth
+                                                // value={guardianPin}
+                                                // onChange={(newVal) => setMotherPin(newVal.target.value)}
+                                                size='small'
+                                                variant="outlined"
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} md={6}>
+                                            <InputLabel id="">Mobile No *</InputLabel>
+                                            <TextField
+                                                fullWidth
+                                                type={'number'}
+                                                // value={guardianMobile}
+                                                // onChange={(newVal) => setMotherMobile(newVal.target.value)}
+                                                size='small'
+                                                variant="outlined"
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} md={6}>
+                                            <InputLabel id="">Email</InputLabel>
+                                            <TextField
+                                                fullWidth
+                                                // value={guardianEmail}
+                                                // onChange={(newVal) => setMotherEmail(newVal.target.value)}
+                                                size='small'
+                                                variant="outlined"
+                                            />
+                                        </Grid>
+                                    </Grid>
                             </AccordionDetails>
                         </Accordion>
                     </div>
