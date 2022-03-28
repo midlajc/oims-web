@@ -56,6 +56,14 @@ function AddApplicant({ open, close }) {
     const [motherOfficeAddress, setMotherOfficeAddress] = useState('');
     const [motherEmail, setMotherEmail] = useState('');
 
+    const [guardianName, setGuardianName] = useState('');
+    const [guardianEd, setGuardianEd] = useState('');
+    const [guardianResiAddress, setGuardianResiAddress] = useState('');
+    const [guardianPin, setGuardianPin] = useState('');
+    const [guardianMobile, setGuardianMobile] = useState('');
+    const [guardianOfficeAddress, setGuardianOfficeAddress] = useState('');
+    const [guardianEmail, setGuardianEmail] = useState('');
+
     // let primary_details={
     //     name
     // }
@@ -86,6 +94,13 @@ function AddApplicant({ open, close }) {
         setMotherOfficeAddress('')
         setMotherPin('')
         setMotherResiAddress('')
+        setGuardianEd('')
+        setGuardianEmail('')
+        setGuardianMobile('')
+        setGuardianName('')
+        setGuardianOfficeAddress('')
+        setGuardianPin('')
+        setGuardianResiAddress('')
     }
 
     return (
@@ -415,13 +430,12 @@ function AddApplicant({ open, close }) {
                             </AccordionSummary>
                             <AccordionDetails>
                                     <Grid container spacing={1}>
-                                        {/* <Typography sx={{ marginLeft: 1 }}>Mother</Typography> */}
                                         <Grid item xs={12} md={6}>
                                             <InputLabel id="">Name *</InputLabel>
                                             <TextField
                                                 fullWidth
-                                                // value={guardianName}
-                                                // onChange={(newVal) => setMotherName(newVal.target.value)}
+                                                value={guardianName}
+                                                onChange={(newVal) => setGuardianName(newVal.target.value)}
                                                 size='small'
                                                 variant="outlined"
                                             />
@@ -430,8 +444,8 @@ function AddApplicant({ open, close }) {
                                             <InputLabel id="">Edn. Qualification *</InputLabel>
                                             <TextField
                                                 fullWidth
-                                                // value={guardianEd}
-                                                // onChange={(newVal) => setMotherEd(newVal.target.value)}
+                                                value={guardianEd}
+                                                onChange={(newVal) => setGuardianEd(newVal.target.value)}
                                                 size='small'
                                                 variant="outlined"
                                             />
@@ -442,8 +456,8 @@ function AddApplicant({ open, close }) {
                                                 fullWidth
                                                 multiline
                                                 rows={3}
-                                                // value={guardianResiAddress}
-                                                // onChange={(newVal) => setMotherResiAddress(newVal.target.value)}
+                                                value={guardianResiAddress}
+                                                onChange={(newVal) => setGuardianResiAddress(newVal.target.value)}
                                                 size='small'
                                                 variant="outlined"
                                             />
@@ -455,8 +469,8 @@ function AddApplicant({ open, close }) {
                                                 fullWidth
                                                 multiline
                                                 rows={3}
-                                                // value={guardianOfficeAddress}
-                                                // onChange={(newVal) => setMotherOfficeAddress(newVal.target.value)}
+                                                value={guardianOfficeAddress}
+                                                onChange={(newVal) => setGuardianOfficeAddress(newVal.target.value)}
                                                 size='small'
                                                 variant="outlined"
                                             />
@@ -466,8 +480,8 @@ function AddApplicant({ open, close }) {
                                             <InputLabel id="">Pin *</InputLabel>
                                             <TextField
                                                 fullWidth
-                                                // value={guardianPin}
-                                                // onChange={(newVal) => setMotherPin(newVal.target.value)}
+                                                value={guardianPin}
+                                                onChange={(newVal) => setGuardianPin(newVal.target.value)}
                                                 size='small'
                                                 variant="outlined"
                                             />
@@ -477,8 +491,8 @@ function AddApplicant({ open, close }) {
                                             <TextField
                                                 fullWidth
                                                 type={'number'}
-                                                // value={guardianMobile}
-                                                // onChange={(newVal) => setMotherMobile(newVal.target.value)}
+                                                value={guardianMobile}
+                                                onChange={(newVal) => setGuardianMobile(newVal.target.value)}
                                                 size='small'
                                                 variant="outlined"
                                             />
@@ -487,8 +501,8 @@ function AddApplicant({ open, close }) {
                                             <InputLabel id="">Email</InputLabel>
                                             <TextField
                                                 fullWidth
-                                                // value={guardianEmail}
-                                                // onChange={(newVal) => setMotherEmail(newVal.target.value)}
+                                                value={guardianEmail}
+                                                onChange={(newVal) => setGuardianEmail(newVal.target.value)}
                                                 size='small'
                                                 variant="outlined"
                                             />
