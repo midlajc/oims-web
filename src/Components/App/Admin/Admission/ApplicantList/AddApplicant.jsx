@@ -426,7 +426,7 @@ function AddApplicant({ open, close }) {
                                 aria-controls="panel3a-content"
                                 id="panel3a-header"
                             >
-                                <Typography>Guardian Detailes</Typography>
+                                <Typography>Guardian Details</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
                                     <Grid container spacing={1}>
