@@ -257,7 +257,7 @@ function AddApplicant({ open, close }) {
                             </AccordionSummary>
                             <AccordionDetails>
                                 <Grid container spacing={4}>
-                                    <Grid item xs={3} md={6}>
+                                    <Grid item xs={12} md={6}>
                                         <Grid container spacing={1}>
                                             <Typography sx={{ marginLeft: 1 }}>Father</Typography>
                                             <Grid item xs={12}>
@@ -440,7 +440,7 @@ function AddApplicant({ open, close }) {
                                                 variant="outlined"
                                             />
                                         </Grid>
-                                        <Grid item xxs={12} md={6}>
+                                        <Grid item xs={12} md={6}>
                                             <InputLabel id="">Edn. Qualification *</InputLabel>
                                             <TextField
                                                 fullWidth
