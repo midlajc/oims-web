@@ -12,7 +12,6 @@ import background from '../asset/images/login_bg.jpg'
 function Login() {
 
   const navigate = useNavigate()
-
   const [dAlert, setDAlert] = useState(null);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -60,9 +59,6 @@ function Login() {
             color='primary' variant="contained"
             style={btnStyle} fullWidth>Log in
           </LoadingButton>
-          {/* <Button onClick={doLogin}
-            color='primary' variant="contained"
-            style={btnStyle} fullWidth>Log in</Button> */}
         </Paper>
       </Grid>
     </div>

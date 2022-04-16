@@ -25,7 +25,7 @@ import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 
 // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function AdminHeader({routes}) {
+function AdminHeader({ routes }) {
     const theme = useContext(themeContext)
 
     useEffect(() => {
@@ -73,7 +73,7 @@ function AdminHeader({routes}) {
                         component="div"
                         sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
                     >
-                        <img style={{width:'2rem'}} src="logo.png" alt="" srcset="" />
+                        <img style={{ width: '2rem' }} src="logo.png" alt="" srcset="" />
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -88,6 +88,7 @@ function AdminHeader({routes}) {
                         >
                             <MenuIcon />
                         </IconButton>
+                        
                         <Menu
                             id="menu-appbar"
                             anchorEl={anchorElNav}
@@ -117,15 +118,17 @@ function AdminHeader({routes}) {
                                 </MenuItem>
                             ))}
                         </Menu>
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="div"
+                            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+                        >
+                            {/* LOGO */}
+                            {/* <img style={{ width: '2.1rem' }} src="logo.png" alt="" srcset="" /> */}
+
+                        </Typography>
                     </Box>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-                    >
-                        LOGO
-                    </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {routes.map((page, index) => (
                             <Link key={index} className='link' to={page.path}>
