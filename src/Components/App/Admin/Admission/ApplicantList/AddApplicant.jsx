@@ -70,7 +70,14 @@ function AddApplicant({ open, close }) {
     const [EmergencyContact, setEmergencyContact] = useState('')
     const [EmergencyContactAddress, setEmergencyContactAddress] = useState('')
     const [pickupMethod, setPickupMethod] = useState('')
+    const [PickupInfo, setPickupInfo] = useState('')
+    const [Allergies, setAllergies] = useState('')
+    const [BloodGroup, setBloodGroup] = useState('')
     const [medicalCondition, setMedicalCondition] = useState('')
+    const [MedicalDetails, setMedicalDetails] = useState('')
+    const [DoctorName, setDoctorName] = useState('')
+    const [DoctorMobile, setDoctorMobile] = useState('')
+    const [DoctorEmail, setDoctorEmail] = useState('')
     // let primary_details={
     //     name
     // }
@@ -571,8 +578,8 @@ function AddApplicant({ open, close }) {
                                                 <TextField
                                                     fullWidth
                                                     multiline
-                                                    value={guardianOfficeAddress}
-                                                    onChange={(newVal) => setGuardianOfficeAddress(newVal.target.value)}
+                                                    value={PickupInfo}
+                                                    onChange={(newVal) => setPickupInfo(newVal.target.value)}
                                                     size='small'
                                                     variant="outlined"
                                                 /></>) : (<></>)
@@ -583,8 +590,8 @@ function AddApplicant({ open, close }) {
                                                     fullWidth
                                                     multiline
                                                     rows={3}
-                                                    value={guardianOfficeAddress}
-                                                    onChange={(newVal) => setGuardianOfficeAddress(newVal.target.value)}
+                                                    value={PickupInfo}
+                                                    onChange={(newVal) => setPickupInfo(newVal.target.value)}
                                                     size='small'
                                                     variant="outlined"
                                                 />
@@ -599,8 +606,8 @@ function AddApplicant({ open, close }) {
                                         <InputLabel id="">Blood Group *</InputLabel>
                                         <TextField
                                             fullWidth
-                                            value={guardianPin}
-                                            onChange={(newVal) => setGuardianPin(newVal.target.value)}
+                                            value={BloodGroup}
+                                            onChange={(newVal) => setBloodGroup(newVal.target.value)}
                                             size='small'
                                             variant="outlined"
                                         />
@@ -609,9 +616,8 @@ function AddApplicant({ open, close }) {
                                         <InputLabel id="">Allergies *</InputLabel>
                                         <TextField
                                             fullWidth
-                                            type={'number'}
-                                            value={guardianMobile}
-                                            onChange={(newVal) => setGuardianMobile(newVal.target.value)}
+                                            value={Allergies}
+                                            onChange={(newVal) => setAllergies(newVal.target.value)}
                                             size='small'
                                             variant="outlined"
                                         />
@@ -638,8 +644,8 @@ function AddApplicant({ open, close }) {
                                                             fullWidth
                                                             multiline
                                                             rows={6}
-                                                            value={guardianOfficeAddress}
-                                                            onChange={(newVal) => setGuardianOfficeAddress(newVal.target.value)}
+                                                            value={MedicalDetails}
+                                                            onChange={(newVal) => setMedicalDetails(newVal.target.value)}
                                                             size='small'
                                                             variant="outlined"
                                                         />
@@ -649,8 +655,8 @@ function AddApplicant({ open, close }) {
                                                         <TextField
                                                             fullWidth
                                                             multiline
-                                                            value={guardianOfficeAddress}
-                                                            onChange={(newVal) => setGuardianOfficeAddress(newVal.target.value)}
+                                                            value={DoctorName}
+                                                            onChange={(newVal) => setDoctorName(newVal.target.value)}
                                                             size='small'
                                                             variant="outlined"
                                                         />
@@ -658,8 +664,8 @@ function AddApplicant({ open, close }) {
                                                         <TextField
                                                             fullWidth
                                                             multiline
-                                                            value={guardianOfficeAddress}
-                                                            onChange={(newVal) => setGuardianOfficeAddress(newVal.target.value)}
+                                                            value={DoctorMobile}
+                                                            onChange={(newVal) => setDoctorMobile(newVal.target.value)}
                                                             size='small'
                                                             variant="outlined"
                                                         />
@@ -667,8 +673,8 @@ function AddApplicant({ open, close }) {
                                                         <TextField
                                                             fullWidth
                                                             multiline
-                                                            value={guardianOfficeAddress}
-                                                            onChange={(newVal) => setGuardianOfficeAddress(newVal.target.value)}
+                                                            value={DoctorEmail}
+                                                            onChange={(newVal) => setDoctorEmail(newVal.target.value)}
                                                             size='small'
                                                             variant="outlined"
                                                         />
