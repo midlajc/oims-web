@@ -21,6 +21,7 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
+import adminService from '../../../../../service/adminService';
 
 
 const style = {
@@ -73,17 +74,22 @@ function AddApplicant({ open, close }) {
     const [PickupInfo, setPickupInfo] = useState('')
     const [Allergies, setAllergies] = useState('')
     const [BloodGroup, setBloodGroup] = useState('')
-    const [medicalCondition, setMedicalCondition] = useState('')
+    const [medicalCondition, setMedicalCondition] = useState(null)
     const [MedicalDetails, setMedicalDetails] = useState('')
     const [DoctorName, setDoctorName] = useState('')
     const [DoctorMobile, setDoctorMobile] = useState('')
     const [DoctorEmail, setDoctorEmail] = useState('')
-    // let primary_details={
-    //     name
-    // }
+    let primary_details = {
+        name,
+        dob
+    }
 
     const handleClick = () => {
-        setLoading(preVal => !preVal)
+        // setLoading(preVal => !preVal)
+        adminService.addApplicant(primary_details).then(res => {
+            console.log(res);
+            // setLoading(preVal => !preVal)
+        })
     }
 
     const clearFields = () => {
@@ -115,6 +121,18 @@ function AddApplicant({ open, close }) {
         setGuardianOfficeAddress('')
         setGuardianPin('')
         setGuardianResiAddress('')
+        setEmergencyContact('')
+        setEmergencyContactAddress('')
+        setPickupInfo('')
+        setPickupMethod(null)
+        setAllergies('')
+        setBloodGroup('')
+        setMedicalCondition(null)
+        setMedicalDetails('')
+        setDoctorName('')
+        setDoctorMobile('')
+        setDoctorEmail('')
+
     }
 
     return (
@@ -564,6 +582,7 @@ function AddApplicant({ open, close }) {
                                                 aria-labelledby="demo-radio-buttons-group-label"
                                                 onChange={(newVal) => { setPickupMethod(newVal.target.value) }}
                                                 name="pickupMethod"
+                                                defaultValue={pickupMethod}
                                             >
                                                 <FormControlLabel value="1" control={<Radio />} label="Parents/guardian will escort them" />
                                                 <FormControlLabel value="2" control={<Radio />} label="School Bus" />
@@ -629,6 +648,7 @@ function AddApplicant({ open, close }) {
                                             aria-labelledby="demo-row-radio-buttons-group-label"
                                             onChange={(newVal) => setMedicalCondition(newVal.target.value)}
                                             name="medicalCondition"
+                                            defaultValue={medicalCondition}
                                         >
                                             <FormControlLabel value="yes" control={<Radio />} label="Yes" />
                                             <FormControlLabel value="no" control={<Radio />} label="No" />
