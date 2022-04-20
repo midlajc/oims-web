@@ -2,8 +2,8 @@ import axios from "axios";
 import storageService from "./storageService";
 const instance = axios.create({
     // baseURL: "http://192.168.183.13:8000",
-    baseURL: "http://localhost:8000",
-    // baseURL: "https://pro-back-end.herokuapp.com/",
+    // baseURL: "http://localhost:8000",/
+    baseURL: "https://pro-back-end.herokuapp.com/",
     // baseURL: "https://tezla.tech/",
     headers: {
         "Content-Type": "application/json",
