@@ -8,11 +8,7 @@ import Calender from './Home/Calender'
 
 
 function Home({routes}) {
-  const [state, setState] = useState('');
   useEffect(() => {
-    // apiService.test().then(res=>{
-    //   setState(res.data.message)
-    // })
     return () => {
       
     };
@@ -22,7 +18,6 @@ function Home({routes}) {
     <div className='body'>
       <Clock />
       <Calender />
-      {state}
     </div>
   )
 }

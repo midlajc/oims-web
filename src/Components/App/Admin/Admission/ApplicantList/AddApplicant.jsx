@@ -37,6 +37,7 @@ function AddApplicant({ open, close }) {
 
     const [loading, setLoading] = useState(false);
 
+    //applicant basic details
     const [name, setName] = useState('');
     const [dob, setDob] = useState(null);
     const [gender, setGender] = useState('');
@@ -45,6 +46,7 @@ function AddApplicant({ open, close }) {
     const [boardOfStudies, setBoardOfStudies] = useState('');
     const [studentType, setStudentType] = useState('');
 
+    //applicant father details
     const [fatherName, setFatherName] = useState('');
     const [fatherEd, setFatherEd] = useState('');
     const [fatherResiAddress, setFatherResiAddress] = useState('');
@@ -53,6 +55,7 @@ function AddApplicant({ open, close }) {
     const [fatherOfficeAddress, setFatherOfficeAddress] = useState('');
     const [fatherEmail, setFatherEmail] = useState('');
 
+    //applicant mother details
     const [motherName, setMotherName] = useState('');
     const [motherEd, setMotherEd] = useState('');
     const [motherResiAddress, setMotherResiAddress] = useState('');
@@ -61,6 +64,7 @@ function AddApplicant({ open, close }) {
     const [motherOfficeAddress, setMotherOfficeAddress] = useState('');
     const [motherEmail, setMotherEmail] = useState('');
 
+    //applicant guardian details
     const [guardianName, setGuardianName] = useState('');
     const [guardianEd, setGuardianEd] = useState('');
     const [guardianResiAddress, setGuardianResiAddress] = useState('');
@@ -68,27 +72,70 @@ function AddApplicant({ open, close }) {
     const [guardianMobile, setGuardianMobile] = useState('');
     const [guardianOfficeAddress, setGuardianOfficeAddress] = useState('');
     const [guardianEmail, setGuardianEmail] = useState('');
-    const [EmergencyContact, setEmergencyContact] = useState('')
-    const [EmergencyContactAddress, setEmergencyContactAddress] = useState('')
-    const [pickupMethod, setPickupMethod] = useState('')
-    const [PickupInfo, setPickupInfo] = useState('')
-    const [Allergies, setAllergies] = useState('')
-    const [BloodGroup, setBloodGroup] = useState('')
+
+    //other details
+    const [emergencyContact, setEmergencyContact] = useState('')
+    const [emergencyContactAddress, setEmergencyContactAddress] = useState('')
+    const [pickupMethod, setPickupMethod] = useState(null)
+    const [pickupInfo, setPickupInfo] = useState('')
+    const [allergies, setAllergies] = useState('')
+    const [bloodGroup, setBloodGroup] = useState('')
     const [medicalCondition, setMedicalCondition] = useState(null)
-    const [MedicalDetails, setMedicalDetails] = useState('')
+    const [medicalDetails, setMedicalDetails] = useState('')
     const [DoctorName, setDoctorName] = useState('')
-    const [DoctorMobile, setDoctorMobile] = useState('')
-    const [DoctorEmail, setDoctorEmail] = useState('')
-    let primary_details = {
+    const [doctorMobile, setDoctorMobile] = useState('')
+    const [doctorEmail, setDoctorEmail] = useState('')
+    let applicant_details = {
         name,
-        dob
+        dob,
+        gender,
+        age,
+        boardOfStudies,
+        standard,
+        studentType,
+
+        fatherName,
+        fatherEd,
+        fatherResiAddress,
+        fatherPin,
+        fatherMobile,
+        fatherOfficeAddress,
+        fatherEmail,
+
+        motherName,
+        motherEd,
+        motherResiAddress,
+        motherPin,
+        motherMobile,
+        motherOfficeAddress,
+        motherEmail,
+
+        guardianName,
+        guardianEd,
+        guardianResiAddress,
+        guardianPin,
+        guardianMobile,
+        guardianOfficeAddress,
+        guardianEmail,
+
+        emergencyContact,
+        emergencyContactAddress,
+        pickupMethod,
+        pickupInfo,
+        allergies,
+        bloodGroup,
+        medicalCondition,
+        medicalDetails,
+        DoctorName,
+        doctorMobile,
+        doctorEmail
     }
 
     const handleClick = () => {
-        // setLoading(preVal => !preVal)
-        adminService.addApplicant(primary_details).then(res => {
+        setLoading(preVal => !preVal)
+        adminService.addApplicant(applicant_details).then(res => {
             console.log(res);
-            // setLoading(preVal => !preVal)
+            setLoading(preVal => !preVal)
         })
     }
 
@@ -556,7 +603,7 @@ function AddApplicant({ open, close }) {
                                         <InputLabel id="">Emergency Contact Nos</InputLabel>
                                         <TextField
                                             fullWidth
-                                            value={EmergencyContact}
+                                            value={emergencyContact}
                                             onChange={(newVal) => setEmergencyContact(newVal.target.value)}
                                             size='small'
                                             variant="outlined"
@@ -569,7 +616,7 @@ function AddApplicant({ open, close }) {
                                             fullWidth
                                             multiline
                                             rows={3}
-                                            value={EmergencyContactAddress}
+                                            value={emergencyContactAddress}
                                             onChange={(newVal) => setEmergencyContactAddress(newVal.target.value)}
                                             size='small'
                                             variant="outlined"
@@ -597,7 +644,7 @@ function AddApplicant({ open, close }) {
                                                 <TextField
                                                     fullWidth
                                                     multiline
-                                                    value={PickupInfo}
+                                                    value={pickupInfo}
                                                     onChange={(newVal) => setPickupInfo(newVal.target.value)}
                                                     size='small'
                                                     variant="outlined"
@@ -609,7 +656,7 @@ function AddApplicant({ open, close }) {
                                                     fullWidth
                                                     multiline
                                                     rows={3}
-                                                    value={PickupInfo}
+                                                    value={pickupInfo}
                                                     onChange={(newVal) => setPickupInfo(newVal.target.value)}
                                                     size='small'
                                                     variant="outlined"
@@ -625,7 +672,7 @@ function AddApplicant({ open, close }) {
                                         <InputLabel id="">Blood Group *</InputLabel>
                                         <TextField
                                             fullWidth
-                                            value={BloodGroup}
+                                            value={bloodGroup}
                                             onChange={(newVal) => setBloodGroup(newVal.target.value)}
                                             size='small'
                                             variant="outlined"
@@ -635,7 +682,7 @@ function AddApplicant({ open, close }) {
                                         <InputLabel id="">Allergies *</InputLabel>
                                         <TextField
                                             fullWidth
-                                            value={Allergies}
+                                            value={allergies}
                                             onChange={(newVal) => setAllergies(newVal.target.value)}
                                             size='small'
                                             variant="outlined"
@@ -664,7 +711,7 @@ function AddApplicant({ open, close }) {
                                                             fullWidth
                                                             multiline
                                                             rows={6}
-                                                            value={MedicalDetails}
+                                                            value={medicalDetails}
                                                             onChange={(newVal) => setMedicalDetails(newVal.target.value)}
                                                             size='small'
                                                             variant="outlined"
@@ -684,7 +731,7 @@ function AddApplicant({ open, close }) {
                                                         <TextField
                                                             fullWidth
                                                             multiline
-                                                            value={DoctorMobile}
+                                                            value={doctorMobile}
                                                             onChange={(newVal) => setDoctorMobile(newVal.target.value)}
                                                             size='small'
                                                             variant="outlined"
@@ -693,7 +740,7 @@ function AddApplicant({ open, close }) {
                                                         <TextField
                                                             fullWidth
                                                             multiline
-                                                            value={DoctorEmail}
+                                                            value={doctorEmail}
                                                             onChange={(newVal) => setDoctorEmail(newVal.target.value)}
                                                             size='small'
                                                             variant="outlined"
