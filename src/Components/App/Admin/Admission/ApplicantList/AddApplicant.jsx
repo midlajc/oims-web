@@ -85,6 +85,7 @@ function AddApplicant({ open, close }) {
     const [DoctorName, setDoctorName] = useState('')
     const [doctorMobile, setDoctorMobile] = useState('')
     const [doctorEmail, setDoctorEmail] = useState('')
+
     let applicant_details = {
         name,
         dob,

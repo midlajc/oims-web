@@ -1,9 +1,9 @@
 import api from "./api";
-import storageService from "./storageService";
+import endpoints from "./endpoints";
 
 const adminService = {
   addApplicant: (applicantData) => {
-    return api.post("admin/admission/add-applicant", applicantData);
+    return api.post(endpoints.addApplicant, applicantData);
   },
 };
 
