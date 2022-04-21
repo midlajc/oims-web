@@ -1,10 +1,10 @@
 import api from "./api";
 import endpoints from "./endpoints";
 
-const adminService = {
+const admissionService = {
   addApplicant: (applicantData) => {
     return api.post(endpoints.addApplicant, applicantData);
   },
 };
 
-export default adminService;
+export default admissionService;

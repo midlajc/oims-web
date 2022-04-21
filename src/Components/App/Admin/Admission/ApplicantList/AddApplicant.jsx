@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -21,8 +21,8 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import adminService from '../../../../../service/adminService';
-
+import admissionService from '../../../../../service/admissionService';
+import dataService from '../../../../../service/dataService';
 
 const style = {
     position: 'absolute',
@@ -36,6 +36,9 @@ const style = {
 function AddApplicant({ open, close }) {
 
     const [loading, setLoading] = useState(false);
+
+    const [boardOfStudiesList, setBoardOfStudiesList] = useState([])
+    const [standardsList, setStandardsList] = useState([])
 
     //applicant basic details
     const [name, setName] = useState('');
@@ -86,6 +89,10 @@ function AddApplicant({ open, close }) {
     const [doctorMobile, setDoctorMobile] = useState('')
     const [doctorEmail, setDoctorEmail] = useState('')
 
+    useEffect(async () => {
+        setBoardOfStudiesList((await dataService.getBoardOfStudies()).data)
+    }, [])
+
     let applicant_details = {
         name,
         dob,
@@ -132,9 +139,14 @@ function AddApplicant({ open, close }) {
         doctorEmail
     }
 
+    const handleBoardOfStudiesChange = async (newVal) => {
+        setBoardOfStudies(newVal.target.value)
+        setStandardsList((await dataService.getStandards(newVal.target.value)).data)
+    }
+
     const handleClick = () => {
         setLoading(preVal => !preVal)
-        adminService.addApplicant(applicant_details).then(res => {
+        admissionService.addApplicant(applicant_details).then(res => {
             console.log(res);
             setLoading(preVal => !preVal)
         })
@@ -272,7 +284,7 @@ function AddApplicant({ open, close }) {
                                             </LocalizationProvider>
                                         </Grid>
                                         <Grid item xs={12} md={3}>
-                                            <InputLabel id="ageLabel">Student Type*</InputLabel>
+                                            <InputLabel id="">Student Type*</InputLabel>
                                             <Select
                                                 value={studentType}
                                                 fullWidth
@@ -286,16 +298,21 @@ function AddApplicant({ open, close }) {
                                             </Select>
                                         </Grid>
                                         <Grid item xs={12} md={3}>
-                                            <InputLabel id="ageLabel">Board of Studies *</InputLabel>
+                                            <InputLabel id="">Board of Studies *</InputLabel>
                                             <Select
                                                 value={boardOfStudies}
                                                 fullWidth
                                                 size='small'
-                                                onChange={(newVal) => setBoardOfStudies(newVal.target.value)}
+                                                onChange={handleBoardOfStudiesChange}
                                                 id=""
                                             >
-                                                <MenuItem value={'cbse'}>CBSE</MenuItem>
-                                                <MenuItem value={'hse'}>HSE</MenuItem>
+                                                {
+                                                    boardOfStudiesList.map((value, key) => {
+                                                        return (
+                                                            <MenuItem key={key} value={value._id}>{value.name}</MenuItem>
+                                                        )
+                                                    })
+                                                }
                                             </Select>
                                         </Grid>
                                         <Grid item xs={12} md={3}>
@@ -307,9 +324,13 @@ function AddApplicant({ open, close }) {
                                                 onChange={(newVal) => setStandard(newVal.target.value)}
                                                 id=""
                                             >
-                                                <MenuItem value={1}>Standard 1</MenuItem>
-                                                <MenuItem value={2}>Standard 2</MenuItem>
-                                                <MenuItem value={3}>Standard 3</MenuItem>
+                                                {
+                                                    standardsList.map((value, key) => {
+                                                        return (
+                                                            <MenuItem key={key} value={value._id}>{value.name}</MenuItem>
+                                                        )
+                                                    })
+                                                }
                                             </Select>
                                         </Grid>
                                         {/* <Grid item xs={12} md={3}>
