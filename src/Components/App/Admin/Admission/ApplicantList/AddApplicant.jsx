@@ -39,13 +39,21 @@ function AddApplicant({ open, close }) {
 
     const [boardOfStudiesList, setBoardOfStudiesList] = useState([])
     const [standardsList, setStandardsList] = useState([])
+    const [genderList, setGenderList] = useState([])
+    const [studentTypeList, setStudentTypeList] = useState([])
+
+    useEffect(async () => {
+        setBoardOfStudiesList((await dataService.getBoardOfStudies()).data)
+        setGenderList((await dataService.getGenders()).data)
+        setStudentTypeList((await dataService.getStudentType()).data)
+    },[])
 
     //applicant basic details
     const [name, setName] = useState('');
     const [dob, setDob] = useState(null);
     const [gender, setGender] = useState('');
     const [standard, setStandard] = useState('');
-    const [age, setAge] = useState('');
+    // const [age, setAge] = useState('');
     const [boardOfStudies, setBoardOfStudies] = useState('');
     const [studentType, setStudentType] = useState('');
 
@@ -89,15 +97,10 @@ function AddApplicant({ open, close }) {
     const [doctorMobile, setDoctorMobile] = useState('')
     const [doctorEmail, setDoctorEmail] = useState('')
 
-    useEffect(async () => {
-        setBoardOfStudiesList((await dataService.getBoardOfStudies()).data)
-    }, [])
-
     let applicant_details = {
         name,
         dob,
         gender,
-        age,
         boardOfStudies,
         standard,
         studentType,
@@ -157,7 +160,6 @@ function AddApplicant({ open, close }) {
         setName('')
         setGender('')
         setStandard('')
-        setAge('')
         setBoardOfStudies('')
         setStudentType('')
         setFatherEd('')
@@ -248,21 +250,14 @@ function AddApplicant({ open, close }) {
                                                 onChange={(newVal) => setGender(newVal.target.value)}
                                                 id=""
                                             >
-                                                <MenuItem value={1}>Male</MenuItem>
-                                                <MenuItem value={2}>Female</MenuItem>
-                                                <MenuItem value={3}>Other</MenuItem>
+                                                {
+                                                    genderList.map((value, key) => {
+                                                        return (
+                                                            <MenuItem key={key} value={value._id}>{value.name}</MenuItem>
+                                                        )
+                                                    })
+                                                }
                                             </Select>
-                                        </Grid>
-                                        <Grid item xs={12} md={3}>
-                                            <InputLabel id="">Age *</InputLabel>
-                                            <TextField
-                                                fullWidth
-                                                size='small'
-                                                type={'number'}
-                                                value={age}
-                                                onChange={(newVal) => setAge(newVal.target.value)}
-                                                variant="outlined"
-                                            />
                                         </Grid>
                                         <Grid item xs={12} md={3}>
                                             <InputLabel id="">Date of Birth *</InputLabel>
@@ -292,12 +287,16 @@ function AddApplicant({ open, close }) {
                                                 onChange={(newVal) => setStudentType(newVal.target.value)}
                                                 id=""
                                             >
-                                                <MenuItem value={1}>Orphan</MenuItem>
-                                                <MenuItem value={2}>Destitute</MenuItem>
-                                                <MenuItem value={3}>Higher Studies</MenuItem>
+                                                {
+                                                    studentTypeList.map((value, key) => {
+                                                        return (
+                                                            <MenuItem key={key} value={value._id}>{value.name}</MenuItem>
+                                                        )
+                                                    })
+                                                }
                                             </Select>
                                         </Grid>
-                                        <Grid item xs={12} md={3}>
+                                        <Grid item xs={12} md={6}>
                                             <InputLabel id="">Board of Studies *</InputLabel>
                                             <Select
                                                 value={boardOfStudies}
@@ -316,7 +315,7 @@ function AddApplicant({ open, close }) {
                                             </Select>
                                         </Grid>
                                         <Grid item xs={12} md={3}>
-                                            <InputLabel id="ageLabel">Class*</InputLabel>
+                                            <InputLabel id="">Class*</InputLabel>
                                             <Select
                                                 value={standard}
                                                 fullWidth
@@ -334,7 +333,7 @@ function AddApplicant({ open, close }) {
                                             </Select>
                                         </Grid>
                                         {/* <Grid item xs={12} md={3}>
-                                            <InputLabel id="ageLabel">Boarder Type*</InputLabel>
+                                            <InputLabel id="">Boarder Type*</InputLabel>
                                             <Select
                                                 value={border}
                                                 fullWidth

@@ -8,6 +8,12 @@ const dataService = {
   getStandards: (_id) => {
     return api.get(endpoints.standards + _id);
   },
+  getGenders: () => {
+    return api.get(endpoints.gender);
+  },
+  getStudentType:()=>{
+      return api.get(endpoints.studentType)
+  }
 };
 
 export default dataService;
