@@ -1,6 +1,7 @@
 const endpoints = {
   //admission end points
   addApplicant: "/admission/add-applicant",
+  applicantList:"/admission/applicant-list",
 
   //data end points
   boardOfStudies: "/data/board-of-studies",

@@ -46,7 +46,7 @@ function AddApplicant({ open, close }) {
         setBoardOfStudiesList((await dataService.getBoardOfStudies()).data)
         setGenderList((await dataService.getGenders()).data)
         setStudentTypeList((await dataService.getStudentType()).data)
-    },[])
+    }, [])
 
     //applicant basic details
     const [name, setName] = useState('');
@@ -93,7 +93,7 @@ function AddApplicant({ open, close }) {
     const [bloodGroup, setBloodGroup] = useState('')
     const [medicalCondition, setMedicalCondition] = useState(null)
     const [medicalDetails, setMedicalDetails] = useState('')
-    const [DoctorName, setDoctorName] = useState('')
+    const [doctorName, setDoctorName] = useState('')
     const [doctorMobile, setDoctorMobile] = useState('')
     const [doctorEmail, setDoctorEmail] = useState('')
 
@@ -137,7 +137,7 @@ function AddApplicant({ open, close }) {
         bloodGroup,
         medicalCondition,
         medicalDetails,
-        DoctorName,
+        doctorName,
         doctorMobile,
         doctorEmail
     }
@@ -743,7 +743,7 @@ function AddApplicant({ open, close }) {
                                                         <TextField
                                                             fullWidth
                                                             multiline
-                                                            value={DoctorName}
+                                                            value={doctorName}
                                                             onChange={(newVal) => setDoctorName(newVal.target.value)}
                                                             size='small'
                                                             variant="outlined"

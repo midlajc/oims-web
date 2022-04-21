@@ -5,6 +5,9 @@ const admissionService = {
   addApplicant: (applicantData) => {
     return api.post(endpoints.addApplicant, applicantData);
   },
+  getApplicantList: async() => {
+    return await api.get(endpoints.applicantList);
+  },
 };
 
 export default admissionService;

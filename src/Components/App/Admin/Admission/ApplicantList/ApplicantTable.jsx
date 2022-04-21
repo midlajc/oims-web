@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types';
 // import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -23,35 +23,7 @@ import Paper from '@mui/material/Paper';
 import { visuallyHidden } from '@mui/utils';
 import { Button } from '@mui/material';
 import SearchBar from '../../../../Common/SearchBox'
-
-
-
-
-function createData(name, calories, fat, carbs, protein) {
-    return {
-        name,
-        calories,
-        fat,
-        carbs,
-        protein,
-    };
-}
-
-const originalRows = [
-    createData('Donut', 452, 25.0, 51, 4.9),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-    createData('Honeycomb', 408, 3.2, 87, 6.5),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Jelly Bean', 375, 0.0, 94, 0.0),
-    createData('KitKat', 518, 26.0, 65, 7.0),
-    createData('Lollipop', 392, 0.2, 98, 0.0),
-    createData('Marshmallow', 318, 0, 81, 2.0),
-    createData('Nougat', 360, 19.0, 9, 37.0),
-    createData('Oreo', 437, 18.0, 63, 4.0),
-];
+import admissionService from '../../../../../service/admissionService';
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -86,34 +58,34 @@ function stableSort(array, comparator) {
 const headCells = [
     {
         id: 'name',
-        numeric: false,
-        disablePadding: true,
-        label: 'NAME',
-    },
-    {
-        id: 'calories',
         numeric: true,
         disablePadding: false,
-        label: 'Calories',
+        label: 'Name',
     },
     {
-        id: 'fat',
+        id: 'dob',
         numeric: true,
         disablePadding: false,
-        label: 'Fat',
+        label: 'Date of Birth',
     },
     {
-        id: 'carbs',
+        id: 'gender',
         numeric: true,
         disablePadding: false,
-        label: 'Carbs',
+        label: 'Gender',
     },
-    // {
-    //     id: 'protein',
-    //     numeric: true,
-    //     disablePadding: false,
-    //     label: 'Protein',
-    // },
+    {
+        id: 'board_of_studies',
+        numeric: true,
+        disablePadding: false,
+        label: 'Board of Studies',
+    },
+    {
+        id: 'standard',
+        numeric: true,
+        disablePadding: false,
+        label: 'Class',
+    },
     {
         id: 'action',
         numeric: true,
@@ -146,7 +118,7 @@ function EnhancedTableHead(props) {
                 {headCells.map((headCell) => (
                     <TableCell
                         key={headCell.id}
-                        align={headCell.numeric ? 'right' : 'left'}
+                        align={headCell.numeric ? 'left' : 'right'}
                         padding={headCell.disablePadding ? 'none' : 'normal'}
                         sortDirection={orderBy === headCell.id ? order : false}
                     >
@@ -232,11 +204,18 @@ const EnhancedTableToolbar = (props) => {
 
 function ApplicantTable({ handleAddApplicant }) {
 
-    const [rows, setRows] = useState(originalRows);
+    const [originalRows, setOriginalRows] = useState([])
+    const [rows, setRows] = useState([]);
     const [searched, setSearched] = useState("");
 
+    useEffect(async () => {
+        const data = (await admissionService.getApplicantList()).data
+        setOriginalRows(data)
+        setRows(data)
+    }, [])
+
+
     const requestSearch = (searchedVal) => {
-        // console.log(searchedVal);
         const filteredRows = originalRows.filter((row) => {
             return row.name.toLowerCase().includes(searchedVal.toLowerCase());
         });
@@ -360,17 +339,15 @@ function ApplicantTable({ handleAddApplicant }) {
                                                 />
                                             </TableCell> */}
                                             <TableCell
-                                                component="th"
+                                                align="left"
                                                 id={labelId}
-                                                scope="row"
-                                                padding="none"
                                             >
                                                 {row.name}
                                             </TableCell>
-                                            <TableCell align="right">{row.calories}</TableCell>
-                                            <TableCell align="right">{row.fat}</TableCell>
-                                            <TableCell align="right">{row.carbs}</TableCell>
-                                            <TableCell align="right">{row.protein}</TableCell>
+                                            <TableCell align="left">{row.dob}</TableCell>
+                                            <TableCell align="left">{row.gender}</TableCell>
+                                            <TableCell align="left">{row.board_of_studies}</TableCell>
+                                            <TableCell align="left">{row.standard}</TableCell>
                                         </TableRow>
                                     );
                                 })}
