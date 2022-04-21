@@ -13,17 +13,13 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-// import Checkbox from '@mui/material/Checkbox';
-// import IconButton from '@mui/material/IconButton';
-// import Tooltip from '@mui/material/Tooltip';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import Switch from '@mui/material/Switch';
-// import DeleteIcon from '@mui/icons-material/Delete';
-// import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import { Button } from '@mui/material';
 import SearchBar from '../../../../Common/SearchBox'
 import admissionService from '../../../../../service/admissionService';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -104,17 +100,6 @@ function EnhancedTableHead(props) {
     return (
         <TableHead>
             <TableRow>
-                {/* <TableCell padding="checkbox">
-                    <Checkbox
-                        color="primary"
-                        indeterminate={numSelected > 0 && numSelected < rowCount}
-                        checked={rowCount > 0 && numSelected === rowCount}
-                        onChange={onSelectAllClick}
-                        inputProps={{
-                            'aria-label': 'select all desserts',
-                        }}
-                    />
-                </TableCell> */}
                 {headCells.map((headCell) => (
                     <TableCell
                         key={headCell.id}
@@ -142,12 +127,9 @@ function EnhancedTableHead(props) {
 }
 
 EnhancedTableHead.propTypes = {
-    // numSelected: PropTypes.number.isRequired,
     onRequestSort: PropTypes.func.isRequired,
-    // onSelectAllClick: PropTypes.func.isRequired,
     order: PropTypes.oneOf(['asc', 'desc']).isRequired,
     orderBy: PropTypes.string.isRequired,
-    // rowCount: PropTypes.number.isRequired,
 };
 
 const EnhancedTableToolbar = (props) => {
@@ -158,23 +140,8 @@ const EnhancedTableToolbar = (props) => {
             sx={{
                 pl: { sm: 0 },
                 pr: { xs: 0, sm: 0 },
-                // ...(numSelected > 0 && {
-                //     bgcolor: (theme) =>
-                //         alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
-                // }),
             }}
         >
-            {/* {numSelected > 0 ? (
-                <Typography
-                    sx={{ flex: '1 1 100%' }}
-                    color="inherit"
-                    variant="subtitle1"
-                    component="div"
-                >
-                    {numSelected} selected
-                </Typography>
-            ) : (
-            )} */}
 
             <Typography
                 sx={{ flex: '1 1 100%' }}
@@ -197,10 +164,6 @@ const EnhancedTableToolbar = (props) => {
         </Toolbar>
     );
 };
-
-// EnhancedTableToolbar.propTypes = {
-//     numSelected: PropTypes.number.isRequired,
-// };
 
 function ApplicantTable({ handleAddApplicant }) {
 
@@ -239,35 +202,6 @@ function ApplicantTable({ handleAddApplicant }) {
         setOrderBy(property);
     };
 
-    // const handleSelectAllClick = (event) => {
-    //     if (event.target.checked) {
-    //         const newSelecteds = rows.map((n) => n.name);
-    //         setSelected(newSelecteds);
-    //         return;
-    //     }
-    //     setSelected([]);
-    // };
-
-    // const handleClick = (event, name) => {
-    //     const selectedIndex = selected.indexOf(name);
-    //     let newSelected = [];
-
-    //     if (selectedIndex === -1) {
-    //         newSelected = newSelected.concat(selected, name);
-    //     } else if (selectedIndex === 0) {
-    //         newSelected = newSelected.concat(selected.slice(1));
-    //     } else if (selectedIndex === selected.length - 1) {
-    //         newSelected = newSelected.concat(selected.slice(0, -1));
-    //     } else if (selectedIndex > 0) {
-    //         newSelected = newSelected.concat(
-    //             selected.slice(0, selectedIndex),
-    //             selected.slice(selectedIndex + 1),
-    //         );
-    //     }
-
-    //     setSelected(newSelected);
-    // };
-
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -276,12 +210,6 @@ function ApplicantTable({ handleAddApplicant }) {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
-
-    // const handleChangeDense = (event) => {
-    //     setDense(event.target.checked);
-    // };
-
-    // const isSelected = (name) => selected.indexOf(name) !== -1;
 
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
@@ -303,41 +231,22 @@ function ApplicantTable({ handleAddApplicant }) {
                         size={'medium'}
                     >
                         <EnhancedTableHead
-                            // numSelected={selected.length}
                             order={order}
                             orderBy={orderBy}
-                            // onSelectAllClick={handleSelectAllClick}
                             onRequestSort={handleRequestSort}
-                        // rowCount={rows.length}
                         />
                         <TableBody>
-                            {/* if you don't need to support IE11, you can replace the `stableSort` call with:
-                 rows.slice().sort(getComparator(order, orderBy)) */}
                             {stableSort(rows, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
-                                    // const isItemSelected = isSelected(row.name);
                                     const labelId = `enhanced-table-checkbox-${index}`;
-
                                     return (
                                         <TableRow
                                             hover
-                                            // onClick={(event) => handleClick(event, row.name)}
                                             role="checkbox"
-                                            // aria-checked={isItemSelected}
                                             tabIndex={-1}
-                                            key={row.name}
-                                        // selected={isItemSelected}
+                                            key={row._id}
                                         >
-                                            {/* <TableCell padding="checkbox">
-                                                <Checkbox
-                                                    color="primary"
-                                                    checked={isItemSelected}
-                                                    inputProps={{
-                                                        'aria-labelledby': labelId,
-                                                    }}
-                                                />
-                                            </TableCell> */}
                                             <TableCell
                                                 align="left"
                                                 id={labelId}
@@ -348,6 +257,14 @@ function ApplicantTable({ handleAddApplicant }) {
                                             <TableCell align="left">{row.gender}</TableCell>
                                             <TableCell align="left">{row.board_of_studies}</TableCell>
                                             <TableCell align="left">{row.standard}</TableCell>
+                                            <TableCell align="left" sx={{ padding: 1 }}>
+                                                <IconButton>
+                                                    <EditIcon />
+                                                </IconButton>
+                                                <IconButton>
+                                                    <DeleteIcon />
+                                                </IconButton>
+                                            </TableCell>
                                         </TableRow>
                                     );
                                 })}
@@ -373,10 +290,6 @@ function ApplicantTable({ handleAddApplicant }) {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </Paper>
-            {/* <FormControlLabel
-                control={<Switch checked={dense} onChange={handleChangeDense} />}
-                label="Dense padding"
-            /> */}
         </Box>
     );
 }
