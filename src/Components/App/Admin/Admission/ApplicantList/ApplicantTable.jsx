@@ -70,6 +70,12 @@ const headCells = [
         label: 'Gender',
     },
     {
+        id: 'student_type',
+        numeric: true,
+        disablePadding: false,
+        label: 'Student Type',
+    },
+    {
         id: 'board_of_studies',
         numeric: true,
         disablePadding: false,
@@ -191,7 +197,6 @@ function ApplicantTable({ handleAddApplicant }) {
 
     const [order, setOrder] = useState('asc');
     const [orderBy, setOrderBy] = useState('');
-    // const [selected, setSelected] = useState([]);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -238,6 +243,7 @@ function ApplicantTable({ handleAddApplicant }) {
                             {stableSort(rows, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
+                                    const dob=(new Date(row.dob).toLocaleDateString('en-GB'));
                                     const labelId = `enhanced-table-checkbox-${index}`;
                                     return (
                                         <TableRow
@@ -252,8 +258,9 @@ function ApplicantTable({ handleAddApplicant }) {
                                             >
                                                 {row.name}
                                             </TableCell>
-                                            <TableCell align="left">{row.dob}</TableCell>
+                                            <TableCell align="left">{dob}</TableCell>
                                             <TableCell align="left">{row.gender}</TableCell>
+                                            <TableCell align="left">{row.student_type}</TableCell>
                                             <TableCell align="left">{row.board_of_studies}</TableCell>
                                             <TableCell align="left">{row.standard}</TableCell>
                                             <TableCell align="left" sx={{ padding: 1 }}>

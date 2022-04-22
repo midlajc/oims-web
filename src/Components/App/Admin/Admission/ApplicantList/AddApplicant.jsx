@@ -53,7 +53,6 @@ function AddApplicant({ open, close }) {
     const [dob, setDob] = useState(null);
     const [gender, setGender] = useState('');
     const [standard, setStandard] = useState('');
-    // const [age, setAge] = useState('');
     const [boardOfStudies, setBoardOfStudies] = useState('');
     const [studentType, setStudentType] = useState('');
 
@@ -96,7 +95,6 @@ function AddApplicant({ open, close }) {
     const [doctorName, setDoctorName] = useState('')
     const [doctorMobile, setDoctorMobile] = useState('')
     const [doctorEmail, setDoctorEmail] = useState('')
-
     let applicant_details = {
         name,
         dob,
@@ -150,7 +148,6 @@ function AddApplicant({ open, close }) {
     const handleClick = () => {
         setLoading(preVal => !preVal)
         admissionService.addApplicant(applicant_details).then(res => {
-            console.log(res);
             setLoading(preVal => !preVal)
         })
     }
