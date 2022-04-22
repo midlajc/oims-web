@@ -17,9 +17,7 @@ function ApplicantList() {
     }}>
       <div
         style={{
-          // background: 'black',
           width: '95%',
-          // padding:5
         }}>
         <AddApplicant open={addApplicant} close={handleClose} />
         <span style={{ float: 'left' }}>

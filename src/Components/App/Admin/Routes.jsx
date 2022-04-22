@@ -11,6 +11,7 @@ import NotFound from '../../404';
 
 //Admission
 import ApplicantList from './Admission/ApplicantList';
+import PrimaryVerification from './Admission/PrimaryVerification';
 
 
 function Routing() {
@@ -30,6 +31,10 @@ function Routing() {
         {
             path: "admission/applicant-list",
             element: < ApplicantList />,
+        },
+        {
+            path: "admission/primary-verification",
+            element: < PrimaryVerification />,
         },
         //Settings
         {

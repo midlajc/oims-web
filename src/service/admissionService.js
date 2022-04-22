@@ -5,9 +5,12 @@ const admissionService = {
   addApplicant: (applicantData) => {
     return api.post(endpoints.addApplicant, applicantData);
   },
-  getApplicantList: async() => {
-    return await api.get(endpoints.applicantList);
+  getApplicantList: () => {
+    return  api.get(endpoints.applicantList);
   },
+  getPrimaryVerificationList:()=>{
+    return api.get(endpoints.primaryVerification)
+  }
 };
 
 export default admissionService;

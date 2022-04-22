@@ -2,6 +2,7 @@ const endpoints = {
   //admission end points
   addApplicant: "/admission/add-applicant",
   applicantList:"/admission/applicant-list",
+  primaryVerification:'admission/primary-verification',
 
   //data end points
   boardOfStudies: "/data/board-of-studies",

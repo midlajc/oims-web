@@ -1,7 +1,6 @@
 import React from 'react'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
 function Widget(props) {
@@ -15,12 +14,7 @@ function Widget(props) {
                 backgroundColor: '#327ec9', height: 80, width: 110,
                 display: 'flex', justifyContent: 'center', alignItems: 'center'
             }}>
-                <CardMedia
-                    component="img"
-                    sx={{ width: 55, height: 55, }}
-                    image={props.icon}
-                    alt="icon"
-                />
+                {props.component}
             </div>
             <div style={{
                 display: 'flex', width: '100%', justifyContent: 'center',

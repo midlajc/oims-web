@@ -13,11 +13,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import { visuallyHidden } from '@mui/utils';
-import { Button } from '@mui/material';
 import SearchBar from '../../../../Common/SearchBox'
 import admissionService from '../../../../../service/admissionService';
 import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import IconButton from '@mui/material/IconButton';
 
 function descendingComparator(a, b, orderBy) {
@@ -132,7 +131,7 @@ EnhancedTableHead.propTypes = {
 };
 
 const EnhancedTableToolbar = (props) => {
-    const { requestSearch, cancelSearch, handleAddApplicant } = props;
+    const { requestSearch, cancelSearch } = props;
 
     return (
         <Toolbar
@@ -148,9 +147,8 @@ const EnhancedTableToolbar = (props) => {
                 id="tableTitle"
                 component="div"
             >
-                Applicant List
+                Primary Verification
             </Typography>
-            <Button sx={{ width: 199 }} onClick={handleAddApplicant} variant="contained" size="medium">Add Applicant</Button>
             <SearchBar
                 style={{
                     width: "19rem",
@@ -164,14 +162,14 @@ const EnhancedTableToolbar = (props) => {
     );
 };
 
-function ApplicantTable({ handleAddApplicant }) {
+function PrimaryVerificationTable() {
 
     const [originalRows, setOriginalRows] = useState([])
     const [rows, setRows] = useState([]);
     const [searched, setSearched] = useState("");
 
     useEffect(async () => {
-        const data = (await admissionService.getApplicantList()).data
+        const data = (await admissionService.getPrimaryVerificationList()).data
         setOriginalRows(data)
         setRows(data)
     }, [])
@@ -216,7 +214,6 @@ function ApplicantTable({ handleAddApplicant }) {
     let prop = {
         requestSearch: requestSearch,
         cancelSearch: cancelSearch,
-        handleAddApplicant: handleAddApplicant
     }
 
     return (
@@ -258,10 +255,10 @@ function ApplicantTable({ handleAddApplicant }) {
                                             <TableCell align="left">{row.standard}</TableCell>
                                             <TableCell align="left" sx={{ padding: 1 }}>
                                                 <IconButton>
-                                                    <EditIcon />
+                                                    <VisibilityIcon />
                                                 </IconButton>
                                                 <IconButton>
-                                                    <DeleteIcon />
+                                                    <EditIcon />
                                                 </IconButton>
                                             </TableCell>
                                         </TableRow>
@@ -293,4 +290,4 @@ function ApplicantTable({ handleAddApplicant }) {
     );
 }
 
-export default ApplicantTable
+export default PrimaryVerificationTable

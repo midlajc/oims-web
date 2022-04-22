@@ -17,7 +17,7 @@ function Admission() {
                             return (
                                 <Box key={i} sx={{ width: { xs: '98%', md: 'auto' } }}>
                                     <Link style={{ textDecoration: 'none', width: '100%' }} to={`${route.path}`}>
-                                        <Widget icon={route.icon} name={route.name} />
+                                        <Widget component={route.component} name={route.name} />
                                     </Link>
                                 </Box>
                             )
