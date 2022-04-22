@@ -6,11 +6,17 @@ const admissionService = {
     return api.post(endpoints.addApplicant, applicantData);
   },
   getApplicantList: () => {
-    return  api.get(endpoints.applicantList);
+    return api.get(endpoints.applicantList);
   },
-  getPrimaryVerificationList:()=>{
-    return api.get(endpoints.primaryVerification)
-  }
+  getPrimaryVerificationList: () => {
+    return api.get(endpoints.primaryVerification);
+  },
+  getManagerApprovalList: () => {
+    return api.get(endpoints.managerApproval);
+  },
+  getOfficerApprovalList: () => {
+    return api.get(endpoints.officerApproval);
+  },
 };
 
 export default admissionService;

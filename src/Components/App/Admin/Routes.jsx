@@ -12,6 +12,8 @@ import NotFound from '../../404';
 //Admission
 import ApplicantList from './Admission/ApplicantList';
 import PrimaryVerification from './Admission/PrimaryVerification';
+import OfficerApproval from './Admission/OfficerApproval';
+import ManagerApproval from './Admission/ManagerApproval';
 
 
 function Routing() {
@@ -35,6 +37,14 @@ function Routing() {
         {
             path: "admission/primary-verification",
             element: < PrimaryVerification />,
+        },
+        {
+            path: "admission/officer-approval",
+            element: < OfficerApproval />,
+        },
+        {
+            path: "admission/manager-approval",
+            element: < ManagerApproval />,
         },
         //Settings
         {

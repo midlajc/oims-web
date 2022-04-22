@@ -16,10 +16,10 @@ import storageService from '../../../service/storageService';
 import { Link } from 'react-router-dom';
 import './Header.css'
 import themeContext from '../../../Context/themeContext';
-// import { height } from '@mui/system';
-// import Switch from '@mui/material/Switch';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+
+import Logo from '../../../asset/images/logo.png'
 
 
 
@@ -73,7 +73,7 @@ function AdminHeader({ routes }) {
                         component="div"
                         sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
                     >
-                        <img style={{ width: '2rem' }} src="logo.png" alt=""/>
+                        <img style={{ width: '2rem' }} src={Logo} alt="" />
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -88,7 +88,7 @@ function AdminHeader({ routes }) {
                         >
                             <MenuIcon />
                         </IconButton>
-                        
+
                         <Menu
                             id="menu-appbar"
                             anchorEl={anchorElNav}
