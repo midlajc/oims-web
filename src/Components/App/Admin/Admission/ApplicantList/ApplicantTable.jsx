@@ -19,6 +19,7 @@ import admissionService from '../../../../../service/admissionService';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
+import AddApplicant from './AddApplicant'
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -170,11 +171,21 @@ const EnhancedTableToolbar = (props) => {
     );
 };
 
-function ApplicantTable({ handleAddApplicant }) {
+function ApplicantTable() {
 
     const [originalRows, setOriginalRows] = useState([])
     const [rows, setRows] = useState([]);
     const [searched, setSearched] = useState("");
+
+    const [addApplicant, setAddApplicant] = useState(false);
+    const handleOpen = () => setAddApplicant(true);
+    const handleClose = () => setAddApplicant(false);
+
+    const handleApplicantAdd = async () => {
+        const data = (await admissionService.getApplicantList()).data
+        setOriginalRows(data)
+        setRows(data)
+    }
 
     useEffect(async () => {
         const data = (await admissionService.getApplicantList()).data
@@ -221,82 +232,92 @@ function ApplicantTable({ handleAddApplicant }) {
     let prop = {
         requestSearch: requestSearch,
         cancelSearch: cancelSearch,
-        handleAddApplicant: handleAddApplicant
+        handleAddApplicant: handleOpen
     }
 
     return (
-        <Box sx={{ width: '100%' }}>
-            <Paper sx={{ width: '100%', mb: 2, padding: 3 }}>
-                <EnhancedTableToolbar {...prop} />
-                <TableContainer>
-                    <Table
-                        sx={{ minWidth: 750 }}
-                        aria-labelledby="tableTitle"
-                        size={'medium'}
-                    >
-                        <EnhancedTableHead
-                            order={order}
-                            orderBy={orderBy}
-                            onRequestSort={handleRequestSort}
-                        />
-                        <TableBody>
-                            {stableSort(rows, getComparator(order, orderBy))
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((row, index) => {
-                                    const dob=(new Date(row.dob).toLocaleDateString('en-GB'));
-                                    const labelId = `enhanced-table-checkbox-${index}`;
-                                    return (
-                                        <TableRow
-                                            hover
-                                            role="checkbox"
-                                            tabIndex={-1}
-                                            key={row._id}
-                                        >
-                                            <TableCell
-                                                align="left"
-                                                id={labelId}
+
+        <div
+            style={{
+                width: '95%',
+            }}>
+            <AddApplicant open={addApplicant} handleApplicantAdd={handleApplicantAdd} close={handleClose} />
+            <span style={{ float: 'left' }}>
+            </span>
+            <Box sx={{ width: '100%' }}>
+                <Paper sx={{ width: '100%', mb: 2, padding: 3 }}>
+                    <EnhancedTableToolbar {...prop} />
+                    <TableContainer>
+                        <Table
+                            sx={{ minWidth: 750 }}
+                            aria-labelledby="tableTitle"
+                            size={'medium'}
+                        >
+                            <EnhancedTableHead
+                                order={order}
+                                orderBy={orderBy}
+                                onRequestSort={handleRequestSort}
+                            />
+                            <TableBody>
+                                {stableSort(rows, getComparator(order, orderBy))
+                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    .map((row, index) => {
+                                        const dob = (new Date(row.dob).toLocaleDateString('en-GB'));
+                                        const labelId = `enhanced-table-checkbox-${index}`;
+                                        return (
+                                            <TableRow
+                                                hover
+                                                role="checkbox"
+                                                tabIndex={-1}
+                                                key={row._id}
                                             >
-                                                {row.name}
-                                            </TableCell>
-                                            <TableCell align="left">{dob}</TableCell>
-                                            <TableCell align="left">{row.gender}</TableCell>
-                                            <TableCell align="left">{row.student_type}</TableCell>
-                                            <TableCell align="left">{row.board_of_studies}</TableCell>
-                                            <TableCell align="left">{row.standard}</TableCell>
-                                            <TableCell align="left" sx={{ padding: 1 }}>
-                                                <IconButton>
-                                                    <EditIcon />
-                                                </IconButton>
-                                                <IconButton>
-                                                    <DeleteIcon />
-                                                </IconButton>
-                                            </TableCell>
-                                        </TableRow>
-                                    );
-                                })}
-                            {emptyRows > 0 && (
-                                <TableRow
-                                    style={{
-                                        height: 53 * emptyRows,
-                                    }}
-                                >
-                                    <TableCell colSpan={6} />
-                                </TableRow>
-                            )}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <TablePagination
-                    rowsPerPageOptions={[5, 10, 25, 50, 100]}
-                    component="div"
-                    count={rows.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                />
-            </Paper>
-        </Box>
+                                                <TableCell
+                                                    align="left"
+                                                    id={labelId}
+                                                >
+                                                    {row.name}
+                                                </TableCell>
+                                                <TableCell align="left">{dob}</TableCell>
+                                                <TableCell align="left">{row.gender}</TableCell>
+                                                <TableCell align="left">{row.student_type}</TableCell>
+                                                <TableCell align="left">{row.board_of_studies}</TableCell>
+                                                <TableCell align="left">{row.standard}</TableCell>
+                                                <TableCell align="left" sx={{ padding: 1 }}>
+                                                    <IconButton>
+                                                        <EditIcon />
+                                                    </IconButton>
+                                                    <IconButton>
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </TableCell>
+                                            </TableRow>
+                                        );
+                                    })}
+                                {emptyRows > 0 && (
+                                    <TableRow
+                                        style={{
+                                            height: 53 * emptyRows,
+                                        }}
+                                    >
+                                        <TableCell colSpan={6} />
+                                    </TableRow>
+                                )}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    <TablePagination
+                        rowsPerPageOptions={[5, 10, 25, 50, 100]}
+                        component="div"
+                        count={rows.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onPageChange={handleChangePage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                </Paper>
+            </Box>
+        </div>
+
     );
 }
 

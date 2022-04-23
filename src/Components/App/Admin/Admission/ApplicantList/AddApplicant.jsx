@@ -33,7 +33,7 @@ const style = {
     p: 4,
 };
 
-function AddApplicant({ open, close }) {
+function AddApplicant({ open, handleApplicantAdd, close }) {
 
     const [loading, setLoading] = useState(false);
 
@@ -145,12 +145,6 @@ function AddApplicant({ open, close }) {
         setStandardsList((await dataService.getStandards(newVal.target.value)).data)
     }
 
-    const handleClick = () => {
-        setLoading(preVal => !preVal)
-        admissionService.addApplicant(applicant_details).then(res => {
-            setLoading(preVal => !preVal)
-        })
-    }
 
     const clearFields = () => {
         setDob(null)
@@ -194,6 +188,15 @@ function AddApplicant({ open, close }) {
 
     }
 
+    const handleClick = () => {
+        setLoading(preVal => !preVal)
+        admissionService.addApplicant(applicant_details).then(res => {
+            setLoading(preVal => !preVal)
+            handleApplicantAdd()
+            clearFields()
+        })
+    }
+
     return (
         <div >
             <Modal
@@ -207,7 +210,9 @@ function AddApplicant({ open, close }) {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
+                <Box sx={style}
+                    component="form"
+                >
                     <Button color='inherit' sx={{ float: 'right' }} onClick={close}>
                         <CloseIcon sx={{ width: 1 }} />
                     </Button>
@@ -231,6 +236,7 @@ function AddApplicant({ open, close }) {
                                         <Grid item xs={12} md={6}>
                                             <InputLabel id="">Name *</InputLabel>
                                             <TextField
+                                                required
                                                 fullWidth
                                                 value={name}
                                                 onChange={(newVal) => setName(newVal.target.value)}
