@@ -124,7 +124,7 @@ function AdminHeader({ routes }) {
                             component="div"
                             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
                         >
-                            <img style={{ width: '2.1rem' }} src={Logo} alt="" srcset="" />
+                            <img style={{ width: '2.1rem' }} src={Logo} alt="" />
 
                         </Typography>
                     </Box>

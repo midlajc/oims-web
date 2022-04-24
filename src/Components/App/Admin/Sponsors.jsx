@@ -1,9 +1,33 @@
 import React from 'react'
+import Box from '@mui/material/Box';
+import { Link } from "react-router-dom";
+import Widget from '../../Common/Widget';
+import routes from './Sponsors/routes'
 
 function Sponsors() {
-  return (
-    <div>Sponsors</div>
-  )
+    return (
+        <>
+            <div>
+                <Box style={{
+                    display: 'flex', width: '100%', padding: 25,
+                    justifyContent: 'flex-start', alignItems: 'flex-start', flexWrap: 'wrap'
+                }}>
+                    {
+                        routes.map((route, i) => {
+                            return (
+                                <Box key={i} sx={{ width: { xs: '98%', md: 'auto' } }}>
+                                    <Link style={{ textDecoration: 'none', width: '100%' }} to={`${route.path}`}>
+                                        <Widget component={route.component} name={route.name} />
+                                    </Link>
+                                </Box>
+                            )
+                        })
+                    }
+
+                </Box>
+            </div>
+        </>
+    )
 }
 
 export default Sponsors

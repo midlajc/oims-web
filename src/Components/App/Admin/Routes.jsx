@@ -7,6 +7,7 @@ import Settings from './Settings';
 import Sponsors from './Sponsors';
 import Sponsorship from './Sponsorship';
 import Accounts from './Accounts';
+import Students from './Students';
 import NotFound from '../../404';
 
 //Admission
@@ -16,6 +17,8 @@ import OfficerApproval from './Admission/OfficerApproval';
 import ManagerApproval from './Admission/ManagerApproval';
 import AdmittedStudents from './Admission/AdmittedStudents';
 
+//Sponsor
+import SponsorRegistration from './Sponsors/SponsorRegistration';
 
 function Routing() {
     let element = useRoutes([
@@ -56,9 +59,15 @@ function Routing() {
             path: "settings",
             element: <Settings />
         },
+        //Sponsor
         {
             path: "sponsors",
             element: <Sponsors />
+        },
+
+        {
+            path: "sponsors/sponsor-registration",
+            element: <SponsorRegistration />
         },
         {
             path: "sponsorship",
@@ -67,6 +76,10 @@ function Routing() {
         {
             path: "accounts",
             element: <Accounts />
+        },
+        {
+            path: "students",
+            element: <Students />
         },
         {
             path: "*",
