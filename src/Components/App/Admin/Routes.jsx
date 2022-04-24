@@ -14,6 +14,7 @@ import ApplicantList from './Admission/ApplicantList';
 import PrimaryVerification from './Admission/PrimaryVerification';
 import OfficerApproval from './Admission/OfficerApproval';
 import ManagerApproval from './Admission/ManagerApproval';
+import AdmittedStudents from './Admission/AdmittedStudents';
 
 
 function Routing() {
@@ -45,6 +46,10 @@ function Routing() {
         {
             path: "admission/manager-approval",
             element: < ManagerApproval />,
+        },
+        {
+            path: "admission/admitted-students",
+            element: < AdmittedStudents />,
         },
         //Settings
         {

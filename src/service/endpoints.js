@@ -5,6 +5,7 @@ const endpoints = {
   primaryVerification: "admission/primary-verification",
   officerApproval: "admission/officer-approval",
   managerApproval: "admission/manager-approval",
+  admittedStudents: "admission/admitted-students",
 
   //data end points
   boardOfStudies: "/data/board-of-studies",

@@ -17,6 +17,9 @@ const admissionService = {
   getOfficerApprovalList: () => {
     return api.get(endpoints.officerApproval);
   },
+  getAdmittedStudentList:()=>{
+    return api.get(endpoints.admittedStudents)
+  }
 };
 
 export default admissionService;
