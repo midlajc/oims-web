@@ -12,6 +12,9 @@ const endpoints = {
   standards: "data/standards",
   gender: "data/gender",
   studentType: "data/student-type",
+
+  //sponsor
+  sponsorRegistration: "sponsor/sponsor-application",
 };
 
 export default endpoints;

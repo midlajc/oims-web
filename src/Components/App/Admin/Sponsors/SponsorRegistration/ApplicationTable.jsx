@@ -15,7 +15,7 @@ import Paper from '@mui/material/Paper';
 import { visuallyHidden } from '@mui/utils';
 import { Button } from '@mui/material';
 import SearchBar from '../../../../Common/SearchBox'
-import admissionService from '../../../../../service/admissionService';
+import sponsorService from '../../../../../service/sponsorService';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
@@ -71,22 +71,16 @@ const headCells = [
         label: 'Gender',
     },
     {
-        id: 'student_type',
+        id: 'mobile',
         numeric: true,
         disablePadding: false,
-        label: 'Student Type',
+        label: 'Mobile',
     },
     {
-        id: 'board_of_studies',
+        id: 'email',
         numeric: true,
         disablePadding: false,
-        label: 'Board of Studies',
-    },
-    {
-        id: 'standard',
-        numeric: true,
-        disablePadding: false,
-        label: 'Class',
+        label: 'Email',
     },
     {
         id: 'action',
@@ -157,7 +151,7 @@ const EnhancedTableToolbar = (props) => {
             >
                 Sponsor Registration
             </Typography>
-            <Button sx={{ width: 248 }} onClick={handleAddApplicant} variant="contained" size="medium">New Registration</Button>
+            {/* <Button sx={{ width: 248 }} onClick={handleAddApplicant} variant="contained" size="medium">New Registration</Button> */}
             <SearchBar
                 style={{
                     width: "19rem",
@@ -182,15 +176,15 @@ function ApplicationTable() {
     const handleClose = () => setAddApplicant(false);
 
     const handleApplicantAdd = async () => {
-        const data = (await admissionService.getApplicantList()).data
-        // setOriginalRows(data)
-        // setRows(data)
+        const data = (await sponsorService.getSponsorApplication()).data
+        setOriginalRows(data)
+        setRows(data)
     }
 
     useEffect(async () => {
-        const data = (await admissionService.getApplicantList()).data
-        // setOriginalRows(data)
-        // setRows(data)
+        const data = (await sponsorService.getSponsorApplication()).data
+        setOriginalRows(data)
+        setRows(data)
     }, [])
 
 
@@ -279,9 +273,8 @@ function ApplicationTable() {
                                                 </TableCell>
                                                 <TableCell align="left">{dob}</TableCell>
                                                 <TableCell align="left">{row.gender}</TableCell>
-                                                <TableCell align="left">{row.student_type}</TableCell>
-                                                <TableCell align="left">{row.board_of_studies}</TableCell>
-                                                <TableCell align="left">{row.standard}</TableCell>
+                                                <TableCell align="left">{row.mobile}</TableCell>
+                                                <TableCell align="left">{row.email}</TableCell>
                                                 <TableCell align="left" sx={{ padding: 1 }}>
                                                     <IconButton>
                                                         <EditIcon />
