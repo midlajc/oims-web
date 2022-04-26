@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 
 function NavBar({ routes }) {
     const [nav, setNavigator] = useState('/');
-    const [navColor, setNavColor] = useState('')
+    const [navColor, setNavColor] = useState('rgba(255, 255, 255, 0.7)')
     const theme = useContext(themeContext)
 
     const navigate = useNavigate()
@@ -23,8 +23,8 @@ function NavBar({ routes }) {
     }
 
     useEffect(() => {
-        if (theme.mode === 'dark') setNavColor('rgba(0, 0, 0, 0.6)')
-        else setNavColor('rgba(255, 255, 255, 0.7)')
+        if (theme.mode === 'dark') setNavColor('rgba(255, 255, 255, 0.7)')
+        else setNavColor('rgba(0, 0, 0, 0.6)')
     }, [theme])
     return (
         <div>
