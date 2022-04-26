@@ -177,8 +177,8 @@ function AdminHeader({ routes }) {
                                     {theme.mode === 'dark' ? <Brightness4Icon /> : <Brightness7Icon />}
                                 </IconButton>
                             </MenuItem> */}
-                            <MenuItem onClick={handleCloseUserMenu}>
-                                <Typography textAlign="center" onClick={authService.logout} id='logout'>Log out</Typography>
+                            <MenuItem onClick={authService.logout}>
+                                <Typography textAlign="center" id='logout'>Log out</Typography>
                             </MenuItem>
                         </Menu>
                     </Box>

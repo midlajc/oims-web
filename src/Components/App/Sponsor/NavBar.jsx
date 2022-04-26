@@ -1,28 +1,77 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import { Typography } from '@mui/material';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Container from '@mui/material/Container';
+import MenuIcon from '@mui/icons-material/Menu';
+import Logo from '../../../asset/images/logo.png'
+import IconButton from '@mui/material/IconButton';
+import themeContext from '../../../Context/themeContext';
+// import './css/NavBar.css'
 
-function NavBar({ drawerWidth, routes }) {
-    const [value, setValue] = React.useState(0);
-
+function NavBar({ routes }) {
+    const [value, setValue] = useState(0);
+    const [navColor, setNavColor] = useState('')
+    const theme = useContext(themeContext)
+    useEffect(() => {
+        if (theme.mode === 'dark') setNavColor('rgba(0, 0, 0, 0.6)')
+        else setNavColor('rgba(255, 255, 255, 0.7)')
+    }, [theme])
     return (
         <div>
             <Box
-                sx={{ display: { xs: 'none', md: 'flex', position: 'fixed' } }}
+                sx={{ width: "100%", display: { xs: 'none', md: 'flex', position: 'fixed' } }}
                 elevation={3}
             >
                 <Box
-                    component="nav"
-                    sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+                    sx={{ width: "100%", flexShrink: { sm: 0 } }}
                     aria-label="mailbox folders"
                 >
-                    <Drawer
+                    <AppBar position="static">
+                        <Container maxWidth="xl">
+                            <Toolbar disableGutters style={{ minHeight: '3rem' }}>
+                                <Typography
+                                    variant="h6"
+                                    noWrap
+                                    component="div"
+                                    sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+                                >
+                                    <img style={{ width: '2rem' }} src={Logo} alt="" />
+                                </Typography>
+
+                                <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                                </Box>
+
+                                <BottomNavigation
+                                    value={value}
+                                    onChange={(event, newValue) => {
+                                        setValue(newValue);
+                                    }}
+                                    sx={{
+                                        background: 'none',
+                                        height: '2.6rem'
+                                    }}
+                                >
+                                    {
+                                        routes.map((value, index) => {
+                                            return (
+                                                <BottomNavigationAction
+                                                    style={{
+                                                        color: navColor
+                                                    }}
+                                                    key={index} label={value.name} icon={value.component} />
+                                            )
+                                        })
+                                    }
+                                </BottomNavigation>
+                            </Toolbar>
+                        </Container>
+                    </AppBar>
+
+                    {/* <Drawer
                         variant="permanent"
                         sx={{
                             display: { xs: "block", sm: "block" },
@@ -52,7 +101,7 @@ function NavBar({ drawerWidth, routes }) {
                                 })
                             }
                         </List>
-                    </Drawer>
+                    </Drawer> */}
                 </Box>
             </Box>
             <Box
@@ -61,7 +110,7 @@ function NavBar({ drawerWidth, routes }) {
             >
                 <Box sx={{ width: "100%" }}>
                     <BottomNavigation
-                        showLabels
+                        // showLabels
                         value={value}
                         onChange={(event, newValue) => {
                             setValue(newValue);
