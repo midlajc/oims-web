@@ -34,7 +34,7 @@ function NavBar({ drawerWidth, routes }) {
                         }}
                         open
                     >
-                        <List sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', height: '100vh' }}>
+                        <List sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'end', height: '100vh' }}>
                             {
                                 routes.map((value, index) => {
                                     return (
