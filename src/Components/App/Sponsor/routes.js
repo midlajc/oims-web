@@ -6,22 +6,22 @@ import PaidIcon from "@mui/icons-material/Paid";
 const routes = [
   {
     name: "Home",
-    path: "",
+    path: "/",
     component: <HomeIcon />,
   },
   {
     name: "Transactions",
-    path: "",
+    path: "/transactions",
     component: <PaidIcon />,
   },
   {
     name: "User",
-    path: "",
+    path: "/user",
     component: <PersonIcon />,
   },
   {
     name: "Settings",
-    path: "",
+    path: "/settings",
     component: <SettingsIcon />,
   },
 ];

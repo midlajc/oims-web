@@ -6,16 +6,22 @@ import { Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
-import MenuIcon from '@mui/icons-material/Menu';
 import Logo from '../../../asset/images/logo.png'
-import IconButton from '@mui/material/IconButton';
 import themeContext from '../../../Context/themeContext';
-// import './css/NavBar.css'
+import { useNavigate } from 'react-router-dom';
 
 function NavBar({ routes }) {
-    const [value, setValue] = useState(0);
+    const [nav, setNavigator] = useState('/');
     const [navColor, setNavColor] = useState('')
     const theme = useContext(themeContext)
+
+    const navigate = useNavigate()
+
+    const handleNavigation = (e, newValue) => {
+        setNavigator(newValue)
+        navigate(newValue)
+    }
+
     useEffect(() => {
         if (theme.mode === 'dark') setNavColor('rgba(0, 0, 0, 0.6)')
         else setNavColor('rgba(255, 255, 255, 0.7)')
@@ -23,7 +29,7 @@ function NavBar({ routes }) {
     return (
         <div>
             <Box
-                sx={{ width: "100%", display: { xs: 'none', md: 'flex', position: 'fixed' } }}
+                sx={{ width: "100%", display: { xs: 'none', md: 'flex', position: 'static' } }}
                 elevation={3}
             >
                 <Box
@@ -46,10 +52,8 @@ function NavBar({ routes }) {
                                 </Box>
 
                                 <BottomNavigation
-                                    value={value}
-                                    onChange={(event, newValue) => {
-                                        setValue(newValue);
-                                    }}
+                                    value={nav}
+                                    onChange={handleNavigation}
                                     sx={{
                                         background: 'none',
                                         height: '2.6rem'
@@ -62,7 +66,7 @@ function NavBar({ routes }) {
                                                     style={{
                                                         color: navColor
                                                     }}
-                                                    key={index} label={value.name} icon={value.component} />
+                                                    key={value.path} value={value.path} label={value.name} icon={value.component} />
                                             )
                                         })
                                     }
@@ -70,38 +74,6 @@ function NavBar({ routes }) {
                             </Toolbar>
                         </Container>
                     </AppBar>
-
-                    {/* <Drawer
-                        variant="permanent"
-                        sx={{
-                            display: { xs: "block", sm: "block" },
-                            "& .MuiDrawer-paper": {
-                                boxSizing: "border-box",
-                                width: drawerWidth,
-                            }
-
-                        }}
-                        open
-                    >
-                        <List sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'end', height: '100vh' }}>
-                            {
-                                routes.map((value, index) => {
-                                    return (
-                                        <ListItem button key={index}>
-                                            <ListItemIcon sx={{ width: '100%' }}>
-                                                <Box
-                                                    sx={{ display: 'flex', width: '100%', flexDirection: 'column', alignItems: 'center' }}
-                                                >
-                                                    {value.component}
-                                                    <Typography variant='caption'>{value.name}</Typography>
-                                                </Box>
-                                            </ListItemIcon>
-                                        </ListItem>
-                                    )
-                                })
-                            }
-                        </List>
-                    </Drawer> */}
                 </Box>
             </Box>
             <Box
@@ -110,16 +82,13 @@ function NavBar({ routes }) {
             >
                 <Box sx={{ width: "100%" }}>
                     <BottomNavigation
-                        // showLabels
-                        value={value}
-                        onChange={(event, newValue) => {
-                            setValue(newValue);
-                        }}
+                        value={nav}
+                        onChange={handleNavigation}
                     >
                         {
                             routes.map((value, index) => {
                                 return (
-                                    <BottomNavigationAction key={index} label={value.name} icon={value.component} />
+                                    <BottomNavigationAction key={value.path} value={value.path} label={value.name} icon={value.component} />
                                 )
                             })
                         }
