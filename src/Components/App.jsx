@@ -1,7 +1,8 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import storageService from '../service/storageService';
 
 import Admin from './App/Admin';
+import Sponsor from './App/Sponsor';
 
 import userContext from '../Context/userContext';
 
@@ -16,11 +17,8 @@ function App() {
   }, [])
 
   let render = () => {
-    if (user.role === 'admin') {
-      return (
-        <Admin />
-      )
-    }
+    if (user.role === 'admin') return (<Admin />)
+    if (user.role === 'sponsor') return (<Sponsor />)
   }
 
   return (
