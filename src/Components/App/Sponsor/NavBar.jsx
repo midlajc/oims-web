@@ -8,10 +8,12 @@ import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Logo from '../../../asset/images/logo.png'
 import themeContext from '../../../Context/themeContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function NavBar({ routes }) {
-    const [nav, setNavigator] = useState('/');
+
+    const location = useLocation()
+    const [nav, setNavigator] = useState(location.pathname);
     const [navColor, setNavColor] = useState('rgba(255, 255, 255, 0.7)')
     const theme = useContext(themeContext)
 
