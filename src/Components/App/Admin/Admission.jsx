@@ -1,7 +1,7 @@
 import React from 'react'
 import Box from '@mui/material/Box';
 import { Link } from "react-router-dom";
-import Widget from '../../Common/Widget';
+import NavCard from '../../Widget/NavCard';
 import routes from './Admission/routes'
 
 function Admission() {
@@ -17,7 +17,7 @@ function Admission() {
                             return (
                                 <Box key={i} sx={{ width: { xs: '98%', md: 'auto' } }}>
                                     <Link style={{ textDecoration: 'none', width: '100%' }} to={`${route.path}`}>
-                                        <Widget component={route.component} name={route.name} />
+                                        <NavCard component={route.component} name={route.name} />
                                     </Link>
                                 </Box>
                             )

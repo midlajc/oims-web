@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import { visuallyHidden } from '@mui/utils';
 import { Button } from '@mui/material';
-import SearchBar from '../../../../Common/SearchBox'
+import SearchBar from '../../../../Widget/SearchBox'
 import admissionService from '../../../../../service/admissionService';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';

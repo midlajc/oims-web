@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
-function Widget(props) {
+function NavCard(props) {
     return (
         <Card sx={{
             display: 'flex', boxShadow: 1, margin: { xs: '2%', md: 3 },
@@ -38,4 +38,4 @@ function Widget(props) {
     )
 }
 
-export default Widget
+export default NavCard

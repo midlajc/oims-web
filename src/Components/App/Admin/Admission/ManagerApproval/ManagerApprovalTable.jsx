@@ -13,7 +13,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import { visuallyHidden } from '@mui/utils';
-import SearchBar from '../../../../Common/SearchBox'
+import SearchBar from '../../../../Widget/SearchBox'
 import admissionService from '../../../../../service/admissionService';
 import EditIcon from '@mui/icons-material/Edit';
 import VisibilityIcon from '@mui/icons-material/Visibility';
