@@ -1,8 +1,15 @@
+import { Button } from '@mui/material'
 import React from 'react'
+import authService from '../../../service/authService'
 
 function User() {
   return (
-    <div>User</div>
+    <Button
+      variant='contained'
+      onClick={authService.logout}
+    >
+      log out
+    </Button>
   )
 }
 
