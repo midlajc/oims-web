@@ -1,5 +1,5 @@
 import { Box } from '@mui/system'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import PaymentCard from '../../Widget/PaymentCard'
 
 
@@ -8,20 +8,20 @@ function Home() {
 
   return (
     <Box
-      sx={{
+      style={{
         display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
-        padding: '1rem',
-        justifyContent: 'space-between',
-        alignItems: 'center'
+        width: '100%',
+        padding: 5,
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        flexWrap: 'wrap',
       }}
     >
       <Box
         sx={{
           width: {
-            xs: '100%',
-            md: '25rem'
+            xs: '100rem',
+            md: '22rem'
           },
           margin: '1rem',
         }}

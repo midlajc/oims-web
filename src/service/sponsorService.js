@@ -1,8 +1,10 @@
 import api from "./api";
 import endpoints from "./endpoints";
 
-export default {
+const sponsorService= {
   getSponsorApplication: () => {
     return api.get(endpoints.sponsorRegistration);
   },
 };
+
+export default sponsorService

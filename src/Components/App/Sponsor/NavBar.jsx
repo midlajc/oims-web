@@ -83,7 +83,8 @@ function NavBar({ routes }) {
             </Box>
             <AppBar
              sx={{
-                 borderRadius:'0 0 .3rem .3rem'
+                 borderRadius:'0 0 .3rem .3rem',
+                 display: { md: 'none' }
              }}
              position="static"
              >

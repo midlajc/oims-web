@@ -50,7 +50,7 @@ function PaymentCard(props) {
                         color="textSecondary"
                         variant="caption"
                     >
-                        Since 10/01/2022
+                        Last Payment: 3000₹ (10/01/2022)
                     </Typography>
                 </Box>
             </CardContent>
