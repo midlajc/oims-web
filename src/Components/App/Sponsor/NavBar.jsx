@@ -9,6 +9,9 @@ import Container from '@mui/material/Container';
 import Logo from '../../../asset/images/logo.png'
 import themeContext from '../../../Context/themeContext';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { Tooltip } from '@mui/material';
+import { Avatar } from '@mui/material';
+import { IconButton } from '@mui/material';
 
 function NavBar({ routes }) {
 
@@ -78,6 +81,39 @@ function NavBar({ routes }) {
                     </AppBar>
                 </Box>
             </Box>
+            <AppBar
+             sx={{
+                 borderRadius:'0 0 .3rem .3rem'
+             }}
+             position="static"
+             >
+                <Container maxWidth="xl">
+                    <Toolbar disableGutters style={{ minHeight: '2rem' }}>
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="div"
+                            sx={{ mr: 2, display: 'flex' }}
+                        >
+                            <img style={{ width: '1.9rem' }} src={Logo} alt="" />
+                        </Typography>
+
+                        <Box sx={{ flexGrow: 1, display: 'flex' }}>
+                        </Box>
+                        <Box sx={{ flexGrow: 0 }}>
+                            <Tooltip title="Open settings">
+                                <IconButton
+                                    // onClick={handleOpenUserMenu}
+                                    sx={{ p: 0, my: 1 }}
+                                >
+                                    <Avatar sx={{ height: '1.9rem', width: '1.9rem' }}
+                                        alt={"U"} src="/static/images/avatar/1.jpg" />
+                                </IconButton>
+                            </Tooltip>
+                        </Box>
+                    </Toolbar>
+                </Container>
+            </AppBar>
             <Box
                 sx={{ display: { md: 'none' }, position: 'fixed', bottom: 0, left: 0, right: 0 }}
                 elevation={3}

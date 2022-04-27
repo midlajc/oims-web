@@ -5,13 +5,6 @@ import PaymentCard from '../../Widget/PaymentCard'
 
 
 function Home() {
-  const [isLoading, setLoading] = useState(false)
-  useEffect(() => {
-    setLoading(prevValue => !prevValue)
-  }, [])
-
-  console.log(isLoading);
-
 
   return (
     <Box
@@ -26,7 +19,10 @@ function Home() {
     >
       <Box
         sx={{
-          width: '25rem',
+          width: {
+            xs: '100%',
+            md: '25rem'
+          },
           margin: '1rem',
         }}
       >
