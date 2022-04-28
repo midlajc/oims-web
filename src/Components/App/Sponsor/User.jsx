@@ -61,10 +61,6 @@ function User() {
         >
           <TableContainer>
             <Table sx={{ minWidth: 'auto' }} size="small" aria-label="a dense table">
-              {/* <TableRow>
-                <TableCell sx={tableCell}>Name</TableCell>
-                <TableCell sx={tableCell}>test</TableCell>
-              </TableRow> */}
               <TableRow>
                 <TableCell sx={tableCell}>Age</TableCell>
                 <TableCell sx={tableCell}>test</TableCell>
