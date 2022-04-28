@@ -149,7 +149,7 @@ function AdminHeader({ routes }) {
                             <IconButton onClick={handleOpenUserMenu}
                                 sx={{ p: 0, my: 1 }}>
                                 <Avatar sx={{ height: '2rem', width: '2rem' }}
-                                    alt={user.name} src="/static/images/avatar/1.jpg" />
+                                     src="/static/images/avatar/1.jpg" />
                             </IconButton>
                         </Tooltip>
                         <Menu

@@ -108,7 +108,7 @@ function NavBar({ routes }) {
                                     sx={{ p: 0, my: 1 }}
                                 >
                                     <Avatar sx={{ height: '1.9rem', width: '1.9rem' }}
-                                        alt={"U"} src="/static/images/avatar/1.jpg" />
+                                        src="/static/images/avatar/1.jpg" />
                                 </IconButton>
                             </Tooltip>
                         </Box>
