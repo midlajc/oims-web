@@ -1,6 +1,6 @@
 import { Box } from '@mui/system'
 import React from 'react'
-import PaymentCard from '../../Widget/PaymentCard'
+import PaymentCard from './Home/PaymentCard'
 
 
 
