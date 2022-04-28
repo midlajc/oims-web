@@ -7,6 +7,9 @@ const sponsorService= {
   },
   getProfile:()=>{
     return api.get(endpoints.profile)
+  },
+  getSponsorList:()=>{
+    return api.get(endpoints.sponsorList)
   }
 };
 

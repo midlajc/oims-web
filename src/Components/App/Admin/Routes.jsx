@@ -19,6 +19,7 @@ import AdmittedStudents from './Admission/AdmittedStudents';
 
 //Sponsor
 import SponsorRegistration from './Sponsors/SponsorRegistration';
+import SponsorList from './Sponsors/SponsorList';
 
 function Routing() {
     let element = useRoutes([
@@ -64,10 +65,13 @@ function Routing() {
             path: "sponsors",
             element: <Sponsors />
         },
-
         {
             path: "sponsors/sponsor-registration",
             element: <SponsorRegistration />
+        },
+        {
+            path: "sponsors/sponsor-list",
+            element: <SponsorList />
         },
         {
             path: "sponsorship",

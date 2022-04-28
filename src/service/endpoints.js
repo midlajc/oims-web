@@ -15,7 +15,11 @@ const endpoints = {
 
   //sponsor
   sponsorRegistration: "sponsor/sponsor-application",
-  profile:'sponsor/profile'
+  profile: "sponsor/profile",
+  sponsorList: "sponsor/sponsor-list",
+
+  //students end points
+  studentList: "students/student-list",
 };
 
 export default endpoints;
