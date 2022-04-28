@@ -99,7 +99,6 @@ function AddApplicant({ open, handleApplicantAdd, close }) {
         name,
         dob,
         gender,
-        boardOfStudies,
         standard,
         studentType,
 
