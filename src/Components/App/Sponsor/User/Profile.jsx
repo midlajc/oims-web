@@ -10,6 +10,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import { TableBody } from '@mui/material';
+// import image from '../../../../asset/images/'
 
 function Profile({ user, logout, loading }) {
 
@@ -36,8 +37,9 @@ function Profile({ user, logout, loading }) {
             }}>
                 <Avatar
                     sx={{ width: 100, height: 100, marginBottom: 2 }}
-                    variant="rounded"
-                    src="avatar1.jpg" />
+                    variant="circular"
+                // src={image}
+                />
                 <Typography
                     fontWeight={700}
                 >

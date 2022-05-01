@@ -20,6 +20,10 @@ const endpoints = {
 
   //students end points
   studentList: "students/student-list",
+
+  //sponsorship end points
+  newSponsorship: "sponsorships/new-sponsorship",
+  sponsorshipList: "sponsorships/sponsorship-list",
 };
 
 export default endpoints;
