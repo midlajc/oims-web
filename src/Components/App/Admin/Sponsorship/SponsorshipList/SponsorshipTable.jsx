@@ -154,7 +154,7 @@ const EnhancedTableToolbar = (props) => {
         id="tableTitle"
         component="div"
       >
-        Sponsor List
+        Sponsorship List
       </Typography>
       <SearchBar
         style={{

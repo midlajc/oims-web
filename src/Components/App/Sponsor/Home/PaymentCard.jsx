@@ -6,7 +6,12 @@ import { Button } from '@mui/material';
 function PaymentCard(props) {
     return (
         <Card
-            sx={{ height: '100%' }}
+            sx={{
+                height: '100%', width: {
+                    xs: '100rem',
+                    md: '22rem'
+                },
+            }}
             {...props}
         >
             <CardContent>
