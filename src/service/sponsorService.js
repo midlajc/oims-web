@@ -14,6 +14,9 @@ const sponsorService = {
   getSponsorshipList: () => {
     return api.get(endpoints.sponsorships)
   },
+  getDues:()=>{
+    return api.get(endpoints.fetchDues)
+  }
 };
 
 export default sponsorService;

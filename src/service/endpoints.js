@@ -18,6 +18,7 @@ const endpoints = {
   profile: "sponsor/profile",
   sponsorList: "sponsor/sponsor-list",
   sponsorships: "sponsor/sponsorships",
+  fetchDues:'sponsor/fetch-dues',
 
   //students end points
   studentList: "students/student-list",

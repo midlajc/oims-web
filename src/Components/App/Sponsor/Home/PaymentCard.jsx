@@ -1,9 +1,18 @@
-import React from 'react'
-import { Box, Card, CardContent, Grid, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react'
+import { Card, CardContent, Grid, Typography } from '@mui/material';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import { Button } from '@mui/material';
+import sponsorService from '../../../../service/sponsorService';
 
 function PaymentCard(props) {
+    const [dues, setDues] = useState({})
+
+    useEffect(() => {
+        sponsorService.getDues().then((dues) => {
+            setDues(dues.data[0])
+        })
+    }, [])
+
     return (
         <Card
             sx={{
@@ -32,32 +41,39 @@ function PaymentCard(props) {
                             color="textPrimary"
                             variant="h4"
                         >
-                            <CurrencyRupeeIcon />3000
+                            <CurrencyRupeeIcon />{dues.total_to_pay}
                         </Typography>
                     </Grid>
-                    <Grid item>
+                    <Grid
+                        sx={{
+                            // pt: 1,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'flex-end',
+                            justifyContent: 'space-between',
+                            gap: '.5rem'
+                        }}
+                        item>
                         <Button
                             variant="outlined"
                             color='success'
                         >
                             Pay
                         </Button>
+                        <Typography
+                            color="textSecondary"
+                            variant="caption"
+                        >
+                            Current Due: {dues.current_to_pay}₹
+                        </Typography>
+                        <Typography
+                            color="textSecondary"
+                            variant="caption"
+                        >
+                            Previous Due: {dues.previous_to_pay}₹
+                        </Typography>
                     </Grid>
                 </Grid>
-                <Box
-                    sx={{
-                        pt: 2,
-                        display: 'flex',
-                        alignItems: 'center'
-                    }}
-                >
-                    <Typography
-                        color="textSecondary"
-                        variant="caption"
-                    >
-                        Last Payment: 3000₹ (10/01/2022)
-                    </Typography>
-                </Box>
             </CardContent>
         </Card>
     )
