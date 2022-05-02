@@ -11,7 +11,7 @@ function Home() {
         display: 'flex',
         width: '100%',
         padding: '1.5rem',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         alignItems: 'flex-start',
         flexWrap: 'wrap',
         gap: '1rem'

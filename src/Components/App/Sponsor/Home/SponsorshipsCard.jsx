@@ -9,10 +9,9 @@ let StudentCard = ({ student }) => {
         <Card
             variant='outlined'
             sx={{
-                display: 'flex', boxShadow: 1,
+                display: 'flex',
+                boxShadow: 1,
                 height: 80, width: { xs: '100%', md: 280 },
-                justifyContent: 'space-between', alignItems: 'center',
-                backgroundColor: 'text',
                 borderRadius: '1rem'
             }}>
             <div style={{
@@ -45,7 +44,7 @@ let StudentCard = ({ student }) => {
                                 fontSize: '0.775rem',
                                 fontWeight: '700',
                             }} variant="h5">
-                            DOB: {student.student_dob}
+                            DOB: {student.dob}
                         </Typography>
                         <Typography component="div"
                             sx={{
@@ -90,7 +89,7 @@ function SponsorshipsCard() {
             <Typography>Sponsorships</Typography>
             {
                 sponsorships.map((value, index) => {
-                    value.student_dob = (new Date(value.student_dob).toLocaleDateString('en-GB'));
+                    value.dob = (new Date(value.student_dob).toLocaleDateString('en-GB'));
                     return (
                         <StudentCard key={index} student={value} />
                     )
