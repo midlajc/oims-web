@@ -3,13 +3,18 @@ import { Card, CardContent, Grid, Typography } from '@mui/material';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import { Button } from '@mui/material';
 import sponsorService from '../../../../service/sponsorService';
+import logo from '../../../../asset/images/logo.png'
 
 function PaymentCard(props) {
     const [dues, setDues] = useState({})
+    const [user, setUser] = useState({})
 
     useEffect(() => {
         sponsorService.getDues().then((dues) => {
             setDues(dues.data[0])
+        })
+        sponsorService.getProfile().then(user => {
+            setUser(user.data)
         })
     }, [])
 
@@ -44,41 +49,39 @@ function PaymentCard(props) {
             return;
         }
 
+        // Getting the order details back
+        const { amount, id: order_id, currency, receipt } = result.data;
+
         console.log(result);
 
-        // Getting the order details back
-        const { amount, id: order_id, currency } = result.data;
-
         const options = {
-            key: process.env.RAZORPAY_KEY_ID, // Enter the Key ID generated from the Dashboard
+            key: process.env.RAZORPAY_KEY_ID,
             amount: amount.toString(),
             currency: currency,
             name: "Wayanad Muslim Orphanage",
-            description: "Test Transaction",
-            // image: { logo },
+            description: "Sponsorship Payment",
+            image: { logo },
             order_id: order_id,
             handler: async function (response) {
-                // const data = {
-                //     orderCreationId: order_id,
-                //     razorpayPaymentId: response.razorpay_payment_id,
-                //     razorpayOrderId: response.razorpay_order_id,
-                //     razorpaySignature: response.razorpay_signature,
-                // };
-
-                // const result = await axios.post("http://localhost:5000/payment/success", data);
-
-                alert(result.data.msg);
+                sponsorService.verifyPayment({
+                    receiptId: receipt,
+                    orderCreationId: order_id,
+                    razorpayPaymentId: response.razorpay_payment_id,
+                    razorpayOrderId: response.razorpay_order_id,
+                    razorpaySignature: response.razorpay_signature,
+                }).then(response => {
+                    console.log(response.data);
+                }).catch((err) => {
+                    console.log(err);
+                })
             },
             prefill: {
-                name: "Soumya Dey",
-                email: "SoumyaDey@example.com",
-                contact: "9999999999",
-            },
-            notes: {
-                address: "Soumya Dey Corporate Office",
+                name: user.name,
+                email: user.email,
+                contact: user.mobile,
             },
             theme: {
-                color: "#61dafb",
+                color: "#000000",
             },
         };
 

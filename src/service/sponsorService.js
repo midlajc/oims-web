@@ -21,10 +21,10 @@ const sponsorService = {
     console.log(amount);
     return api.get(endpoints.payment, {
       params: { amount: amount },
-      data: {
-        test: "test",
-      },
     });
+  },
+  verifyPayment: (data) => {
+    return api.post(endpoints.payment, data);
   },
 };
 
