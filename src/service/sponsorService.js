@@ -12,11 +12,20 @@ const sponsorService = {
     return api.get(endpoints.sponsorList);
   },
   getSponsorshipList: () => {
-    return api.get(endpoints.sponsorships)
+    return api.get(endpoints.sponsorships);
   },
-  getDues:()=>{
-    return api.get(endpoints.fetchDues)
-  }
+  getDues: () => {
+    return api.get(endpoints.fetchDues);
+  },
+  createNewPayment: (amount) => {
+    console.log(amount);
+    return api.get(endpoints.payment, {
+      params: { amount: amount },
+      data: {
+        test: "test",
+      },
+    });
+  },
 };
 
 export default sponsorService;

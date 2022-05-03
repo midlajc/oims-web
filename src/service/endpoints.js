@@ -26,6 +26,9 @@ const endpoints = {
   //sponsorship end points
   newSponsorship: "sponsorships/new-sponsorship",
   sponsorshipList: "sponsorships/sponsorship-list",
+
+  //sponsor payment apis
+  payment:'sponsor/payment'
 };
 
 export default endpoints;
