@@ -18,7 +18,6 @@ const sponsorService = {
     return api.get(endpoints.fetchDues);
   },
   createNewPayment: (amount) => {
-    console.log(amount);
     return api.get(endpoints.payment, {
       params: { amount: amount },
     });

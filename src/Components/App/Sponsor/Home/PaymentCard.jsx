@@ -1,22 +1,43 @@
 import React, { useEffect, useState } from 'react'
-import { Card, CardContent, Grid, Typography } from '@mui/material';
+import {
+    Card,
+    CardContent,
+    Grid,
+    Typography,
+    Box,
+    IconButton,
+    TextField,
+    Alert
+} from '@mui/material';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import { Button } from '@mui/material';
 import sponsorService from '../../../../service/sponsorService';
 import logo from '../../../../asset/images/logo.png'
+import Modal from '@mui/material/Modal';
+import CloseIcon from '@mui/icons-material/Close';
+import { LoadingButton } from '@mui/lab';
+import Snackbar from '@mui/material/Snackbar';
 
-function PaymentCard(props) {
-    const [dues, setDues] = useState({})
-    const [user, setUser] = useState({})
+
+const style = {
+    height: 'auto',
+    width: 300,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    padding: 1,
+};
+
+
+function PaymentModel({ user, dues, handlePaymentModelClose, paymentModalOpen, loading }) {
+
+    const [pay, setPay] = useState()
+    const [dAlert, setDAlert] = useState(false)
+    const [toast, setToast] = useState({ status: false })
 
     useEffect(() => {
-        sponsorService.getDues().then((dues) => {
-            setDues(dues.data[0])
-        })
-        sponsorService.getProfile().then(user => {
-            setUser(user.data)
-        })
-    }, [])
+        setPay(dues.total_to_pay)
+    }, [dues])
 
     function loadScript(src) {
         return new Promise((resolve) => {
@@ -31,7 +52,11 @@ function PaymentCard(props) {
             document.body.appendChild(script);
         });
     }
+
     const displayRazorpay = async () => {
+
+        loading.setLoading(true)
+
         const res = await loadScript(
             "https://checkout.razorpay.com/v1/checkout.js"
         );
@@ -42,7 +67,7 @@ function PaymentCard(props) {
         }
 
         // creating a new order
-        const result = await sponsorService.createNewPayment(dues.total_to_pay)
+        const result = await sponsorService.createNewPayment(pay)
 
         if (!result) {
             alert("Server error. Are you online?");
@@ -51,8 +76,6 @@ function PaymentCard(props) {
 
         // Getting the order details back
         const { amount, id: order_id, currency, receipt } = result.data;
-
-        console.log(result);
 
         const options = {
             key: process.env.RAZORPAY_KEY_ID,
@@ -71,8 +94,28 @@ function PaymentCard(props) {
                     razorpaySignature: response.razorpay_signature,
                 }).then(response => {
                     console.log(response.data);
+                    loading.setLoading(false)
+                    handlePaymentModelClose()
+                    setToast({
+                        status: true,
+                        message: "Payment Successful",
+                        severity: 'success',
+                        handleClose: () => {
+                            setToast({ status: false })
+                        }
+                    })
                 }).catch((err) => {
                     console.log(err);
+                    loading.setLoading(false)
+                    handlePaymentModelClose()
+                    setToast({
+                        status: true,
+                        message: "Payment Failed",
+                        severity: 'error',
+                        handleClose: () => {
+                            setToast({ status: false })
+                        }
+                    })
                 })
             },
             prefill: {
@@ -89,70 +132,183 @@ function PaymentCard(props) {
         paymentObject.open();
     }
 
+    const handleAmountChange = (newValue) => {
+        if (newValue.target.value > dues.total_to_pay) {
+            setDAlert(true)
+        }
+        else {
+            setDAlert(false)
+            setPay(newValue.target.value)
+        }
+    }
     return (
-        <Card
-            sx={{
-                height: '100%', width: {
-                    xs: '100rem',
-                    md: '22rem'
-                },
-            }}
-            {...props}
-        >
-            <CardContent>
-                <Grid
-                    container
-                    spacing={3}
-                    sx={{ justifyContent: 'space-between' }}
+        <>
+            <Modal
+                open={paymentModalOpen}
+                onClose={handlePaymentModelClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        height: '100vh',
+                        width: '100%',
+                        alignItems: 'center'
+                    }}
                 >
-                    <Grid item>
-                        <Typography
-                            color="textSecondary"
-                            gutterBottom
-                            variant="overline"
+                    <Box sx={style}>
+                        <Box
+                            sx={{
+                                position: 'relative',
+                                display: 'flex',
+                                justifyContent: 'flex-end'
+                            }}
                         >
-                            Outstanding
-                        </Typography>
-                        <Typography
-                            color="textPrimary"
-                            variant="h4"
+                            <IconButton
+                                onClick={handlePaymentModelClose}
+                            ><CloseIcon /></IconButton>
+                        </Box>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                padding: 1,
+                                gap: '.8rem'
+                            }}
                         >
-                            <CurrencyRupeeIcon />{dues.total_to_pay}
-                        </Typography>
-                    </Grid>
+                            {
+                                (dAlert) ?
+                                    <Alert severity="error">
+                                        can't pay more than {dues.total_to_pay}
+                                    </Alert>
+                                    : ''
+                            }
+                            <TextField
+                                label="Enter Amount"
+                                type={'number'}
+                                id="outlined-size-small"
+                                value={pay}
+                                size="small"
+                                onChange={handleAmountChange}
+                                fullWidth
+                            />
+                            <LoadingButton
+                                fullWidth
+                                size='small'
+                                variant='contained'
+                                loading={loading.loading}
+                                onClick={displayRazorpay}
+                            >Pay</LoadingButton>
+                        </Box>
+                    </Box>
+                </Box>
+            </Modal>
+            <Snackbar open={toast.status} autoHideDuration={6000} onClose={toast.handleClose}>
+                <Alert onClose={toast.handleClose} severity={toast.severity} sx={{ width: '15rem' }}>
+                    {toast.message}
+                </Alert>
+            </Snackbar>
+        </>
+    )
+}
+
+function PaymentCard(props) {
+    const [dues, setDues] = useState({})
+    const [user, setUser] = useState({})
+    const [loading, setLoading] = useState(false)
+
+    const [paymentModalOpen, setPaymentModalOpen] = useState(false);
+    const handlePaymentModelOpen = () => { setPaymentModalOpen(true) };
+    const handlePaymentModelClose = () => {
+        setPaymentModalOpen(false)
+        setLoading(false)
+    };
+
+    useEffect(() => {
+        sponsorService.getDues().then((dues) => {
+            setDues(dues.data[0])
+        })
+        sponsorService.getProfile().then(user => {
+            setUser(user.data)
+        })
+    }, [loading])
+
+    return (
+        <>
+            <PaymentModel
+                paymentModalOpen={paymentModalOpen}
+                handlePaymentModelClose={handlePaymentModelClose}
+                user={user}
+                dues={dues}
+                loading={{ loading, setLoading }}
+            />
+            <Card
+                sx={{
+                    height: '100%', width: {
+                        xs: '100rem',
+                        md: '22rem'
+                    },
+                }}
+                {...props}
+            >
+                <CardContent>
                     <Grid
-                        sx={{
-                            // pt: 1,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'flex-end',
-                            justifyContent: 'space-between',
-                            gap: '.5rem'
-                        }}
-                        item>
-                        <Button
-                            variant="outlined"
-                            color='success'
-                            onClick={displayRazorpay}
-                        >
-                            Pay
-                        </Button>
-                        <Typography
-                            color="textSecondary"
-                            variant="caption"
-                        >
-                            Current Due: {dues.current_to_pay}₹
-                        </Typography>
-                        <Typography
-                            color="textSecondary"
-                            variant="caption"
-                        >
-                            Previous Due: {dues.previous_to_pay}₹
-                        </Typography>
+                        container
+                        spacing={3}
+                        sx={{ justifyContent: 'space-between' }}
+                    >
+                        <Grid item>
+                            <Typography
+                                color="textSecondary"
+                                gutterBottom
+                                variant="overline"
+                            >
+                                Outstanding
+                            </Typography>
+                            <Typography
+                                color="textPrimary"
+                                variant="h4"
+                            >
+                                <CurrencyRupeeIcon />{dues.total_to_pay}
+                            </Typography>
+                        </Grid>
+                        <Grid
+                            sx={{
+                                // pt: 1,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'flex-end',
+                                justifyContent: 'space-between',
+                                gap: '.5rem'
+                            }}
+                            item>
+                            <Button
+                                variant="outlined"
+                                color='success'
+                                onClick={handlePaymentModelOpen}
+                            >
+                                Pay
+                            </Button>
+                            <Typography
+                                color="textSecondary"
+                                variant="caption"
+                            >
+                                Current Due: {dues.current_to_pay}₹
+                            </Typography>
+                            <Typography
+                                color="textSecondary"
+                                variant="caption"
+                            >
+                                Previous Due: {dues.previous_to_pay}₹
+                            </Typography>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </CardContent>
-        </Card>
+                </CardContent>
+            </Card>
+        </>
     )
 }
 
