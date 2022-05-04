@@ -1,4 +1,5 @@
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import { Card, Typography, Avatar } from '@mui/material'
 
 
@@ -24,7 +25,10 @@ const CardWidget = ({ data }) => {
                         color: '#1d6e35'
                     }}
                 >
-                    <CreditScoreIcon />
+                    {
+                        (data.receipt_id) ? (<CreditScoreIcon />) : (<AccountBalanceWalletIcon />)
+                    }
+
                 </Avatar>
             </div>
             <div
