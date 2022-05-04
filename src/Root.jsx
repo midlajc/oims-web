@@ -6,7 +6,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import themeContext from './Context/themeContext';
 import storageService from './service/storageService';
-
+import './Root.css'
 
 function Root() {
 
@@ -38,7 +38,7 @@ function Root() {
           <CssBaseline />
           {
             (user) ?
-              <div>
+              <div className=''>
                 <App />
               </div>
               :

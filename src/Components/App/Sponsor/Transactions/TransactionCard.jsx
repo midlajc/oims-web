@@ -1,14 +1,8 @@
 import { Card } from '@mui/material'
 import React, { useState, useEffect } from 'react'
 import sponsorService from '../../../../service/sponsorService'
+import CardWidget from './Widget/Card'
 
-const Widget = () => {
-    return (
-        <>
-            hello
-        </>
-    )
-}
 
 function TransactionCard() {
 
@@ -23,20 +17,20 @@ function TransactionCard() {
     return (
         <Card
             sx={{
-                height: '30rem', width: {
+                maxHeight: '80vh',
+                height: 'auto',
+                width: {
                     xs: '100rem',
                     md: '22rem'
                 },
-                overflow:'scroll',
-                overflowX:'hidden'
-                // width:'3rem'
+                overflowY: 'scroll',
+                padding: 1
             }}
         >
             {
                 transactions.map((value, index) => {
                     return (
-                        <h1>{index}</h1>
-                        // <Widget key={index} data={value} />
+                        <CardWidget key={index} data={value} />
                     )
                 })
             }

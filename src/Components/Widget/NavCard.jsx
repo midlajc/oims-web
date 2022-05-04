@@ -6,8 +6,8 @@ import Typography from '@mui/material/Typography';
 function NavCard(props) {
     return (
         <Card sx={{
-            display: 'flex', boxShadow: 1, margin: { xs: '2%', md: 3 },
-            height: 80, width: { xs: '100%', md: 280 },
+        display: 'flex', boxShadow: 1, margin: { xs: '2%', md: 3 },
+        height: 80, width: { xs: '100%', md: 280 },
             justifyContent: 'space-between', alignItems: 'center'
         }}>
             <div style={{
