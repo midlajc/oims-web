@@ -25,6 +25,9 @@ const sponsorService = {
   verifyPayment: (data) => {
     return api.post(endpoints.payment, data);
   },
+  getTransactions:()=>{
+    return api.get(endpoints.transactions)
+  }
 };
 
 export default sponsorService;

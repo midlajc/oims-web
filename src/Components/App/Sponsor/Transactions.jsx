@@ -1,8 +1,18 @@
 import React from 'react'
+import TransactionCard from './Transactions/TransactionCard'
 
 function Transactions() {
   return (
-    <div>Transactions</div>
+    <div
+      style={{
+        display: 'flex',
+        width: '100%',
+        justifyContent: 'center',
+        padding:'1.4rem'
+      }}
+    >
+      <TransactionCard />
+    </div>
   )
 }
 

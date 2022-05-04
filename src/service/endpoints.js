@@ -18,7 +18,7 @@ const endpoints = {
   profile: "sponsor/profile",
   sponsorList: "sponsor/sponsor-list",
   sponsorships: "sponsor/sponsorships",
-  fetchDues:'sponsor/fetch-dues',
+  fetchDues: "sponsor/fetch-dues",
 
   //students end points
   studentList: "students/student-list",
@@ -28,7 +28,10 @@ const endpoints = {
   sponsorshipList: "sponsorships/sponsorship-list",
 
   //sponsor payment apis
-  payment:'sponsor/payment'
+  payment: "sponsor/payment",
+
+  //sponsor transaction apis
+  transactions: "sponsor/transactions",
 };
 
 export default endpoints;
