@@ -1,8 +1,11 @@
 import React from 'react'
+import Transactions from './Accounts/Transactions'
 
 function Accounts() {
   return (
-    <div>Accounts</div>
+    <>
+      <Transactions />
+    </>
   )
 }
 

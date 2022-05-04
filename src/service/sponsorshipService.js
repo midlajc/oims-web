@@ -1,8 +1,10 @@
 import api from "./api";
 import endpoints from "./endpoints";
 
-export default {
+const sponsorshipService={
   sponsorshipList: () => {
     return api.get(endpoints.sponsorshipList);
   },
-};
+}
+
+export default sponsorshipService;

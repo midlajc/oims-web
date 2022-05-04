@@ -26,7 +26,7 @@ const sponsorService = {
     return api.post(endpoints.payment, data);
   },
   getTransactions:()=>{
-    return api.get(endpoints.transactions)
+    return api.get(endpoints.sponsor.transactions)
   }
 };
 

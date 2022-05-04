@@ -86,7 +86,12 @@ function SponsorshipsCard() {
 
             }}
         >
-            <Typography>Sponsorships</Typography>
+            <Typography
+                sx={{
+                    textAlign: 'center'
+                }}
+                variant='button'
+            >Sponsorships</Typography>
             {
                 sponsorships.map((value, index) => {
                     value.dob = (new Date(value.student_dob).toLocaleDateString('en-GB'));

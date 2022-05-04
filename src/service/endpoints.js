@@ -31,7 +31,14 @@ const endpoints = {
   payment: "sponsor/payment",
 
   //sponsor transaction apis
-  transactions: "sponsor/transactions",
+  sponsor: {
+    transactions: "sponsor/transactions",
+  },
+
+  //accounts apis
+  accounts: {
+    transaction: "accounts/transactions",
+  },
 };
 
 export default endpoints;

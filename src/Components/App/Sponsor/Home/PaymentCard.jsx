@@ -206,8 +206,12 @@ function PaymentModel({ user, dues, handlePaymentModelClose, paymentModalOpen, l
                     </Box>
                 </Box>
             </Modal>
-            <Snackbar open={toast.status} autoHideDuration={6000} onClose={toast.handleClose}>
-                <Alert onClose={toast.handleClose} severity={toast.severity} sx={{ width: '15rem' }}>
+            <Snackbar open={toast.status}
+                autoHideDuration={2000} onClose={toast.handleClose}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                sx={{ bottom: { xs: 90, sm: 0 } }}
+            >
+                <Alert onClose={toast.handleClose} severity={toast.severity} sx={{ width: 'auto' }}>
                     {toast.message}
                 </Alert>
             </Snackbar>
@@ -219,9 +223,23 @@ function PaymentCard(props) {
     const [dues, setDues] = useState({})
     const [user, setUser] = useState({})
     const [loading, setLoading] = useState(false)
+    const [toast, setToast] = useState({ status: false })
 
     const [paymentModalOpen, setPaymentModalOpen] = useState(false);
-    const handlePaymentModelOpen = () => { setPaymentModalOpen(true) };
+    const handlePaymentModelOpen = () => {
+        if (dues.total_to_pay == 0) {
+            setToast({
+                status: true,
+                message: "You dont have any due",
+                severity: 'warning',
+                handleClose: () => {
+                    setToast({ status: false })
+                }
+            })
+            return;
+        }
+        setPaymentModalOpen(true)
+    };
     const handlePaymentModelClose = () => {
         setPaymentModalOpen(false)
         setLoading(false)
@@ -308,6 +326,15 @@ function PaymentCard(props) {
                     </Grid>
                 </CardContent>
             </Card>
+            <Snackbar open={toast.status}
+                autoHideDuration={1000} onClose={toast.handleClose}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                sx={{ bottom: { xs: 90, sm: 0 } }}
+            >
+                <Alert onClose={toast.handleClose} severity={toast.severity} sx={{ width: 'auto' }}>
+                    {toast.message}
+                </Alert>
+            </Snackbar>
         </>
     )
 }
