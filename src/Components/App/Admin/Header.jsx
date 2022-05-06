@@ -13,11 +13,13 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import authService from '../../../service/authService';
 import storageService from '../../../service/storageService';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import './Header.css'
 import themeContext from '../../../Context/themeContext';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import {useNavigate} from 'react-router-dom'
+
 
 import Logo from '../../../asset/images/logo.png'
 
@@ -27,7 +29,8 @@ import Logo from '../../../asset/images/logo.png'
 
 function AdminHeader({ routes }) {
     const theme = useContext(themeContext)
-
+    const navigate=useNavigate()
+    
     useEffect(() => {
         if (theme.mode === 'light') {
             setLinkStyle({
@@ -149,7 +152,7 @@ function AdminHeader({ routes }) {
                             <IconButton onClick={handleOpenUserMenu}
                                 sx={{ p: 0, my: 1 }}>
                                 <Avatar sx={{ height: '2rem', width: '2rem' }}
-                                     src="/static/images/avatar/1.jpg" />
+                                    src="/static/images/avatar/1.jpg" />
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -177,7 +180,10 @@ function AdminHeader({ routes }) {
                                     {theme.mode === 'dark' ? <Brightness4Icon /> : <Brightness7Icon />}
                                 </IconButton>
                             </MenuItem> */}
-                            <MenuItem onClick={authService.logout}>
+                            <MenuItem onClick={() => {
+                                navigate('/')
+                                authService.logout()
+                            }}>
                                 <Typography textAlign="center" id='logout'>Log out</Typography>
                             </MenuItem>
                         </Menu>

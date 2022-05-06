@@ -13,8 +13,10 @@ import { Tooltip } from '@mui/material';
 import { Avatar } from '@mui/material';
 import { IconButton } from '@mui/material';
 
-function NavBar({ routes }) {
 
+
+function NavBar({ routes }) {
+    
     const location = useLocation()
     const [nav, setNavigator] = useState(location.pathname);
     const [navColor, setNavColor] = useState('rgba(255, 255, 255, 0.7)')
