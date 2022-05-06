@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Login from './Components/Login'
 import authService from './service/authService';
 import App from './Components/App'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -7,6 +6,9 @@ import CssBaseline from '@mui/material/CssBaseline';
 import themeContext from './Context/themeContext';
 import storageService from './service/storageService';
 import './Root.css'
+import Public from './Components/App/Public'
+
+
 
 function Root() {
 
@@ -36,6 +38,7 @@ function Root() {
       <themeContext.Provider value={{ mode: mode, setMode: changeTheme }}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
+          {/* <Routes/> */}
           {
             (user) ?
               <div className=''>
@@ -43,7 +46,7 @@ function Root() {
               </div>
               :
               <div>
-                <Login />
+                <Public />
               </div>
           }
         </ThemeProvider>
