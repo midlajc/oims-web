@@ -187,7 +187,7 @@ function AddApplicant({ open, handleApplicantAdd, close }) {
 
     }
 
-    const handleClick = () => {
+    const handleSubmit = () => {
         setLoading(preVal => !preVal)
         admissionService.addApplicant(applicant_details).then(res => {
             setLoading(preVal => !preVal)
@@ -215,588 +215,597 @@ function AddApplicant({ open, handleApplicantAdd, close }) {
                     <Button color='inherit' sx={{ float: 'right' }} onClick={close}>
                         <CloseIcon sx={{ width: 1 }} />
                     </Button>
-                    <Typography sx={{
-                        marginBottom: 3
-                    }} id="modal-modal-title" variant="h5" component="h2">
-                        ADD APPLICANT
-                    </Typography>
-                    <div style={{ marginBottom: '1rem' }}>
-                        <Accordion>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                            >
-                                <Typography>Primary Details</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Container sx={{
-                                    marginBottom: 3
-                                }}>
-                                    <Grid container spacing={1}>
-                                        <Grid item xs={12} md={6}>
-                                            <InputLabel id="">Name *</InputLabel>
-                                            <TextField
-                                                required
-                                                fullWidth
-                                                value={name}
-                                                onChange={(newVal) => setName(newVal.target.value)}
-                                                size='small'
-                                                variant="outlined"
-                                            />
-                                        </Grid>
-                                        <Grid item xs={12} md={3}>
-                                            <InputLabel id="">Gender*</InputLabel>
-                                            <Select
-                                                value={gender}
-                                                fullWidth
-                                                size='small'
-                                                onChange={(newVal) => setGender(newVal.target.value)}
-                                                id=""
-                                            >
-                                                {
-                                                    genderList.map((value, key) => {
-                                                        return (
-                                                            <MenuItem key={key} value={value._id}>{value.name}</MenuItem>
-                                                        )
-                                                    })
-                                                }
-                                            </Select>
-                                        </Grid>
-                                        <Grid item xs={12} md={3}>
-                                            <InputLabel id="">Date of Birth *</InputLabel>
-                                            <LocalizationProvider
-                                                dateAdapter={AdapterDateFns}>
-                                                <DatePicker
-                                                    value={dob}
-                                                    onChange={(newValue) => {
-                                                        setDob(newValue);
-                                                    }}
-                                                    renderInput={(params) => <TextField
-                                                        style={{
-                                                            width: '100%'
-                                                        }}
-                                                        size='small'
-                                                        {...params}
-                                                    />}
+                    <form onSubmit={handleSubmit}>
+                        <Typography sx={{
+                            marginBottom: 3
+                        }} id="modal-modal-title" variant="h5" component="h2">
+                            ADD APPLICANT
+                        </Typography>
+                        <div style={{ marginBottom: '1rem' }}>
+                            <Accordion>
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                >
+                                    <Typography>Primary Details</Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <Container sx={{
+                                        marginBottom: 3
+                                    }}>
+
+                                        <Grid container spacing={1}>
+                                            <Grid item xs={12} md={6}>
+                                                <InputLabel id="">Name *</InputLabel>
+                                                <TextField
+                                                    required
+                                                    fullWidth
+                                                    value={name}
+                                                    onChange={(newVal) => setName(newVal.target.value)}
+                                                    size='small'
+                                                    variant="outlined"
                                                 />
-                                            </LocalizationProvider>
-                                        </Grid>
-                                        <Grid item xs={12} md={3}>
-                                            <InputLabel id="">Student Type*</InputLabel>
-                                            <Select
-                                                value={studentType}
-                                                fullWidth
-                                                size='small'
-                                                onChange={(newVal) => setStudentType(newVal.target.value)}
-                                                id=""
-                                            >
-                                                {
-                                                    studentTypeList.map((value, key) => {
-                                                        return (
-                                                            <MenuItem key={key} value={value._id}>{value.name}</MenuItem>
-                                                        )
-                                                    })
-                                                }
-                                            </Select>
-                                        </Grid>
-                                        <Grid item xs={12} md={6}>
-                                            <InputLabel id="">Board of Studies *</InputLabel>
-                                            <Select
-                                                value={boardOfStudies}
-                                                fullWidth
-                                                size='small'
-                                                onChange={handleBoardOfStudiesChange}
-                                                id=""
-                                            >
-                                                {
-                                                    boardOfStudiesList.map((value, key) => {
-                                                        return (
-                                                            <MenuItem key={key} value={value._id}>{value.name}</MenuItem>
-                                                        )
-                                                    })
-                                                }
-                                            </Select>
-                                        </Grid>
-                                        <Grid item xs={12} md={3}>
-                                            <InputLabel id="">Class*</InputLabel>
-                                            <Select
-                                                value={standard}
-                                                fullWidth
-                                                size='small'
-                                                onChange={(newVal) => setStandard(newVal.target.value)}
-                                                id=""
-                                            >
-                                                {
-                                                    standardsList.map((value, key) => {
-                                                        return (
-                                                            <MenuItem key={key} value={value._id}>{value.name}</MenuItem>
-                                                        )
-                                                    })
-                                                }
-                                            </Select>
-                                        </Grid>
-                                        {/* <Grid item xs={12} md={3}>
+                                            </Grid>
+                                            <Grid item xs={12} md={3}>
+                                                <InputLabel id="">Gender*</InputLabel>
+                                                <Select
+                                                    required
+                                                    value={gender}
+                                                    fullWidth
+                                                    size='small'
+                                                    onChange={(newVal) => setGender(newVal.target.value)}
+                                                    id=""
+                                                >
+                                                    {
+                                                        genderList.map((value, key) => {
+                                                            return (
+                                                                <MenuItem key={key} value={value._id}>{value.name}</MenuItem>
+                                                            )
+                                                        })
+                                                    }
+                                                </Select>
+                                            </Grid>
+                                            <Grid item xs={12} md={3}>
+                                                <InputLabel id="">Date of Birth *</InputLabel>
+                                                <LocalizationProvider
+                                                    dateAdapter={AdapterDateFns}>
+                                                    <DatePicker
+                                                        value={dob}
+                                                        onChange={(newValue) => {
+                                                            setDob(newValue);
+                                                        }}
+                                                        renderInput={(params) => <TextField
+                                                            required
+                                                            style={{
+                                                                width: '100%'
+                                                            }}
+                                                            size='small'
+                                                            {...params}
+                                                        />}
+                                                    />
+                                                </LocalizationProvider>
+                                            </Grid>
+                                            <Grid item xs={12} md={3}>
+                                                <InputLabel id="">Student Type*</InputLabel>
+                                                <Select
+                                                    required
+                                                    value={studentType}
+                                                    fullWidth
+                                                    size='small'
+                                                    onChange={(newVal) => setStudentType(newVal.target.value)}
+                                                    id=""
+                                                >
+                                                    {
+                                                        studentTypeList.map((value, key) => {
+                                                            return (
+                                                                <MenuItem key={key} value={value._id}>{value.name}</MenuItem>
+                                                            )
+                                                        })
+                                                    }
+                                                </Select>
+                                            </Grid>
+                                            <Grid item xs={12} md={6}>
+                                                <InputLabel id="">Board of Studies *</InputLabel>
+                                                <Select
+                                                    required
+                                                    value={boardOfStudies}
+                                                    fullWidth
+                                                    size='small'
+                                                    onChange={handleBoardOfStudiesChange}
+                                                    id=""
+                                                >
+                                                    {
+                                                        boardOfStudiesList.map((value, key) => {
+                                                            return (
+                                                                <MenuItem key={key} value={value._id}>{value.name}</MenuItem>
+                                                            )
+                                                        })
+                                                    }
+                                                </Select>
+                                            </Grid>
+                                            <Grid item xs={12} md={3}>
+                                                <InputLabel id="">Class*</InputLabel>
+                                                <Select
+                                                    required
+                                                    value={standard}
+                                                    fullWidth
+                                                    size='small'
+                                                    onChange={(newVal) => setStandard(newVal.target.value)}
+                                                    id=""
+                                                >
+                                                    {
+                                                        standardsList.map((value, key) => {
+                                                            return (
+                                                                <MenuItem key={key} value={value._id}>{value.name}</MenuItem>
+                                                            )
+                                                        })
+                                                    }
+                                                </Select>
+                                            </Grid>
+                                            {/* <Grid item xs={12} md={3}>
                                             <InputLabel id="">Boarder Type*</InputLabel>
                                             <Select
-                                                value={border}
+                                            value={border}
                                                 fullWidth
                                                 size='small'
                                                 onChange={(newVal) => setBorder(newVal.target.value)}
                                                 id=""
                                             >
-                                                <MenuItem value={'week'}>Week Day</MenuItem>
+                                            <MenuItem value={'week'}>Week Day</MenuItem>
                                                 <MenuItem value={'full'}>Full Day</MenuItem>
                                             </Select>
                                         </Grid> */}
-                                    </Grid>
-                                </Container>
-                            </AccordionDetails>
-                        </Accordion>
-                        <Accordion>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                            >
-                                <Typography>Parent Details</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Grid container spacing={4}>
-                                    <Grid item xs={12} md={6}>
-                                        <Grid container spacing={1}>
-                                            <Typography sx={{ marginLeft: 1 }}>Father</Typography>
-                                            <Grid item xs={12}>
-                                                <InputLabel id="">Name *</InputLabel>
-                                                <TextField
-                                                    fullWidth
-                                                    value={fatherName}
-                                                    onChange={(newVal) => setFatherName(newVal.target.value)}
-                                                    size='small'
-                                                    variant="outlined"
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <InputLabel id="">Edn. Qualification *</InputLabel>
-                                                <TextField
-                                                    fullWidth
-                                                    value={fatherEd}
-                                                    onChange={(newVal) => setFatherEd(newVal.target.value)}
-                                                    size='small'
-                                                    variant="outlined"
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <InputLabel id="">Residence Address *</InputLabel>
-                                                <TextField
-                                                    fullWidth
-                                                    multiline
-                                                    rows={3}
-                                                    value={fatherResiAddress}
-                                                    onChange={(newVal) => setFatherResiAddress(newVal.target.value)}
-                                                    size='small'
-                                                    variant="outlined"
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <InputLabel id="">Pin *</InputLabel>
-                                                <TextField
-                                                    fullWidth
-                                                    value={fatherPin}
-                                                    onChange={(newVal) => setFatherPin(newVal.target.value)}
-                                                    size='small'
-                                                    variant="outlined"
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <InputLabel id="">Mobile No *</InputLabel>
-                                                <TextField
-                                                    fullWidth
-                                                    type={'number'}
-                                                    value={fatherMobile}
-                                                    onChange={(newVal) => setFatherMobile(newVal.target.value)}
-                                                    size='small'
-                                                    variant="outlined"
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <InputLabel id="">Office Address</InputLabel>
-                                                <TextField
-                                                    fullWidth
-                                                    multiline
-                                                    rows={3}
-                                                    value={fatherOfficeAddress}
-                                                    onChange={(newVal) => setFatherOfficeAddress(newVal.target.value)}
-                                                    size='small'
-                                                    variant="outlined"
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <InputLabel id="">Email</InputLabel>
-                                                <TextField
-                                                    fullWidth
-                                                    value={fatherEmail}
-                                                    onChange={(newVal) => setFatherEmail(newVal.target.value)}
-                                                    size='small'
-                                                    variant="outlined"
-                                                />
-                                            </Grid>
                                         </Grid>
-                                    </Grid>
-                                    <Grid item xs={12} md={6}>
-                                        <Grid container spacing={1}>
-                                            <Typography sx={{ marginLeft: 1 }}>Mother</Typography>
-                                            <Grid item xs={12}>
-                                                <InputLabel id="">Name *</InputLabel>
-                                                <TextField
-                                                    fullWidth
-                                                    value={motherName}
-                                                    onChange={(newVal) => setMotherName(newVal.target.value)}
-                                                    size='small'
-                                                    variant="outlined"
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <InputLabel id="">Edn. Qualification *</InputLabel>
-                                                <TextField
-                                                    fullWidth
-                                                    value={motherEd}
-                                                    onChange={(newVal) => setMotherEd(newVal.target.value)}
-                                                    size='small'
-                                                    variant="outlined"
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <InputLabel id="">Residence Address *</InputLabel>
-                                                <TextField
-                                                    fullWidth
-                                                    multiline
-                                                    rows={3}
-                                                    value={motherResiAddress}
-                                                    onChange={(newVal) => setMotherResiAddress(newVal.target.value)}
-                                                    size='small'
-                                                    variant="outlined"
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <InputLabel id="">Pin *</InputLabel>
-                                                <TextField
-                                                    fullWidth
-                                                    value={motherPin}
-                                                    onChange={(newVal) => setMotherPin(newVal.target.value)}
-                                                    size='small'
-                                                    variant="outlined"
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <InputLabel id="">Mobile No *</InputLabel>
-                                                <TextField
-                                                    fullWidth
-                                                    type={'number'}
-                                                    value={motherMobile}
-                                                    onChange={(newVal) => setMotherMobile(newVal.target.value)}
-                                                    size='small'
-                                                    variant="outlined"
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <InputLabel id="">Office Address</InputLabel>
-                                                <TextField
-                                                    fullWidth
-                                                    multiline
-                                                    rows={3}
-                                                    value={motherOfficeAddress}
-                                                    onChange={(newVal) => setMotherOfficeAddress(newVal.target.value)}
-                                                    size='small'
-                                                    variant="outlined"
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <InputLabel id="">Email</InputLabel>
-                                                <TextField
-                                                    fullWidth
-                                                    value={motherEmail}
-                                                    onChange={(newVal) => setMotherEmail(newVal.target.value)}
-                                                    size='small'
-                                                    variant="outlined"
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </AccordionDetails>
-                        </Accordion>
-                        <Accordion>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel3a-content"
-                                id="panel3a-header"
-                            >
-                                <Typography>Guardian Details</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Grid container spacing={1}>
-                                    <Grid item xs={12} md={6}>
-                                        <InputLabel id="">Name *</InputLabel>
-                                        <TextField
-                                            fullWidth
-                                            value={guardianName}
-                                            onChange={(newVal) => setGuardianName(newVal.target.value)}
-                                            size='small'
-                                            variant="outlined"
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12} md={6}>
-                                        <InputLabel id="">Edn. Qualification *</InputLabel>
-                                        <TextField
-                                            fullWidth
-                                            value={guardianEd}
-                                            onChange={(newVal) => setGuardianEd(newVal.target.value)}
-                                            size='small'
-                                            variant="outlined"
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12} md={6}>
-                                        <InputLabel id="">Residence Address *</InputLabel>
-                                        <TextField
-                                            fullWidth
-                                            multiline
-                                            rows={3}
-                                            value={guardianResiAddress}
-                                            onChange={(newVal) => setGuardianResiAddress(newVal.target.value)}
-                                            size='small'
-                                            variant="outlined"
-                                        />
-                                    </Grid>
-
-                                    <Grid item xs={12} md={6}>
-                                        <InputLabel id="">Office Address</InputLabel>
-                                        <TextField
-                                            fullWidth
-                                            multiline
-                                            rows={3}
-                                            value={guardianOfficeAddress}
-                                            onChange={(newVal) => setGuardianOfficeAddress(newVal.target.value)}
-                                            size='small'
-                                            variant="outlined"
-                                        />
-                                    </Grid>
-
-                                    <Grid item xs={12} md={6}>
-                                        <InputLabel id="">Pin *</InputLabel>
-                                        <TextField
-                                            fullWidth
-                                            value={guardianPin}
-                                            onChange={(newVal) => setGuardianPin(newVal.target.value)}
-                                            size='small'
-                                            variant="outlined"
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12} md={6}>
-                                        <InputLabel id="">Mobile No *</InputLabel>
-                                        <TextField
-                                            fullWidth
-                                            type={'number'}
-                                            value={guardianMobile}
-                                            onChange={(newVal) => setGuardianMobile(newVal.target.value)}
-                                            size='small'
-                                            variant="outlined"
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12} md={6}>
-                                        <InputLabel id="">Email</InputLabel>
-                                        <TextField
-                                            fullWidth
-                                            value={guardianEmail}
-                                            onChange={(newVal) => setGuardianEmail(newVal.target.value)}
-                                            size='small'
-                                            variant="outlined"
-                                        />
-                                    </Grid>
-                                </Grid>
-                            </AccordionDetails>
-                        </Accordion>
-                        <Accordion>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel3a-content"
-                                id="panel3a-header"
-                            >
-                                <Typography>Other Details</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Grid container spacing={1}>
-                                    <Grid item xs={12} md={12}>
-                                        <InputLabel id="">Emergency Contact Nos</InputLabel>
-                                        <TextField
-                                            fullWidth
-                                            value={emergencyContact}
-                                            onChange={(newVal) => setEmergencyContact(newVal.target.value)}
-                                            size='small'
-                                            variant="outlined"
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12} md={12}>
-                                        <InputLabel id="" sx={{ marginTop: 1 }}>Address of Correspondence</InputLabel>
-                                        <TextField
-                                            sx={{ marginTop: 1 }}
-                                            fullWidth
-                                            multiline
-                                            rows={3}
-                                            value={emergencyContactAddress}
-                                            onChange={(newVal) => setEmergencyContactAddress(newVal.target.value)}
-                                            size='small'
-                                            variant="outlined"
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12} md={6}>
-                                        <InputLabel id="">How would you want your child to go to his/her home/guardian's home?</InputLabel>
-                                        <FormControl>
-                                            <RadioGroup
-                                                aria-labelledby="demo-radio-buttons-group-label"
-                                                onChange={(newVal) => { setPickupMethod(newVal.target.value) }}
-                                                name="pickupMethod"
-                                                defaultValue={pickupMethod}
-                                            >
-                                                <FormControlLabel value="1" control={<Radio />} label="Parents/guardian will escort them" />
-                                                <FormControlLabel value="2" control={<Radio />} label="School Bus" />
-                                                <FormControlLabel value="3" control={<Radio />} label="Other" />
-                                            </RadioGroup>
-                                        </FormControl>
-                                    </Grid>
-
-                                    <Grid item xs={12} md={6}>
-                                        {
-                                            (pickupMethod === '2') ? (<><InputLabel id="">Alight/Pick up pont:</InputLabel>
-                                                <TextField
-                                                    fullWidth
-                                                    multiline
-                                                    value={pickupInfo}
-                                                    onChange={(newVal) => setPickupInfo(newVal.target.value)}
-                                                    size='small'
-                                                    variant="outlined"
-                                                /></>) : (<></>)
-                                        }
-                                        {
-                                            (pickupMethod === '3') ? (<><InputLabel id="">Please Specify</InputLabel>
-                                                <TextField
-                                                    fullWidth
-                                                    multiline
-                                                    rows={3}
-                                                    value={pickupInfo}
-                                                    onChange={(newVal) => setPickupInfo(newVal.target.value)}
-                                                    size='small'
-                                                    variant="outlined"
-                                                />
-                                                <Typography variant="caption" display="block" gutterBottom>
-                                                    Please provide letter of the authorization and photograph of the person
-                                                </Typography>
-                                            </>) : (<></>)
-                                        }
-                                    </Grid>
-
-                                    <Grid item xs={12} md={6}>
-                                        <InputLabel id="">Blood Group *</InputLabel>
-                                        <TextField
-                                            fullWidth
-                                            value={bloodGroup}
-                                            onChange={(newVal) => setBloodGroup(newVal.target.value)}
-                                            size='small'
-                                            variant="outlined"
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12} md={6}>
-                                        <InputLabel id="">Allergies *</InputLabel>
-                                        <TextField
-                                            fullWidth
-                                            value={allergies}
-                                            onChange={(newVal) => setAllergies(newVal.target.value)}
-                                            size='small'
-                                            variant="outlined"
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12} md={12}>
-                                        <InputLabel id="">Is there is any other medical condition which the school/hostel authorities should know of ?</InputLabel>
-                                        <RadioGroup
-                                            row
-                                            aria-labelledby="demo-row-radio-buttons-group-label"
-                                            onChange={(newVal) => setMedicalCondition(newVal.target.value)}
-                                            name="medicalCondition"
-                                            defaultValue={medicalCondition}
-                                        >
-                                            <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                                            <FormControlLabel value="no" control={<Radio />} label="No" />
-                                        </RadioGroup>
-                                    </Grid>
-                                    <Grid item xs={12} md={12}>
-                                        {
-                                            (medicalCondition === 'yes') ? (
-                                                <Grid container spacing={1}>
-                                                    <Grid item xs={12} md={6}>
-                                                        <InputLabel id="">Give Details</InputLabel>
-                                                        <TextField
-                                                            fullWidth
-                                                            multiline
-                                                            rows={6}
-                                                            value={medicalDetails}
-                                                            onChange={(newVal) => setMedicalDetails(newVal.target.value)}
-                                                            size='small'
-                                                            variant="outlined"
-                                                        />
-                                                    </Grid>
-                                                    <Grid item xs={12} md={6}>
-                                                        <InputLabel id="">Name of family doctor</InputLabel>
-                                                        <TextField
-                                                            fullWidth
-                                                            multiline
-                                                            value={doctorName}
-                                                            onChange={(newVal) => setDoctorName(newVal.target.value)}
-                                                            size='small'
-                                                            variant="outlined"
-                                                        />
-                                                        <InputLabel id="">Phone No</InputLabel>
-                                                        <TextField
-                                                            fullWidth
-                                                            multiline
-                                                            value={doctorMobile}
-                                                            onChange={(newVal) => setDoctorMobile(newVal.target.value)}
-                                                            size='small'
-                                                            variant="outlined"
-                                                        />
-                                                        <InputLabel id="">E-Mail</InputLabel>
-                                                        <TextField
-                                                            fullWidth
-                                                            multiline
-                                                            value={doctorEmail}
-                                                            onChange={(newVal) => setDoctorEmail(newVal.target.value)}
-                                                            size='small'
-                                                            variant="outlined"
-                                                        />
-                                                    </Grid>
+                                    </Container>
+                                </AccordionDetails>
+                            </Accordion>
+                            <Accordion>
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                >
+                                    <Typography>Parent Details</Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <Grid container spacing={4}>
+                                        <Grid item xs={12} md={6}>
+                                            <Grid container spacing={1}>
+                                                <Typography sx={{ marginLeft: 1 }}>Father</Typography>
+                                                <Grid item xs={12}>
+                                                    <InputLabel id="">Name *</InputLabel>
+                                                    <TextField
+                                                        fullWidth
+                                                        value={fatherName}
+                                                        onChange={(newVal) => setFatherName(newVal.target.value)}
+                                                        size='small'
+                                                        variant="outlined"
+                                                    />
                                                 </Grid>
-                                            ) : (<></>)
-                                        }
+                                                <Grid item xs={12}>
+                                                    <InputLabel id="">Edn. Qualification *</InputLabel>
+                                                    <TextField
+                                                        fullWidth
+                                                        value={fatherEd}
+                                                        onChange={(newVal) => setFatherEd(newVal.target.value)}
+                                                        size='small'
+                                                        variant="outlined"
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={12}>
+                                                    <InputLabel id="">Residence Address *</InputLabel>
+                                                    <TextField
+                                                        fullWidth
+                                                        multiline
+                                                        rows={3}
+                                                        value={fatherResiAddress}
+                                                        onChange={(newVal) => setFatherResiAddress(newVal.target.value)}
+                                                        size='small'
+                                                        variant="outlined"
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={12}>
+                                                    <InputLabel id="">Pin *</InputLabel>
+                                                    <TextField
+                                                        fullWidth
+                                                        value={fatherPin}
+                                                        onChange={(newVal) => setFatherPin(newVal.target.value)}
+                                                        size='small'
+                                                        variant="outlined"
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={12}>
+                                                    <InputLabel id="">Mobile No *</InputLabel>
+                                                    <TextField
+                                                        fullWidth
+                                                        type={'number'}
+                                                        value={fatherMobile}
+                                                        onChange={(newVal) => setFatherMobile(newVal.target.value)}
+                                                        size='small'
+                                                        variant="outlined"
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={12}>
+                                                    <InputLabel id="">Office Address</InputLabel>
+                                                    <TextField
+                                                        fullWidth
+                                                        multiline
+                                                        rows={3}
+                                                        value={fatherOfficeAddress}
+                                                        onChange={(newVal) => setFatherOfficeAddress(newVal.target.value)}
+                                                        size='small'
+                                                        variant="outlined"
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={12}>
+                                                    <InputLabel id="">Email</InputLabel>
+                                                    <TextField
+                                                        fullWidth
+                                                        value={fatherEmail}
+                                                        onChange={(newVal) => setFatherEmail(newVal.target.value)}
+                                                        size='small'
+                                                        variant="outlined"
+                                                    />
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid item xs={12} md={6}>
+                                            <Grid container spacing={1}>
+                                                <Typography sx={{ marginLeft: 1 }}>Mother</Typography>
+                                                <Grid item xs={12}>
+                                                    <InputLabel id="">Name *</InputLabel>
+                                                    <TextField
+                                                        fullWidth
+                                                        value={motherName}
+                                                        onChange={(newVal) => setMotherName(newVal.target.value)}
+                                                        size='small'
+                                                        variant="outlined"
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={12}>
+                                                    <InputLabel id="">Edn. Qualification *</InputLabel>
+                                                    <TextField
+                                                        fullWidth
+                                                        value={motherEd}
+                                                        onChange={(newVal) => setMotherEd(newVal.target.value)}
+                                                        size='small'
+                                                        variant="outlined"
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={12}>
+                                                    <InputLabel id="">Residence Address *</InputLabel>
+                                                    <TextField
+                                                        fullWidth
+                                                        multiline
+                                                        rows={3}
+                                                        value={motherResiAddress}
+                                                        onChange={(newVal) => setMotherResiAddress(newVal.target.value)}
+                                                        size='small'
+                                                        variant="outlined"
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={12}>
+                                                    <InputLabel id="">Pin *</InputLabel>
+                                                    <TextField
+                                                        fullWidth
+                                                        value={motherPin}
+                                                        onChange={(newVal) => setMotherPin(newVal.target.value)}
+                                                        size='small'
+                                                        variant="outlined"
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={12}>
+                                                    <InputLabel id="">Mobile No *</InputLabel>
+                                                    <TextField
+                                                        fullWidth
+                                                        type={'number'}
+                                                        value={motherMobile}
+                                                        onChange={(newVal) => setMotherMobile(newVal.target.value)}
+                                                        size='small'
+                                                        variant="outlined"
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={12}>
+                                                    <InputLabel id="">Office Address</InputLabel>
+                                                    <TextField
+                                                        fullWidth
+                                                        multiline
+                                                        rows={3}
+                                                        value={motherOfficeAddress}
+                                                        onChange={(newVal) => setMotherOfficeAddress(newVal.target.value)}
+                                                        size='small'
+                                                        variant="outlined"
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={12}>
+                                                    <InputLabel id="">Email</InputLabel>
+                                                    <TextField
+                                                        fullWidth
+                                                        value={motherEmail}
+                                                        onChange={(newVal) => setMotherEmail(newVal.target.value)}
+                                                        size='small'
+                                                        variant="outlined"
+                                                    />
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
                                     </Grid>
+                                </AccordionDetails>
+                            </Accordion>
+                            <Accordion>
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    aria-controls="panel3a-content"
+                                    id="panel3a-header"
+                                >
+                                    <Typography>Guardian Details</Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <Grid container spacing={1}>
+                                        <Grid item xs={12} md={6}>
+                                            <InputLabel id="">Name *</InputLabel>
+                                            <TextField
+                                                fullWidth
+                                                value={guardianName}
+                                                onChange={(newVal) => setGuardianName(newVal.target.value)}
+                                                size='small'
+                                                variant="outlined"
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} md={6}>
+                                            <InputLabel id="">Edn. Qualification *</InputLabel>
+                                            <TextField
+                                                fullWidth
+                                                value={guardianEd}
+                                                onChange={(newVal) => setGuardianEd(newVal.target.value)}
+                                                size='small'
+                                                variant="outlined"
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} md={6}>
+                                            <InputLabel id="">Residence Address *</InputLabel>
+                                            <TextField
+                                                fullWidth
+                                                multiline
+                                                rows={3}
+                                                value={guardianResiAddress}
+                                                onChange={(newVal) => setGuardianResiAddress(newVal.target.value)}
+                                                size='small'
+                                                variant="outlined"
+                                            />
+                                        </Grid>
 
-                                </Grid>
-                            </AccordionDetails>
-                        </Accordion>
-                    </div>
-                    <div style={{ float: 'right' }}>
-                        <Button
-                            variant='contained'
-                            color='error'
-                            sx={{
-                                marginRight: 1
-                            }}
-                            onClick={clearFields}
-                        >
-                            Clear
-                        </Button>
-                        <LoadingButton
-                            onClick={handleClick}
-                            loading={loading}
-                            variant="contained"
-                        >
-                            Add
-                        </LoadingButton>
-                    </div>
+                                        <Grid item xs={12} md={6}>
+                                            <InputLabel id="">Office Address</InputLabel>
+                                            <TextField
+                                                fullWidth
+                                                multiline
+                                                rows={3}
+                                                value={guardianOfficeAddress}
+                                                onChange={(newVal) => setGuardianOfficeAddress(newVal.target.value)}
+                                                size='small'
+                                                variant="outlined"
+                                            />
+                                        </Grid>
+
+                                        <Grid item xs={12} md={6}>
+                                            <InputLabel id="">Pin *</InputLabel>
+                                            <TextField
+                                                fullWidth
+                                                value={guardianPin}
+                                                onChange={(newVal) => setGuardianPin(newVal.target.value)}
+                                                size='small'
+                                                variant="outlined"
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} md={6}>
+                                            <InputLabel id="">Mobile No *</InputLabel>
+                                            <TextField
+                                                fullWidth
+                                                type={'number'}
+                                                value={guardianMobile}
+                                                onChange={(newVal) => setGuardianMobile(newVal.target.value)}
+                                                size='small'
+                                                variant="outlined"
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} md={6}>
+                                            <InputLabel id="">Email</InputLabel>
+                                            <TextField
+                                                fullWidth
+                                                value={guardianEmail}
+                                                onChange={(newVal) => setGuardianEmail(newVal.target.value)}
+                                                size='small'
+                                                variant="outlined"
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                </AccordionDetails>
+                            </Accordion>
+                            <Accordion>
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    aria-controls="panel3a-content"
+                                    id="panel3a-header"
+                                >
+                                    <Typography>Other Details</Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <Grid container spacing={1}>
+                                        <Grid item xs={12} md={12}>
+                                            <InputLabel id="">Emergency Contact Nos</InputLabel>
+                                            <TextField
+                                                fullWidth
+                                                value={emergencyContact}
+                                                onChange={(newVal) => setEmergencyContact(newVal.target.value)}
+                                                size='small'
+                                                variant="outlined"
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} md={12}>
+                                            <InputLabel id="" sx={{ marginTop: 1 }}>Address of Correspondence</InputLabel>
+                                            <TextField
+                                                sx={{ marginTop: 1 }}
+                                                fullWidth
+                                                multiline
+                                                rows={3}
+                                                value={emergencyContactAddress}
+                                                onChange={(newVal) => setEmergencyContactAddress(newVal.target.value)}
+                                                size='small'
+                                                variant="outlined"
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} md={6}>
+                                            <InputLabel id="">How would you want your child to go to his/her home/guardian's home?</InputLabel>
+                                            <FormControl>
+                                                <RadioGroup
+                                                    aria-labelledby="demo-radio-buttons-group-label"
+                                                    onChange={(newVal) => { setPickupMethod(newVal.target.value) }}
+                                                    name="pickupMethod"
+                                                    defaultValue={pickupMethod}
+                                                >
+                                                    <FormControlLabel value="1" control={<Radio />} label="Parents/guardian will escort them" />
+                                                    <FormControlLabel value="2" control={<Radio />} label="School Bus" />
+                                                    <FormControlLabel value="3" control={<Radio />} label="Other" />
+                                                </RadioGroup>
+                                            </FormControl>
+                                        </Grid>
+
+                                        <Grid item xs={12} md={6}>
+                                            {
+                                                (pickupMethod === '2') ? (<><InputLabel id="">Alight/Pick up pont:</InputLabel>
+                                                    <TextField
+                                                        fullWidth
+                                                        multiline
+                                                        value={pickupInfo}
+                                                        onChange={(newVal) => setPickupInfo(newVal.target.value)}
+                                                        size='small'
+                                                        variant="outlined"
+                                                    /></>) : (<></>)
+                                            }
+                                            {
+                                                (pickupMethod === '3') ? (<><InputLabel id="">Please Specify</InputLabel>
+                                                    <TextField
+                                                        fullWidth
+                                                        multiline
+                                                        rows={3}
+                                                        value={pickupInfo}
+                                                        onChange={(newVal) => setPickupInfo(newVal.target.value)}
+                                                        size='small'
+                                                        variant="outlined"
+                                                    />
+                                                    <Typography variant="caption" display="block" gutterBottom>
+                                                        Please provide letter of the authorization and photograph of the person
+                                                    </Typography>
+                                                </>) : (<></>)
+                                            }
+                                        </Grid>
+
+                                        <Grid item xs={12} md={6}>
+                                            <InputLabel id="">Blood Group *</InputLabel>
+                                            <TextField
+                                                fullWidth
+                                                value={bloodGroup}
+                                                onChange={(newVal) => setBloodGroup(newVal.target.value)}
+                                                size='small'
+                                                variant="outlined"
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} md={6}>
+                                            <InputLabel id="">Allergies *</InputLabel>
+                                            <TextField
+                                                fullWidth
+                                                value={allergies}
+                                                onChange={(newVal) => setAllergies(newVal.target.value)}
+                                                size='small'
+                                                variant="outlined"
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} md={12}>
+                                            <InputLabel id="">Is there is any other medical condition which the school/hostel authorities should know of ?</InputLabel>
+                                            <RadioGroup
+                                                row
+                                                aria-labelledby="demo-row-radio-buttons-group-label"
+                                                onChange={(newVal) => setMedicalCondition(newVal.target.value)}
+                                                name="medicalCondition"
+                                                defaultValue={medicalCondition}
+                                            >
+                                                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                                                <FormControlLabel value="no" control={<Radio />} label="No" />
+                                            </RadioGroup>
+                                        </Grid>
+                                        <Grid item xs={12} md={12}>
+                                            {
+                                                (medicalCondition === 'yes') ? (
+                                                    <Grid container spacing={1}>
+                                                        <Grid item xs={12} md={6}>
+                                                            <InputLabel id="">Give Details</InputLabel>
+                                                            <TextField
+                                                                fullWidth
+                                                                multiline
+                                                                rows={6}
+                                                                value={medicalDetails}
+                                                                onChange={(newVal) => setMedicalDetails(newVal.target.value)}
+                                                                size='small'
+                                                                variant="outlined"
+                                                            />
+                                                        </Grid>
+                                                        <Grid item xs={12} md={6}>
+                                                            <InputLabel id="">Name of family doctor</InputLabel>
+                                                            <TextField
+                                                                fullWidth
+                                                                multiline
+                                                                value={doctorName}
+                                                                onChange={(newVal) => setDoctorName(newVal.target.value)}
+                                                                size='small'
+                                                                variant="outlined"
+                                                            />
+                                                            <InputLabel id="">Phone No</InputLabel>
+                                                            <TextField
+                                                                fullWidth
+                                                                multiline
+                                                                value={doctorMobile}
+                                                                onChange={(newVal) => setDoctorMobile(newVal.target.value)}
+                                                                size='small'
+                                                                variant="outlined"
+                                                            />
+                                                            <InputLabel id="">E-Mail</InputLabel>
+                                                            <TextField
+                                                                fullWidth
+                                                                multiline
+                                                                value={doctorEmail}
+                                                                onChange={(newVal) => setDoctorEmail(newVal.target.value)}
+                                                                size='small'
+                                                                variant="outlined"
+                                                            />
+                                                        </Grid>
+                                                    </Grid>
+                                                ) : (<></>)
+                                            }
+                                        </Grid>
+
+                                    </Grid>
+                                </AccordionDetails>
+                            </Accordion>
+                        </div>
+                        <div style={{ float: 'right' }}>
+                            <Button
+                                variant='contained'
+                                color='error'
+                                sx={{
+                                    marginRight: 1
+                                }}
+                                onClick={clearFields}
+                            >
+                                Clear
+                            </Button>
+                            <LoadingButton
+                                type='submit'
+                                // onClick={handleClick}
+                                loading={loading}
+                                variant="contained"
+                            >
+                                Add
+                            </LoadingButton>
+                        </div>
+                    </form>
                 </Box>
             </Modal>
         </div >
