@@ -20,6 +20,12 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import NewRegistration from './NewRegistration'
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { Snackbar, Alert } from '@mui/material';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -170,10 +176,33 @@ function ApplicationTable() {
     const [originalRows, setOriginalRows] = useState([])
     const [rows, setRows] = useState([]);
     const [searched, setSearched] = useState("");
+    const [toast, setToast] = useState({ status: false })
+    const [dialog, setDialog] = useState(false)
+    const [applicantId, setApplicantId] = useState('')
 
     const [addApplicant, setAddApplicant] = useState(false);
     const handleOpen = () => setAddApplicant(true);
     const handleClose = () => setAddApplicant(false);
+    const handleDialogClose = () => setDialog(false);
+
+    const handleSponsorApplicationApprove = () => {
+        sponsorService.approveSponsorApplication({
+            application_id: applicantId
+        }).then(async response => {
+            const data = (await sponsorService.getSponsorApplication()).data
+            setOriginalRows(data)
+            setRows(data)
+            setToast({
+                status: true,
+                message: "Application Approved",
+                severity: 'success',
+                handleClose: () => {
+                    setToast({ status: false })
+                }
+            })
+            handleDialogClose()
+        })
+    }
 
     const handleApplicantAdd = async () => {
         const data = (await sponsorService.getSponsorApplication()).data
@@ -279,6 +308,14 @@ function ApplicationTable() {
                                                     <IconButton>
                                                         <EditIcon />
                                                     </IconButton>
+                                                    <IconButton
+                                                        onClick={() => {
+                                                            setApplicantId(row._id)
+                                                            setDialog(true)
+                                                        }}
+                                                    >
+                                                        <CheckCircleOutlineIcon />
+                                                    </IconButton>
                                                     <IconButton>
                                                         <DeleteIcon />
                                                     </IconButton>
@@ -309,7 +346,31 @@ function ApplicationTable() {
                     />
                 </Paper>
             </Box>
-        </div>
+            <Dialog
+                open={dialog}
+                onClose={handleDialogClose}
+                aria-labelledby="draggable-dialog-title"
+            >
+                <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+                    Are you Sure ?
+                </DialogTitle>
+                <DialogActions>
+                    <Button autoFocus onClick={handleDialogClose}>
+                        Cancel
+                    </Button>
+                    <Button onClick={handleSponsorApplicationApprove}>Confirm</Button>
+                </DialogActions>
+            </Dialog>
+            <Snackbar open={toast.status}
+                autoHideDuration={3000} onClose={toast.handleClose}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                sx={{ bottom: { xs: 90, sm: 10 } }}
+            >
+                <Alert onClose={toast.handleClose} color="info" severity={toast.severity} sx={{ width: 'auto' }}>
+                    {toast.message}
+                </Alert>
+            </Snackbar>
+        </div >
 
     );
 }

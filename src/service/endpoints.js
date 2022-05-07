@@ -7,6 +7,12 @@ const endpoints = {
   managerApproval: "admission/manager-approval",
   admittedStudents: "admission/admitted-students",
 
+  admission: {
+    primaryVerification: "admission/primary-verification",
+    officerApproval: "admission/officer-approval",
+    managerApproval: "admission/manager-approval",
+  },
+
   //data end points
   boardOfStudies: "/data/board-of-studies",
   standards: "data/standards",
@@ -30,9 +36,11 @@ const endpoints = {
   //sponsor payment apis
   payment: "sponsor/payment",
 
-  //sponsor transaction apis
+  //sponsor apis
   sponsor: {
+    //sponsor transaction apis
     transactions: "sponsor/transactions",
+    sponsorRegistration: "sponsor/sponsor-application",
   },
 
   //accounts apis

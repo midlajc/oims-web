@@ -15,7 +15,13 @@ function Home({routes}) {
   }, []);
 
   return (
-    <div className='body'>
+    <div className='body'
+    style={{
+      display:'flex',
+      flexDirection:'column',
+      alignItems:'center'
+    }}
+    >
       <Clock />
       <Calender />
     </div>
