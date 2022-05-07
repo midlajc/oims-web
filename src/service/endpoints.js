@@ -39,6 +39,13 @@ const endpoints = {
   accounts: {
     transaction: "accounts/transactions",
   },
+
+  //public apis
+
+  public: {
+    gender: "public/gender",
+    sponsorRegistration: "public/sponsor-registration",
+  },
 };
 
 export default endpoints;

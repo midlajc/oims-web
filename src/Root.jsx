@@ -38,7 +38,6 @@ function Root() {
       <themeContext.Provider value={{ mode: mode, setMode: changeTheme }}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          {/* <Routes/> */}
           {
             (user) ?
               <div className=''>
