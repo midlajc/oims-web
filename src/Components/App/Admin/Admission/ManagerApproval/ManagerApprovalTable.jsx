@@ -18,6 +18,12 @@ import admissionService from '../../../../../service/admissionService';
 import EditIcon from '@mui/icons-material/Edit';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import IconButton from '@mui/material/IconButton';
+import { Snackbar, Alert, Button } from '@mui/material';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogTitle from '@mui/material/DialogTitle';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -173,6 +179,31 @@ function ManagerApprovalTable() {
     const [originalRows, setOriginalRows] = useState([])
     const [rows, setRows] = useState([]);
     const [searched, setSearched] = useState("");
+    const [toast, setToast] = useState({ status: false })
+    const [dialog, setDialog] = useState(false)
+    const [applicantId, setApplicantId] = useState('')
+
+
+    const handleDialogClose = () => setDialog(false);
+
+    const handleSponsorApplicationApprove = () => {
+        admissionService.applicantManagerApproval({
+            applicant_id: applicantId
+        }).then(async response => {
+            const data = (await admissionService.getManagerApprovalList()).data
+            setOriginalRows(data)
+            setRows(data)
+            setToast({
+                status: true,
+                message: "Application Approved",
+                severity: 'success',
+                handleClose: () => {
+                    setToast({ status: false })
+                }
+            })
+            handleDialogClose()
+        })
+    }
 
     useEffect(async () => {
         const data = (await admissionService.getManagerApprovalList()).data
@@ -241,7 +272,7 @@ function ManagerApprovalTable() {
                             {stableSort(rows, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
-                                    const dob=(new Date(row.dob).toLocaleDateString('en-GB'));
+                                    const dob = (new Date(row.dob).toLocaleDateString('en-GB'));
                                     const labelId = `enhanced-table-checkbox-${index}`;
                                     return (
                                         <TableRow
@@ -264,6 +295,14 @@ function ManagerApprovalTable() {
                                             <TableCell align="left" sx={{ padding: 1 }}>
                                                 <IconButton>
                                                     <VisibilityIcon />
+                                                </IconButton>
+                                                <IconButton
+                                                    onClick={() => {
+                                                        setApplicantId(row._id)
+                                                        setDialog(true)
+                                                    }}
+                                                >
+                                                    <CheckCircleOutlineIcon />
                                                 </IconButton>
                                                 <IconButton>
                                                     <EditIcon />
@@ -294,6 +333,30 @@ function ManagerApprovalTable() {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </Paper>
+            <Dialog
+                open={dialog}
+                onClose={handleDialogClose}
+                aria-labelledby="draggable-dialog-title"
+            >
+                <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+                    Are you Sure ?
+                </DialogTitle>
+                <DialogActions>
+                    <Button autoFocus onClick={handleDialogClose}>
+                        Cancel
+                    </Button>
+                    <Button onClick={handleSponsorApplicationApprove}>Confirm</Button>
+                </DialogActions>
+            </Dialog>
+            <Snackbar open={toast.status}
+                autoHideDuration={3000} onClose={toast.handleClose}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                sx={{ bottom: { xs: 90, sm: 10 } }}
+            >
+                <Alert onClose={toast.handleClose} color="info" severity={toast.severity} sx={{ width: 'auto' }}>
+                    {toast.message}
+                </Alert>
+            </Snackbar>
         </Box>
     );
 }

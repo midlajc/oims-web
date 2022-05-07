@@ -21,13 +21,13 @@ const admissionService = {
     return api.get(endpoints.admittedStudents);
   },
   applicantPrimaryVerification: (data) => {
-    return api.get(endpoints.admission.primaryVerification, data);
+    return api.put(endpoints.admission.primaryVerification, data);
   },
   applicantOfficeApproval: (data) => {
-    return api.get(endpoints.admission.officerApproval, data);
+    return api.put(endpoints.admission.officerApproval, data);
   },
   applicantManagerApproval: (data) => {
-    return api.get(endpoints.admission.managerApproval, data);
+    return api.put(endpoints.admission.managerApproval, data);
   },
 };
 
